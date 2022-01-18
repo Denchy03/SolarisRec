@@ -27,9 +27,8 @@
     </MudItem>
 </MudGrid>
 
-<MudItem>
-    <MudButton OnClick="ClearFilters">Clear Filters</MudButton>
-</MudItem>
+
+<MudButton OnClick="ClearFilters">Clear Filters</MudButton>
 
 <MudGrid>
 
@@ -113,7 +112,10 @@
             <MudItem xs="12" lg="6">
                 <img src="@(ImgSrc)" width="100%" height="auto">
 
-                <MudIconButton Icon="@Icons.Material.Filled.Print" Color="Color.Inherit" OnClick="Export"></MudIconButton>
+                <MudIconButton Icon="@Icons.Material.Filled.Print" 
+                    Color="Color.Inherit" OnClick="Export"></MudIconButton>
+
+                <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Warning" hidden="@ValidationResult.IsDeckInvalid" />
 
                 <MudText GutterBottom="true"> Missions (@MissionDeck.Select(d => d.Quantity).Sum())</MudText>
                 @foreach (var item in MissionDeck)
