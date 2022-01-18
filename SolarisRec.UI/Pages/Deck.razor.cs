@@ -4,7 +4,6 @@ using MudBlazor;
 using CoreCard = SolarisRec.Core.Card;
 using SolarisRec.Core.CardType;
 using SolarisRec.UI.Components.Dropdown;
-using SolarisRec.UI.Mappers;
 using SolarisRec.UI.UIModels;
 using SolarisRec.UI.Utility;
 using System.Collections.Generic;
@@ -33,9 +32,9 @@ namespace SolarisRec.UI.Pages
         //todo: use for instead of foreach when using mappers
         //todo: converted resource cost???
         //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
+        //todo? MudPaper to component?
 
-        [Inject] private ICardProvider CardProvider { get; set; }
-        [Inject] private IMapToUIModel<CoreCard.Card, Card> CardToUIModelMapper { get; set; }
+        [Inject] private ICardProvider CardProvider { get; set; }        
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
         [Inject] private ITalentDropdownItemProvider TalentDropdownItemProvider { get; set; }
         [Inject] private ICardTypeDropdownProvider CardTypeDropdownItemProvider { get; set; }
@@ -48,10 +47,7 @@ namespace SolarisRec.UI.Pages
         private const int DEFAULT_FROM_MUD_BLAZOR = 10;
         private const int MAX_MISSION_SIZE = 5;
 
-        private MudTable<Card> table;
-        private MudTable<DeckItem> mainDeck;
-        private MudTable<DeckItem> tacticalDeck;
-        private MudTable<DeckItem> missionDeck;
+        private MudTable<Card> table;        
 
         private MudMultiSelectDropdown factionDropdown;
         private MudMultiSelectDropdown cardTypeDropdown;
@@ -81,7 +77,7 @@ namespace SolarisRec.UI.Pages
         private List<DropdownItem> KeywordDropdownItems = new();
         private SelectedValues SelectedKeywords = new();
         private List<DropdownItem> ConvertedResourceCostDropdownItems = new();
-        private SelectedValues SelectedConvertedResourceCosts = new();
+        private SelectedValues SelectedConvertedResourceCosts = new();       
 
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
 
@@ -205,7 +201,7 @@ namespace SolarisRec.UI.Pages
             await table.ReloadServerData();
         }
 
-        private async Task AddToDeck(TableRowClickEventArgs<Card> card)
+        private void AddToDeck(TableRowClickEventArgs<Card> card)
         {
             bool isMission = card.Item.Type == nameof(CardTypeConstants.Mission);
 
@@ -218,18 +214,18 @@ namespace SolarisRec.UI.Pages
                     .ThenBy(d => d.Card.ConvertedResourceCost)
                     .ThenBy(d => d.Card.Name)
                     .ToList();
-                await tacticalDeck.ReloadServerData();
+                
                 return;
             }
 
-            if (isMission && MissionDeck.Count < MAX_MISSION_SIZE)
+            if (isMission)
             {
                 card.Item.AddCard(MissionDeck);
                 MissionDeck = MissionDeck
                     .OrderBy(d => d.Card.Talents.Select(t => t.Quantity).Sum())
                     .ThenBy(d => d.Card.Name)
                     .ToList();
-                await missionDeck.ReloadServerData();
+                
                 return;
             } 
             
@@ -239,23 +235,22 @@ namespace SolarisRec.UI.Pages
                 .ThenBy(d => d.Card.Type)
                 .ThenBy(d => d.Card.ConvertedResourceCost)
                 .ThenBy(d => d.Card.Name)
-                .ToList();
-            await mainDeck.ReloadServerData();
+                .ToList();            
         }
 
-        private void RemoveFromDeck(TableRowClickEventArgs<DeckItem> deckItem)
+        private void RemoveFromDeck(DeckItem deckItem)
         {
-            deckItem.Item.RemoveCard(MainDeck);
+            deckItem.RemoveCard(MainDeck);            
         }
 
-        private void RemoveFromMissionDeck(TableRowClickEventArgs<DeckItem> deckItem)
+        private void RemoveFromMissionDeck(DeckItem deckItem)
         {
-            deckItem.Item.RemoveCard(MissionDeck);
+            deckItem.RemoveCard(MissionDeck);
         }
 
-        private void RemoveFromSideboard(TableRowClickEventArgs<DeckItem> deckItem)
+        private void RemoveFromTacticalDeck(DeckItem deckItem)
         {
-            deckItem.Item.RemoveCard(TacticalDeck);
+            deckItem.RemoveCard(TacticalDeck);
         }
 
         private async Task Export()

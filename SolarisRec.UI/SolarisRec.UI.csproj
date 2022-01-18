@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="C:\Users\MajorMartin\.nuget\packages\mudblazor\6.0.3\contentFiles\any\net6.0\tsconfig.json" />
     <Content Remove="C:\Users\major\.nuget\packages\mudblazor\6.0.3\contentFiles\any\net6.0\tsconfig.json" />
     <Content Remove="C:\Users\major\.nuget\packages\mudblazor\6.0.3\contentFiles\any\net6.0\TScripts\combined\MudBlazor.js" />
   </ItemGroup>
@@ -18,7 +19,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MudBlazor" Version="6.0.3" />
+    <PackageReference Include="MudBlazor" Version="6.0.5" />
   </ItemGroup>
 
   <ItemGroup>

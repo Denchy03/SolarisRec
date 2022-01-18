@@ -4,197 +4,157 @@
 @using SolarisRec.UI.Provdiders
 @using SolarisRec.UI.UIModels
 
-<MudGrid>
-    <MudItem lg="2" xs="2" sm="2">
+<MudGrid id="Dropdowns">
+    <MudItem>
         <MudMultiSelectDropdown @ref="factionDropdown" DropdownItems="FactionDropdownItems" Dense="true"
-            Label="Factions" @bind-SelectedValues="@SelectedFactions.Selected" />
+                                Label="Factions" @bind-SelectedValues="@SelectedFactions.Selected" />
     </MudItem>
-    <MudItem lg="2" xs="2" sm="2">
+    <MudItem>
         <MudMultiSelectDropdown @ref="cardTypeDropdown" DropdownItems="CardTypeDropdownItems" Dense="true"
-            Label="Card Type" @bind-SelectedValues="@SelectedCardTypes.Selected" />
+                                Label="Card Type" @bind-SelectedValues="@SelectedCardTypes.Selected" />
     </MudItem>
-    <MudItem lg="2" xs="2" sm="2">
+    <MudItem>
         <MudMultiSelectDropdown @ref="crcDropdown" DropdownItems="ConvertedResourceCostDropdownItems" Dense="true"
-            Label="Converted Cost" @bind-SelectedValues="@SelectedConvertedResourceCosts.Selected" />
+                                Label="Converted Cost" @bind-SelectedValues="@SelectedConvertedResourceCosts.Selected" />
     </MudItem>
-    <MudItem lg="2" xs="2" sm="2">
+    <MudItem>
         <MudMultiSelectDropdown @ref="talentsDropdown" DropdownItems="TalentDropdownItems" Dense="true"
-            Label="Talents" @bind-SelectedValues="@SelectedTalents.Selected" />
+                                Label="Talents" @bind-SelectedValues="@SelectedTalents.Selected" />
     </MudItem>
-    <MudItem lg="2" xs="2" sm="2">
+    <MudItem>
         <MudMultiSelectDropdown @ref="keywordDropown" DropdownItems="KeywordDropdownItems" Dense="true"
-            Label="Keyword" @bind-SelectedValues="@SelectedKeywords.Selected" />
-    </MudItem>
-    <MudItem lg="2" xs="2" sm="2">
-        <MudButton OnClick="ClearFilters">Clear Filters</MudButton>
+                                Label="Keyword" @bind-SelectedValues="@SelectedKeywords.Selected" />
     </MudItem>
 </MudGrid>
 
+<MudItem>
+    <MudButton OnClick="ClearFilters">Clear Filters</MudButton>
+</MudItem>
+
 <MudGrid>
 
-    <MudItem lg="2" md="2" sm="2">
+    <MudItem id="CardSearch" xs="8">
+        <MudTable Items="@Cards"
+                  T="Card" OnRowClick="AddToDeck" RowClass="relative"
+                  ServerData="@(new Func<TableState, Task<TableData<Card>>>(GetCardsFiltered))"
+                  Hover="true" Breakpoint="Breakpoint.Sm" RightAlignSmall="true"
+                  @ref="table">
+            <ToolBarContent>
+                <MudSpacer />
+                <MudTextField T="string" ValueChanged="@(searchTerm => OnSearchByName(searchTerm))" Placeholder="Search by name"
+                              Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                              IconSize="Size.Medium" Class="mt-0" Label="Search by name" @ref="searchByName"></MudTextField>
+                <MudTextField T="string" ValueChanged="@(abilitySearchTerm => OnSearchByAbility(abilitySearchTerm))" Placeholder="Search by ability"
+                              Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                              IconSize="Size.Medium" Class="mt-0" Label="Search by ability" @ref="searchByAbility"></MudTextField>
+            </ToolBarContent>
+            <ColGroup>
+                <col style="width: 50px;" />
+                <col style="width: 50px;" />
+                <col style="width: 50px;" />
+                <col style="width: 30px;" />
+                <col style="width: 30px;" />
+                <col style="width: 10px;" />
+                <col style="width: 10px;" />
+                <col style="width: 490px;" />
+            </ColGroup>
+            <HeaderContent>
 
-        <MudItem lg="3" md="3" sm="3" Style="padding-bottom: 20px;">
-            <img src="@(ImgSrc)" width=200 height=300>
-        </MudItem>
-               
-        <MudIconButton Icon="@Icons.Material.Filled.Print" Color="Color.Inherit" OnClick="Export"></MudIconButton>
+                <MudTh><MudTableSortLabel SortLabel="@nameof(Card.Name)" T="Card">Name</MudTableSortLabel></MudTh>
+                <MudTh>Factions</MudTh>
+                <MudTh>Type</MudTh>
+                <MudTh><MudTableSortLabel SortLabel="@nameof(Card.Costs)" T="Card">Cost</MudTableSortLabel></MudTh>
+                <MudTh>Talent</MudTh>
+                <MudTh><MudTableSortLabel SortLabel="@nameof(Card.AttackValue)" T="Card">AV</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="@nameof(Card.HealthValue)" T="Card">HV</MudTableSortLabel></MudTh>
+                <MudTh>Ability</MudTh>
+
+            </HeaderContent>
+            <RowTemplate>
+
+                <MudTd DataLabel="Name">
+                    <div @onmouseover="@(() => UpdateImageSrc(context))" class="absolute mud-width-full mud-height-full" style="top:0;left:0;"></div>
+                    @context.Name
+                </MudTd>
+                <MudTd DataLabel="Factions">@context.Factions</MudTd>
+                <MudTd DataLabel="CardType">@context.Type</MudTd>
+                <MudTd DataLabel="Cost">
+                    @for (int i = 0; i < @context.Costs.Count; i++)
+                    {
+                        for (int j = 0; j < @context.Costs[i].Quantity; j++)
+                        {
+                            <img src="@ResourceIconImageLinkProvider.Provide(@context.Costs[i])" width="30" height="26">
+                        }
+                    }
+                </MudTd>
+                <MudTd DataLabel="Talent">
+                    @for (int i = 0; i < @context.Talents.Count; i++)
+                    {
+                        for (int j = 0; j < @context.Talents[i].Quantity; j++)
+                        {
+                            <img src="@TalentIconImageLinkProvider.Provide(@context.Talents[i])" width="30" height="26">
+                        }
+                    }
+                </MudTd>
+                <MudTd DataLabel="AttackValue">@context.AttackValue</MudTd>
+                <MudTd DataLabel="HealthValue">@context.HealthValue</MudTd>
+                <MudTd DataLabel="Ability">@context.Ability</MudTd>
+
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="@pageSizeOption" RowsPerPageString="Cards per page" />
+            </PagerContent>
+        </MudTable>
     </MudItem>
 
-    <MudItem lg="2" md="2" sm="2">
+    <MudItem id="DecksAndCommands" xs="4" Spacing="0">
+        <MudGrid>
 
-        <MudItem lg="12" md="12" sm="12">
-            <MudText> Main deck (@mainDeckCardCount / @mainDeckAgentCount A)</MudText>
-            <MudTable Items="@MainDeck"
-                      T="DeckItem"                     
-                      OnRowClick="RemoveFromDeck"
-                      Hover="true"
-                      Breakpoint="Breakpoint.Sm"
-                      Style="float: left; width: 220px;"
-                      Dense="true"
-                      @ref="mainDeck">
+            <MudItem xs="12" lg="6">
+                <img src="@(ImgSrc)" width="100%" height="auto">
 
-                <HeaderContent>
-                    <MudContainer>
-                        <MudTh Style="width: 10px;"></MudTh>
-                        <MudTh Style="width: 200px; text-align:right">Name</MudTh>
-                    </MudContainer>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudContainer @onmouseover="@(() => UpdateImageSrc(context))">
-                        <MudTd DataLabel="Quantity" Style="width: 10px;">@context.Quantity</MudTd>
-                        <MudTd DataLabel="Name" Style="width: 200px;">@context.Card.Name</MudTd>
-                    </MudContainer>
-                </RowTemplate>
-            </MudTable>
-        </MudItem>     
-        
-        
+                <MudIconButton Icon="@Icons.Material.Filled.Print" Color="Color.Inherit" OnClick="Export"></MudIconButton>
 
-        <MudItem lg="12" md="12" sm="12">
-            <MudText>Missions (@MissionDeck.Select( d => d.Quantity).Sum())</MudText>
-            <MudTable Items="@MissionDeck"
-                      T="DeckItem"
-                      OnRowClick="RemoveFromMissionDeck"
-                      Hover="true"
-                      Breakpoint="Breakpoint.Sm"
-                      Style="float: left; width: 220px;"
-                      Dense="true"
-                      @ref="missionDeck">
+                <MudText GutterBottom="true"> Missions (@MissionDeck.Select(d => d.Quantity).Sum())</MudText>
+                @foreach (var item in MissionDeck)
+                {
+                    <MudPaper @onclick="@(() => RemoveFromMissionDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
+                          Class="solaris-deck-item d-flex px-2 align-center my-1">
+                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudSpacer />
+                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudText Typo="Typo.body2">@item.Quantity</MudText>
+                    </MudPaper>
+                }
+            </MudItem>
 
-                <HeaderContent>
-                    <MudContainer>
-                        <MudTh Style="width: 10px;"></MudTh>
-                        <MudTh Style="width: 200px; text-align:right">Name</MudTh>
-                    </MudContainer>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudContainer @onmouseover="@(() => UpdateImageSrc(context))">
-                        <MudTd DataLabel="Quantity" Style="width: 10px;">@context.Quantity</MudTd>
-                        <MudTd DataLabel="Name" Style="width: 200px;">@context.Card.Name</MudTd>
-                    </MudContainer>
-                </RowTemplate>
-            </MudTable>
-        </MudItem>
+            <MudItem xs="12" lg="6">
+                <MudText GutterBottom="true"> Main deck (@mainDeckCardCount / @mainDeckAgentCount A)</MudText>
+                @foreach (var item in MainDeck)
+                {
+                    <MudPaper @onclick="@(() => RemoveFromDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
+                          Class="solaris-deck-item d-flex px-2 align-center my-1">
+                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudSpacer />
+                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudText Typo="Typo.body2">@item.Quantity</MudText>
+                    </MudPaper>
+                }
 
-        
+                <MudText Class="mt-4" GutterBottom="true"> Tactical Deck (@TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
+                @foreach (var item in TacticalDeck)
+                {
+                    <MudPaper @onclick="@(() => RemoveFromTacticalDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
+                          Class="solaris-deck-item d-flex px-2 align-center my-1">
+                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudSpacer />
+                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudText Typo="Typo.body2">@item.Quantity</MudText>
+                    </MudPaper>
+                }
+            </MudItem>
 
-        <MudItem lg="12" md="12" sm="12">
-            <MudText>Tactical Deck (@TacticalDeck.Select( d => d.Quantity).Sum())</MudText>
-            <MudTable Items="@TacticalDeck"
-                      T="DeckItem"
-                      OnRowClick="RemoveFromSideboard"
-                      Hover="true"
-                      Breakpoint="Breakpoint.Sm"
-                      Style="float: left; width: 220px;"
-                      Dense="true"
-                      @ref="tacticalDeck">
-
-                <HeaderContent>
-                    <MudContainer>
-                        <MudTh Style="width: 10px;"></MudTh>
-                        <MudTh Style="width: 200px; text-align:right">Name</MudTh>
-                    </MudContainer>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudContainer @onmouseover="@(() => UpdateImageSrc(context))">
-                        <MudTd DataLabel="Quantity" Style="width: 10px;">@context.Quantity</MudTd>
-                        <MudTd DataLabel="Name" Style="width: 200px;">@context.Card.Name</MudTd>
-                    </MudContainer>
-                </RowTemplate>
-            </MudTable>
-        </MudItem>
-
-    </MudItem>
-
-    <MudItem lg="1" md="1" sm="1" />
-
-    <MudItem lg="7" md="7" sm="7">
-
-        <MudItem lg="12" xs="12" sm="12">
-            <MudTable Items="@Cards"
-                      T="Card"
-                      OnRowClick="AddToDeck"
-                      ServerData="@(new Func<TableState, Task<TableData<Card>>>(GetCardsFiltered))"
-                      Hover="true"
-                      Breakpoint="Breakpoint.Sm"
-                      RightAlignSmall="true"                      
-                      @ref="table" Dense="true">
-                <ToolBarContent>
-                    <MudSpacer />
-                    <MudTextField T="string" ValueChanged="@(searchTerm => OnSearchByName(searchTerm))" Placeholder="Search by name"
-                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                                  IconSize="Size.Medium" Class="mt-0" Label="Search by name" @ref="searchByName"></MudTextField>
-                    <MudTextField T="string" ValueChanged="@(abilitySearchTerm => OnSearchByAbility(abilitySearchTerm))" Placeholder="Search by ability"
-                                  Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                                  IconSize="Size.Medium" Class="mt-0" Label="Search by ability" @ref="searchByAbility"></MudTextField>
-                </ToolBarContent>
-
-                <HeaderContent>
-                    <MudItem>
-                        <MudTh Style="width: 100px;"><MudTableSortLabel SortLabel="@nameof(Card.Name)" T="Card">Name</MudTableSortLabel></MudTh>
-                        <MudTh Style="width: 100px;">Factions</MudTh>
-                        <MudTh Style="width: 100px;">Type</MudTh>
-                        <MudTh Style="width: 50px;"><MudTableSortLabel SortLabel="@nameof(Card.Costs)" T="Card">Cost</MudTableSortLabel></MudTh>
-                        <MudTh Style="width: 50px;">Talent</MudTh>
-                        <MudTh Style="width: 30px;"><MudTableSortLabel SortLabel="@nameof(Card.AttackValue)" T="Card">AV</MudTableSortLabel></MudTh>
-                        <MudTh Style="width: 30px;"><MudTableSortLabel SortLabel="@nameof(Card.HealthValue)" T="Card">HV</MudTableSortLabel></MudTh>
-                        <MudTh Style="width: 500px;">Ability</MudTh>
-                    </MudItem>
-                </HeaderContent>
-                <RowTemplate>
-                    <MudItem @onmouseover="@(() => UpdateImageSrc(context))">
-                        <MudTd DataLabel="Name" Style="width: 100px;">@context.Name</MudTd>
-                        <MudTd DataLabel="Factions" Style="width: 100px;">@context.Factions</MudTd>
-                        <MudTd DataLabel="CardType" Style="width: 100px;">@context.Type</MudTd>
-                        <MudTd DataLabel="Cost" Style="width: 50px;">
-                            @for (int i = 0; i < @context.Costs.Count; i++)
-                            {
-                                for (int j = 0; j < @context.Costs[i].Quantity; j++)
-                                {
-                                    <img src="@ResourceIconImageLinkProvider.Provide(@context.Costs[i])" width="20" height="20">
-                                }
-                            }
-                        </MudTd>
-                        <MudTd DataLabel="Talent" Style="width: 50px;">
-                            @for (int i = 0; i < @context.Talents.Count; i++)
-                            {
-                                for (int j = 0; j < @context.Talents[i].Quantity; j++)
-                                {
-                                    <img src="@TalentIconImageLinkProvider.Provide(@context.Talents[i])" width="20" height="20">
-                                }
-                            }
-                        </MudTd>
-                        <MudTd DataLabel="AttackValue" Style="width: 30px;">@context.AttackValue</MudTd>
-                        <MudTd DataLabel="HealthValue" Style="width: 30px;">@context.HealthValue</MudTd>
-                        <MudTd DataLabel="Ability" Style="width: 500px;">@context.Ability</MudTd>
-                    </MudItem>
-                </RowTemplate>
-                <PagerContent>
-                    <MudTablePager PageSizeOptions="@pageSizeOption" RowsPerPageString="Cards per page" />
-                </PagerContent>
-            </MudTable>
-        </MudItem>
+        </MudGrid>
     </MudItem>
 
 </MudGrid>

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolarisRec.Persistence;
 
@@ -11,9 +12,10 @@ using SolarisRec.Persistence;
 namespace SolarisRec.Persistence.Migrations
 {
     [DbContext(typeof(SolarisRecDbContext))]
-    partial class SolarisRecDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220117165627_AmbassadorSunders")]
+    partial class AmbassadorSunders
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -4957,18 +4959,6 @@ namespace SolarisRec.Persistence.Migrations
                         {
                             CardId = 99,
                             TalentId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 100,
-                            TalentId = 2,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 100,
-                            TalentId = 4,
                             Quantity = 1
                         },
                         new

@@ -363,7 +363,24 @@ namespace SolarisRec.Persistence.Configuration.JoiningTables
                     TalentId = (int)Enum.Talent.Espionage,
                     Quantity = 1
                 },
-
+                new CardTalent
+                {
+                    CardId = (int)Enum.CardId.AmbassadorSunders,
+                    TalentId = (int)Enum.Talent.Diplomacy,
+                    Quantity = 3
+                },
+                new CardTalent
+                {
+                    CardId = (int)Enum.CardId.AmbassadorSunders,
+                    TalentId = (int)Enum.Talent.Military,
+                    Quantity = 1
+                },
+                new CardTalent
+                {
+                    CardId = (int)Enum.CardId.AmbassadorSunders,
+                    TalentId = (int)Enum.Talent.Mining,
+                    Quantity = 1
+                },
 
             #endregion
 
@@ -774,6 +791,18 @@ namespace SolarisRec.Persistence.Configuration.JoiningTables
                 {
                     CardId = (int)Enum.CardId.BattleDroid,
                     TalentId = (int)Enum.Talent.Military,
+                    Quantity = 1
+                },
+                new CardTalent
+                {
+                    CardId = (int)Enum.CardId.LigeiaDeveloper,
+                    TalentId = (int)Enum.Talent.Data,
+                    Quantity = 2
+                },
+                new CardTalent
+                {
+                    CardId = (int)Enum.CardId.LigeiaDeveloper,
+                    TalentId = (int)Enum.Talent.Espionage,
                     Quantity = 1
                 },
                 new CardTalent
