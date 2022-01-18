@@ -795,6 +795,18 @@ namespace SolarisRec.Persistence.Configuration.JoiningTables
                 },
                 new CardTalent
                 {
+                    CardId = (int)Enum.CardId.LigeiaDeveloper,
+                    TalentId = (int)Enum.Talent.Data,
+                    Quantity = 2
+                },
+                new CardTalent
+                {
+                    CardId = (int)Enum.CardId.LigeiaDeveloper,
+                    TalentId = (int)Enum.Talent.Espionage,
+                    Quantity = 1
+                },
+                new CardTalent
+                {
                     CardId = (int)Enum.CardId.XanaduLeadLibrarian,
                     TalentId = (int)Enum.Talent.Data,
                     Quantity = 2
