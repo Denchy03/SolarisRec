@@ -114,85 +114,45 @@
 
                 <MudIconButton Icon="@Icons.Material.Filled.Print" Color="Color.Inherit" OnClick="Export"></MudIconButton>
 
-                <MudText>Missions (@MissionDeck.Select(d => d.Quantity).Sum())</MudText>
-                <MudTable Items="@MissionDeck"
-                          T="DeckItem"
-                          OnRowClick="RemoveFromMissionDeck"
-                          Hover="true"
-                          Breakpoint="Breakpoint.Sm"
-                          Dense="true"
-                          @ref="missionDeck">
-                    <ColGroup>
-                        <col style="width: 10px;" />
-                        <col style="width: 200px; text-align:right" />
-                    </ColGroup>
-                    <HeaderContent>
-                        <MudContainer>
-                            <MudTh></MudTh>
-                            <MudTh>Name</MudTh>
-                        </MudContainer>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudContainer @onmouseover="@(() => UpdateImageSrc(context))">
-                            <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
-                            <MudTd DataLabel="Name">@context.Card.Name</MudTd>
-                        </MudContainer>
-                    </RowTemplate>
-                </MudTable>
+                <MudText GutterBottom="true"> Missions (@MissionDeck.Select(d => d.Quantity).Sum())</MudText>
+                @foreach (var item in MissionDeck)
+                {
+                    <MudPaper @onclick="@(() => RemoveFromMissionDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))" 
+                        Class="solaris-deck-item d-flex px-2 align-center my-1">
+                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudSpacer />
+                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudText Typo="Typo.body2">@item.Quantity</MudText>
+                    </MudPaper>
+                }
+                
             </MudItem>
 
             <MudItem xs="12" lg="6">
-                <MudText> Main deck (@mainDeckCardCount / @mainDeckAgentCount A)</MudText>
-                <MudTable Items="@MainDeck"
-                          T="DeckItem"
-                          OnRowClick="RemoveFromDeck"
-                          Hover="true"
-                          Breakpoint="Breakpoint.Sm"
-                          Dense="true"
-                          @ref="mainDeck">
-                    <ColGroup>
-                        <col style="width: 10px;" />
-                        <col style="width: 200px; text-align:right" />
-                    </ColGroup>
-                    <HeaderContent>
-                        <MudContainer>
-                            <MudTh></MudTh>
-                            <MudTh Style="text-align:right">Name</MudTh>
-                        </MudContainer>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudContainer @onmouseover="@(() => UpdateImageSrc(context))">
-                            <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
-                            <MudTd DataLabel="Name">@context.Card.Name</MudTd>
-                        </MudContainer>
-                    </RowTemplate>
-                </MudTable>
+                <MudText GutterBottom="true"> Main deck (@mainDeckCardCount / @mainDeckAgentCount A)</MudText>
+                @foreach (var item in MainDeck)
+                {
+                    <MudPaper @onclick="@(() => RemoveFromDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))" 
+                        Class="solaris-deck-item d-flex px-2 align-center my-1">
+                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudSpacer />
+                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudText Typo="Typo.body2">@item.Quantity</MudText>
+                    </MudPaper>
+                }
 
-                <MudText>Tactical Deck (@TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
-                <MudTable Items="@TacticalDeck"
-                          T="DeckItem"
-                          OnRowClick="RemoveFromSideboard"
-                          Hover="true"
-                          Breakpoint="Breakpoint.Sm"
-                          Dense="true"
-                          @ref="tacticalDeck">
-                    <ColGroup>
-                        <col style="width: 10px;" />
-                        <col style="width: 200px; text-align:right" />
-                    </ColGroup>
-                    <HeaderContent>
-                        <MudContainer>
-                            <MudTh></MudTh>
-                            <MudTh>Name</MudTh>
-                        </MudContainer>
-                    </HeaderContent>
-                    <RowTemplate>
-                        <MudContainer @onmouseover="@(() => UpdateImageSrc(context))">
-                            <MudTd DataLabel="Quantity">@context.Quantity</MudTd>
-                            <MudTd DataLabel="Name">@context.Card.Name</MudTd>
-                        </MudContainer>
-                    </RowTemplate>
-                </MudTable>
+                <MudText Class="mt-4" GutterBottom="true"> Tactical Deck (@TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
+                @foreach (var item in TacticalDeck)
+                {
+                    <MudPaper @onclick="@(() => RemoveFromTacticalDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))" 
+                        Class="solaris-deck-item d-flex px-2 align-center my-1">
+                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudSpacer />
+                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudText Typo="Typo.body2">@item.Quantity</MudText>
+                    </MudPaper>
+                }        
+                
             </MudItem>
 
         </MudGrid>

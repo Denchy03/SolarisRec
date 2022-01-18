@@ -1,0 +1,8 @@
+.solaris-deck-item {
+    user-select: none;
+}
+
+    .solaris-deck-item:hover {
+        cursor: pointer;
+        background-color: var(--mud-palette-table-hover);
+    }

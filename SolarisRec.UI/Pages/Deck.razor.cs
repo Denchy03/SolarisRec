@@ -47,10 +47,7 @@ namespace SolarisRec.UI.Pages
         private const int DEFAULT_FROM_MUD_BLAZOR = 10;
         private const int MAX_MISSION_SIZE = 5;
 
-        private MudTable<Card> table;
-        private MudTable<DeckItem> mainDeck;
-        private MudTable<DeckItem> tacticalDeck;
-        private MudTable<DeckItem> missionDeck;
+        private MudTable<Card> table;        
 
         private MudMultiSelectDropdown factionDropdown;
         private MudMultiSelectDropdown cardTypeDropdown;
@@ -217,7 +214,7 @@ namespace SolarisRec.UI.Pages
                     .ThenBy(d => d.Card.ConvertedResourceCost)
                     .ThenBy(d => d.Card.Name)
                     .ToList();
-                await tacticalDeck.ReloadServerData();
+                
                 return;
             }
 
@@ -228,7 +225,7 @@ namespace SolarisRec.UI.Pages
                     .OrderBy(d => d.Card.Talents.Select(t => t.Quantity).Sum())
                     .ThenBy(d => d.Card.Name)
                     .ToList();
-                await missionDeck.ReloadServerData();
+                
                 return;
             } 
             
@@ -239,22 +236,22 @@ namespace SolarisRec.UI.Pages
                 .ThenBy(d => d.Card.ConvertedResourceCost)
                 .ThenBy(d => d.Card.Name)
                 .ToList();
-            await mainDeck.ReloadServerData();
+            
         }
 
-        private void RemoveFromDeck(TableRowClickEventArgs<DeckItem> deckItem)
+        private void RemoveFromDeck(DeckItem deckItem)
         {
-            deckItem.Item.RemoveCard(MainDeck);
+            deckItem.RemoveCard(MainDeck);            
         }
 
-        private void RemoveFromMissionDeck(TableRowClickEventArgs<DeckItem> deckItem)
+        private void RemoveFromMissionDeck(DeckItem deckItem)
         {
-            deckItem.Item.RemoveCard(MissionDeck);
+            deckItem.RemoveCard(MissionDeck);
         }
 
-        private void RemoveFromSideboard(TableRowClickEventArgs<DeckItem> deckItem)
+        private void RemoveFromTacticalDeck(DeckItem deckItem)
         {
-            deckItem.Item.RemoveCard(TacticalDeck);
+            deckItem.RemoveCard(TacticalDeck);
         }
 
         private async Task Export()
