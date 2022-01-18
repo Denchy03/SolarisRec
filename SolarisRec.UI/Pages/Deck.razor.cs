@@ -4,7 +4,6 @@ using MudBlazor;
 using CoreCard = SolarisRec.Core.Card;
 using SolarisRec.Core.CardType;
 using SolarisRec.UI.Components.Dropdown;
-using SolarisRec.UI.Mappers;
 using SolarisRec.UI.UIModels;
 using SolarisRec.UI.Utility;
 using System.Collections.Generic;
@@ -33,6 +32,7 @@ namespace SolarisRec.UI.Pages
         //todo: use for instead of foreach when using mappers
         //todo: converted resource cost???
         //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
+        //todo? MudPaper to component?
 
         [Inject] private ICardProvider CardProvider { get; set; }        
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
@@ -77,7 +77,7 @@ namespace SolarisRec.UI.Pages
         private List<DropdownItem> KeywordDropdownItems = new();
         private SelectedValues SelectedKeywords = new();
         private List<DropdownItem> ConvertedResourceCostDropdownItems = new();
-        private SelectedValues SelectedConvertedResourceCosts = new();
+        private SelectedValues SelectedConvertedResourceCosts = new();       
 
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
 
@@ -201,7 +201,7 @@ namespace SolarisRec.UI.Pages
             await table.ReloadServerData();
         }
 
-        private async Task AddToDeck(TableRowClickEventArgs<Card> card)
+        private void AddToDeck(TableRowClickEventArgs<Card> card)
         {
             bool isMission = card.Item.Type == nameof(CardTypeConstants.Mission);
 
@@ -235,8 +235,7 @@ namespace SolarisRec.UI.Pages
                 .ThenBy(d => d.Card.Type)
                 .ThenBy(d => d.Card.ConvertedResourceCost)
                 .ThenBy(d => d.Card.Name)
-                .ToList();
-            
+                .ToList();            
         }
 
         private void RemoveFromDeck(DeckItem deckItem)
