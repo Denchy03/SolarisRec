@@ -109,8 +109,8 @@
     <MudItem id="PictureAndCommands" xs="4" Spacing="0">
         <MudGrid>
 
-            <MudItem xs="12" md="6">
-                <img src="@(ImgSrc)" width=200 height=300>
+            <MudItem xs="12" lg="6">
+                <img src="@(ImgSrc)" width="100%" height="auto">
 
                 <MudIconButton Icon="@Icons.Material.Filled.Print" Color="Color.Inherit" OnClick="Export"></MudIconButton>
 
@@ -141,7 +141,7 @@
                 </MudTable>
             </MudItem>
 
-            <MudItem xs="12" md="6">
+            <MudItem xs="12" lg="6">
                 <MudText> Main deck (@mainDeckCardCount / @mainDeckAgentCount A)</MudText>
                 <MudTable Items="@MainDeck"
                           T="DeckItem"
