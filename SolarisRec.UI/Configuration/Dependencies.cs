@@ -42,6 +42,8 @@ namespace SolarisRec.UI.Configuration
                 .AddTransient<IMapToUIModel<CoreCard.Card, Card>, Mappers.ToUIModel.CardMapper>()
                 .AddTransient<IMapToUIModel<CoreCard.Talent, Talent>, Mappers.ToUIModel.TalentMapper>()
                 .AddTransient<IMapToUIModel<CoreCard.Cost, Cost>, Mappers.ToUIModel.CostMapper>()
+
+                .AddTransient<IDeckValidator, DeckValidator>()
                 ;
         }       
     }

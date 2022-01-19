@@ -10,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using SolarisRec.UI.Providers;
+using SolarisRec.Core.Card.Enums;
+using SolarisRec.UI.Components.ValidationDialog;
+using SolarisRec.UI.Components.ConfirmOnlyDialog;
 
 namespace SolarisRec.UI.Pages
 {
@@ -33,6 +36,7 @@ namespace SolarisRec.UI.Pages
         //todo: converted resource cost???
         //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
         //todo? MudPaper to component?
+        //todo consider Deckvalidation refactor
 
         [Inject] private ICardProvider CardProvider { get; set; }        
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
@@ -42,12 +46,13 @@ namespace SolarisRec.UI.Pages
         [Inject] private IConvertedResourceCostDropdownItemProvider ConvertedResourceCostDropdownItemProvider { get; set; }
         [Inject] private IDeckGenerator DeckGenerator { get; set; }
         [Inject] private IFileSaveService SaveFile { get; set; }
+        [Inject] private IDeckValidator DeckValidator { get; set; }
+        [Inject] private IDialogService DialogService { get; set; }
 
         private const int DEFAULT_PAGE_SIZE = 8;
-        private const int DEFAULT_FROM_MUD_BLAZOR = 10;
-        private const int MAX_MISSION_SIZE = 5;
+        private const int DEFAULT_FROM_MUD_BLAZOR = 10;        
 
-        private MudTable<Card> table;        
+        private MudTable<Card> table;       
 
         private MudMultiSelectDropdown factionDropdown;
         private MudMultiSelectDropdown cardTypeDropdown;
@@ -80,6 +85,7 @@ namespace SolarisRec.UI.Pages
         private SelectedValues SelectedConvertedResourceCosts = new();       
 
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
+        private ValidationResult ValidationResult { get; set; } = new ValidationResult();
 
         protected override void OnParametersSet()
         {
@@ -114,6 +120,8 @@ namespace SolarisRec.UI.Pages
                 if (reload)
                     await InvokeAsync(ApplyDropdownFilters);
             };
+
+            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);            
         }
 
         protected override async Task OnInitializedAsync()
@@ -201,9 +209,21 @@ namespace SolarisRec.UI.Pages
             await table.ReloadServerData();
         }
 
+        private void ClearDeck()
+        {
+            MainDeck = new List<DeckItem>();
+            MissionDeck = new List<DeckItem>();
+            TacticalDeck = new List<DeckItem>(); 
+        }
+
         private void AddToDeck(TableRowClickEventArgs<Card> card)
         {
             bool isMission = card.Item.Type == nameof(CardTypeConstants.Mission);
+
+            if(card.Item.Id == (int)CardId.PlanetaryPolitics || card.Item.Id == (int)CardId.SearchforLostKnowledge)
+            {
+                return;
+            }
 
             if (card.MouseEventArgs.CtrlKey)
             {
@@ -214,7 +234,8 @@ namespace SolarisRec.UI.Pages
                     .ThenBy(d => d.Card.ConvertedResourceCost)
                     .ThenBy(d => d.Card.Name)
                     .ToList();
-                
+
+                ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
                 return;
             }
 
@@ -225,7 +246,8 @@ namespace SolarisRec.UI.Pages
                     .OrderBy(d => d.Card.Talents.Select(t => t.Quantity).Sum())
                     .ThenBy(d => d.Card.Name)
                     .ToList();
-                
+
+                ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
                 return;
             } 
             
@@ -235,33 +257,59 @@ namespace SolarisRec.UI.Pages
                 .ThenBy(d => d.Card.Type)
                 .ThenBy(d => d.Card.ConvertedResourceCost)
                 .ThenBy(d => d.Card.Name)
-                .ToList();            
+                .ToList();
+
+            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
         }
 
         private void RemoveFromDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(MainDeck);            
+            deckItem.RemoveCard(MainDeck);
+            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
         }
 
         private void RemoveFromMissionDeck(DeckItem deckItem)
         {
             deckItem.RemoveCard(MissionDeck);
+            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
         }
 
         private void RemoveFromTacticalDeck(DeckItem deckItem)
         {
             deckItem.RemoveCard(TacticalDeck);
+            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
         }
 
         private async Task Export()
         {
-            var deck = DeckGenerator.Generate(MainDeck, MissionDeck, TacticalDeck);
+            if(!ValidationResult.IsDeckValid)
+            {               
+                var parameters = new DialogParameters { ["reasons"] = ValidationResult.Reasons };
 
-            var stream = StringToStreamConverter.Convert(deck);           
+                var options = new DialogOptions { CloseOnEscapeKey = true };
+                var dialog = DialogService.Show<ValidationDialog>("Illegal Deck state! Are you sure you want to continue?", parameters, options);
+                var result = await dialog.Result;
 
-            using var streamRef = new DotNetStreamReference(stream: stream);
+                if(!result.Cancelled)
+                {
+                    var deck = DeckGenerator.Generate(MainDeck, MissionDeck, TacticalDeck);
 
-            await SaveFile.Save(streamRef);            
-        }        
+                    var stream = StringToStreamConverter.Convert(deck);
+
+                    using var streamRef = new DotNetStreamReference(stream: stream);
+
+                    await SaveFile.Save(streamRef);
+                }
+            }                       
+        }
+        
+        private async Task ShowReasons()
+        {
+            var parameters = new DialogParameters { ["reasons"] = ValidationResult.Reasons };
+
+            var options = new DialogOptions { CloseOnEscapeKey = true };
+            var dialog = DialogService.Show<ConfirmOnlyDialog>("Your deck state is illegal, because:", parameters, options);
+            await dialog.Result;
+        }
     }
 }

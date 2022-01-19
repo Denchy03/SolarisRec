@@ -1,0 +1,11 @@
+﻿<MudDialog>
+    <DialogContent>
+        @foreach(var reason in Reasons)
+        {
+            <MudText>@reason</MudText>
+        }
+    </DialogContent>
+    <DialogActions>        
+        <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+    </DialogActions>
+</MudDialog>

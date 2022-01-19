@@ -4,6 +4,8 @@
 @using SolarisRec.UI.Provdiders
 @using SolarisRec.UI.UIModels
 
+<MudDialogProvider />
+
 <MudGrid id="Dropdowns">
     <MudItem>
         <MudMultiSelectDropdown @ref="factionDropdown" DropdownItems="FactionDropdownItems" Dense="true"
@@ -27,9 +29,8 @@
     </MudItem>
 </MudGrid>
 
-<MudItem>
-    <MudButton OnClick="ClearFilters">Clear Filters</MudButton>
-</MudItem>
+
+<MudButton OnClick="ClearFilters">Clear Filters</MudButton>
 
 <MudGrid>
 
@@ -113,7 +114,15 @@
             <MudItem xs="12" lg="6">
                 <img src="@(ImgSrc)" width="100%" height="auto">
 
-                <MudIconButton Icon="@Icons.Material.Filled.Print" Color="Color.Inherit" OnClick="Export"></MudIconButton>
+                <MudIconButton Icon="@Icons.Material.Filled.Print"
+                               Color="Color.Inherit" OnClick="Export"></MudIconButton>
+
+                @if (!ValidationResult.IsDeckValid)
+                {
+                    <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Warning" OnClick="ShowReasons"/>
+                }
+
+                <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Clear" OnClick="ClearDeck" />              
 
                 <MudText GutterBottom="true"> Missions (@MissionDeck.Select(d => d.Quantity).Sum())</MudText>
                 @foreach (var item in MissionDeck)
