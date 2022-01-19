@@ -6,6 +6,6 @@ namespace SolarisRec.UI.UIModels
     {
         public List<string> Reasons { get; set; } = new List<string>();
 
-        public bool IsDeckInvalid => Reasons.Count > 0;
+        public bool IsDeckValid => Reasons.Count == 0;
     }
 }

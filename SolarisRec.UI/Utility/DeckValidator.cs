@@ -25,6 +25,12 @@ namespace SolarisRec.UI.Utility
 
             ValidateTacticalDeck(tacticalDeck);
 
+            if(missionDeck.Where(m => m.Card.Type == CardTypeConstants.Mission).Select(m => m.Card.Name)
+                .Any(m => tacticalDeck.Where(t => t.Card.Type == CardTypeConstants.Mission).Select(t => t.Card.Name).Contains(m)))
+            {
+                validationResult.Reasons.Add($"The same mission can not be in both Tactical and Misison deck.");
+            }
+
             return validationResult;            
         }
 
@@ -40,7 +46,7 @@ namespace SolarisRec.UI.Utility
         {            
             if (missionDeck.Select(c => c.Quantity).Sum() != MISSION_DECK_CARD_COUNT)
             {
-                validationResult.Reasons.Add($"Mission Deck must consist of exactly {MAIN_DECK_CARD_COUNT} cards.");
+                validationResult.Reasons.Add($"Mission Deck must consist of exactly {MISSION_DECK_CARD_COUNT} cards.");
             }            
         }
 
@@ -48,7 +54,7 @@ namespace SolarisRec.UI.Utility
         {
             if (tacticalDeck.Select(c => c.Quantity).Sum() > TACTICAL_DECK_CARD_COUNT)
             {
-                validationResult.Reasons.Add($"Tactical Deck may not have more than {MAIN_DECK_CARD_COUNT} cards.");
+                validationResult.Reasons.Add($"Tactical Deck may not have more than {TACTICAL_DECK_CARD_COUNT} cards.");
             }
 
             if (tacticalDeck.Where(d => d.Card.Type != CardTypeConstants.Mission).Count() > MAX_NON_MISSION_IN_TACTICAL_DECK)
