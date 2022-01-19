@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using SolarisRec.UI.Providers;
 using SolarisRec.Core.Card.Enums;
 using SolarisRec.UI.Components.ValidationDialog;
+using SolarisRec.UI.Components.ConfirmOnlyDialog;
 
 namespace SolarisRec.UI.Pages
 {
@@ -300,6 +301,15 @@ namespace SolarisRec.UI.Pages
                     await SaveFile.Save(streamRef);
                 }
             }                       
-        }        
+        }
+        
+        private async Task ShowReasons()
+        {
+            var parameters = new DialogParameters { ["reasons"] = ValidationResult.Reasons };
+
+            var options = new DialogOptions { CloseOnEscapeKey = true };
+            var dialog = DialogService.Show<ConfirmOnlyDialog>("Your deck state is ilegal, because:", parameters, options);
+            await dialog.Result;
+        }
     }
 }

@@ -119,7 +119,7 @@
 
                 @if (!ValidationResult.IsDeckValid)
                 {
-                    <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Warning" />
+                    <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Warning" OnClick="ShowReasons"/>
                 }
 
                 <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Clear" OnClick="ClearDeck" />              
