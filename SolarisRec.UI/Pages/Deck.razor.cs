@@ -308,7 +308,7 @@ namespace SolarisRec.UI.Pages
             var parameters = new DialogParameters { ["reasons"] = ValidationResult.Reasons };
 
             var options = new DialogOptions { CloseOnEscapeKey = true };
-            var dialog = DialogService.Show<ConfirmOnlyDialog>("Your deck state is ilegal, because:", parameters, options);
+            var dialog = DialogService.Show<ConfirmOnlyDialog>("Your deck state is illegal, because:", parameters, options);
             await dialog.Result;
         }
     }
