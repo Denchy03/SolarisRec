@@ -1,11 +1,11 @@
 ﻿using SolarisRec.Core.CardType;
-using SolarisRec.UI.UIModels;
+using SolarisRec.Core.Deck.Processes.PrimaryPorts;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SolarisRec.UI.Utility
+namespace SolarisRec.Core.Deck.Processes
 {
-    internal class DeckValidator : IDeckValidator
+    internal class ValidateDeckService : IValidateDeckService
     {
         public const int MAIN_DECK_CARD_COUNT = 45;
         public const int TACTICAL_DECK_CARD_COUNT = 10;        
@@ -13,11 +13,11 @@ namespace SolarisRec.UI.Utility
         public const int MAX_NON_MISSION_IN_TACTICAL_DECK = 9;
         public const int MAX_MISSION_IN_TACTICAL_DECK = 1;
 
-        private ValidationResult validationResult = new ValidationResult();
+        private List<string> validationResults; 
 
-        public ValidationResult Validate(List<DeckItem> maindeck, List<DeckItem> missionDeck, List<DeckItem> tacticalDeck)
+        public List<string> Validate(List<DeckItem> maindeck, List<DeckItem> missionDeck, List<DeckItem> tacticalDeck)
         {
-            validationResult = new ValidationResult();
+            validationResults = new List<string>();
 
             ValidateMainDeck(maindeck);
 
@@ -28,17 +28,17 @@ namespace SolarisRec.UI.Utility
             if(missionDeck.Where(m => m.Card.Type == CardTypeConstants.Mission).Select(m => m.Card.Name)
                 .Any(m => tacticalDeck.Where(t => t.Card.Type == CardTypeConstants.Mission).Select(t => t.Card.Name).Contains(m)))
             {
-                validationResult.Reasons.Add($"The same mission can not be in both Tactical and Misison deck.");
+                validationResults.Add($"The same mission can not be in both Tactical and Misison deck.");
             }
 
-            return validationResult;            
+            return validationResults;            
         }
 
         private void ValidateMainDeck(List<DeckItem> maindeck)
         {
             if(maindeck.Select(c => c.Quantity).Sum() != MAIN_DECK_CARD_COUNT)
             {
-                validationResult.Reasons.Add($"Main Deck must consist of exactly {MAIN_DECK_CARD_COUNT} cards.");
+                validationResults.Add($"Main Deck must consist of exactly {MAIN_DECK_CARD_COUNT} cards.");
             }          
         }
 
@@ -46,7 +46,7 @@ namespace SolarisRec.UI.Utility
         {            
             if (missionDeck.Select(c => c.Quantity).Sum() != MISSION_DECK_CARD_COUNT)
             {
-                validationResult.Reasons.Add($"Mission Deck must consist of exactly {MISSION_DECK_CARD_COUNT} cards.");
+                validationResults.Add($"Mission Deck must consist of exactly {MISSION_DECK_CARD_COUNT} cards.");
             }            
         }
 
@@ -54,17 +54,17 @@ namespace SolarisRec.UI.Utility
         {
             if (tacticalDeck.Select(c => c.Quantity).Sum() > TACTICAL_DECK_CARD_COUNT)
             {
-                validationResult.Reasons.Add($"Tactical Deck may not have more than {TACTICAL_DECK_CARD_COUNT} cards.");
+                validationResults.Add($"Tactical Deck may not have more than {TACTICAL_DECK_CARD_COUNT} cards.");
             }
 
             if (tacticalDeck.Where(d => d.Card.Type != CardTypeConstants.Mission).Count() > MAX_NON_MISSION_IN_TACTICAL_DECK)
             {
-                validationResult.Reasons.Add($"Tactical Deck may not have more than {MAX_NON_MISSION_IN_TACTICAL_DECK} Main deck Cards.");
+                validationResults.Add($"Tactical Deck may not have more than {MAX_NON_MISSION_IN_TACTICAL_DECK} Main deck Cards.");
             }
 
             if (tacticalDeck.Where(d => d.Card.Type == CardTypeConstants.Mission).Count() > MAX_MISSION_IN_TACTICAL_DECK)
             {
-                validationResult.Reasons.Add($"Tactical Deck may not have more than {MAX_MISSION_IN_TACTICAL_DECK} Mission.");
+                validationResults.Add($"Tactical Deck may not have more than {MAX_MISSION_IN_TACTICAL_DECK} Mission.");
             }
         }
     }
