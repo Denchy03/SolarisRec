@@ -1,6 +1,6 @@
 ﻿namespace SolarisRec.Core.Deck
 {
-    internal class DeckItem
+    public class DeckItem
     {
         public int Quantity { get; set; }
 
