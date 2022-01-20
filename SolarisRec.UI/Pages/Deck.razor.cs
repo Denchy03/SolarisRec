@@ -35,8 +35,7 @@ namespace SolarisRec.UI.Pages
         //todo: use for instead of foreach when using mappers
         //todo: converted resource cost???
         //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
-        //todo? MudPaper to component?
-        //todo consider Deckvalidation refactor
+        //todo? MudPaper to component?       
 
         [Inject] private ICardProvider CardProvider { get; set; }        
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
@@ -209,11 +208,20 @@ namespace SolarisRec.UI.Pages
             await table.ReloadServerData();
         }
 
-        private void ClearDeck()
+        private async Task ClearDeck()
         {
-            MainDeck = new List<DeckItem>();
-            MissionDeck = new List<DeckItem>();
-            TacticalDeck = new List<DeckItem>(); 
+            var parameters = new DialogParameters { ["reasons"] = new List<string>() };
+
+            var options = new DialogOptions { CloseOnEscapeKey = true };
+            var dialog = DialogService.Show<ValidationDialog>("Are you sure you want to delete this deck?", parameters, options);
+            var result = await dialog.Result;
+
+            if (!result.Cancelled)
+            {
+                MainDeck = new List<DeckItem>();
+                MissionDeck = new List<DeckItem>();
+                TacticalDeck = new List<DeckItem>();
+            }            
         }
 
         private void AddToDeck(TableRowClickEventArgs<Card> card)
