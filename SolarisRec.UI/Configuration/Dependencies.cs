@@ -43,6 +43,10 @@ namespace SolarisRec.UI.Configuration
                 .AddTransient<IMapToUIModel<CoreCard.Talent, Talent>, Mappers.ToUIModel.TalentMapper>()
                 .AddTransient<IMapToUIModel<CoreCard.Cost, Cost>, Mappers.ToUIModel.CostMapper>()
 
+                .AddTransient<IMapToDomainModel<Talent, CoreCard.Talent>, Mappers.ToDomainModel.TalentMapper>()
+                .AddTransient<IMapToDomainModel<Cost, CoreCard.Cost>, Mappers.ToDomainModel.CostMapper>()
+                .AddTransient<IMapToDomainModel<DeckItem, Core.Deck.DeckItem>, Mappers.ToDomainModel.DeckItemMapper>()
+                .AddTransient<IMapToDomainModel<Card, CoreCard.Card>, Mappers.ToDomainModel.CardMapper>()
                 .AddTransient<IDeckValidator, DeckValidator>()
                 ;
         }       
