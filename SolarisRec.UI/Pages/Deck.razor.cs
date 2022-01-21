@@ -57,7 +57,7 @@ namespace SolarisRec.UI.Pages
         private MudMultiSelectDropdown cardTypeDropdown;
         private MudMultiSelectDropdown crcDropdown;
         private MudMultiSelectDropdown talentsDropdown;
-        private MudMultiSelectDropdown keywordDropown;
+        private MudMultiSelectDropdown keywordDropdown;
         private MudTextField<string> searchByName;
         private MudTextField<string> searchByAbility;
 
@@ -86,10 +86,8 @@ namespace SolarisRec.UI.Pages
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
         private ValidationResult ValidationResult { get; set; } = new ValidationResult();
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
+        protected override void OnParametersSet() {
+            
             SelectedFactions.PropertyChanged += async (sender, e) =>
             {
                 if (reload)
@@ -131,6 +129,8 @@ namespace SolarisRec.UI.Pages
             CardTypeDropdownItems = await CardTypeDropdownItemProvider.ProvideDropdownItems();
             KeywordDropdownItems = await KeywordDropdownItemProvider.ProvideDropdownItems();
             ConvertedResourceCostDropdownItems = await ConvertedResourceCostDropdownItemProvider.ProvideDropdownItems();
+
+            Cards = await CardProvider.GetCardsFiltered(Filter);
         }
 
         private async Task ApplyDropdownFilters()
@@ -199,7 +199,7 @@ namespace SolarisRec.UI.Pages
             await cardTypeDropdown.Clear();
             await crcDropdown.Clear();
             await talentsDropdown.Clear();
-            await keywordDropown.Clear();
+            await keywordDropdown.Clear();
             await searchByName.Clear();
             await searchByAbility.Clear();            
 
@@ -222,6 +222,11 @@ namespace SolarisRec.UI.Pages
                 MissionDeck = new List<DeckItem>();
                 TacticalDeck = new List<DeckItem>();
             }            
+        }
+
+        private void AddToDeck(Card card)
+        {
+
         }
 
         private void AddToDeck(TableRowClickEventArgs<Card> card)

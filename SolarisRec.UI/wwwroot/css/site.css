@@ -6,3 +6,11 @@
         cursor: pointer;
         background-color: var(--mud-palette-table-hover);
     }
+
+.resourceCostIcon {
+    width: 40px;
+}
+
+.talentIcon {
+    width: 40px;
+}
