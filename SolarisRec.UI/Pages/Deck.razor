@@ -2,7 +2,6 @@
 
 @using SolarisRec.UI.Components.Dropdown
 @using SolarisRec.UI.Provdiders
-@using SolarisRec.UI.UIModels
 
 <MudDialogProvider />
 
@@ -39,25 +38,25 @@
         <MudPaper Class="solaris-deck-item-header d-flex px-2 align-center my-1">
             <MudText Typo="Typo.body2" Class="name-header">Name</MudText>
             <MudSpacer />
-            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudDivider FlexItem="true" Vertical="true" />
             <MudText Typo="Typo.body2" Class="factions-header">Factions</MudText>
             <MudSpacer />
-            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudDivider FlexItem="true" Vertical="true"  />
             <MudText Typo="Typo.body2" Class="type-header">Type</MudText>
             <MudSpacer />
-            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudDivider FlexItem="true" Vertical="true"  />
             <MudText Typo="Typo.body2" Class="resourceCostIcon-header">C</MudText>
             <MudSpacer />
-            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudDivider FlexItem="true" Vertical="true" />
             <MudText Typo="Typo.body2" Class="talentIcon-header">T</MudText>
             <MudSpacer />
-            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudDivider FlexItem="true" Vertical="true"  />
             <MudText Typo="Typo.body2" Class="av-header">AV</MudText>
             <MudSpacer />
-            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudDivider FlexItem="true" Vertical="true"  />
             <MudText Typo="Typo.body2" Class="hv-header">HV</MudText>
             <MudSpacer />
-            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudDivider FlexItem="true" Vertical="true"  />
             <MudText Typo="Typo.body2" Class="ability-header">Ability</MudText>
         </MudPaper>
 
@@ -67,10 +66,10 @@
                       Class="solaris-deck-item d-flex px-2 align-center my-1">
                 <MudText Typo="Typo.body2" Class="name">@item.Name</MudText>
                 <MudSpacer />
-                <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                <MudDivider FlexItem="true" Vertical="true" />
                 <MudText Typo="Typo.body2" Class="factions">@item.Factions</MudText>
                 <MudSpacer />
-                <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                <MudDivider FlexItem="true" Vertical="true" />
                 <MudText Typo="Typo.body2" Class="type">@item.Type</MudText>
                 <MudSpacer />
                 <MudDivider FlexItem="true" Vertical="true" />
@@ -98,90 +97,15 @@
                 <MudDivider FlexItem="true" Vertical="true" />
                 <MudText Typo="Typo.body2" Class="av">@item.AttackValue</MudText>
                 <MudSpacer />
-                <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                <MudDivider FlexItem="true" Vertical="true" />
                 <MudText Typo="Typo.body2" Class="hv">@item.HealthValue</MudText>
                 <MudSpacer />
-                <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                <MudDivider FlexItem="true" Vertical="true" />
                 <MudText Typo="Typo.body2" Class="ability">@item.Ability</MudText>
             </MudPaper>
         }
 
     </MudItem>
-    
-
-    @*<MudItem id="CardSearch" xs="8">
-        <MudTable Items="@Cards"
-                  T="Card" OnRowClick="AddToDeck" RowClass="relative"
-                  ServerData="@(new Func<TableState, Task<TableData<Card>>>(GetCardsFiltered))"
-                  Hover="true" Breakpoint="Breakpoint.Sm" RightAlignSmall="true"
-                  @ref="table">
-            <ToolBarContent>
-                <MudSpacer />
-                <MudTextField T="string" ValueChanged="@(searchTerm => OnSearchByName(searchTerm))" Placeholder="Search by name"
-                              Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                              IconSize="Size.Medium" Class="mt-0" Label="Search by name" @ref="searchByName"></MudTextField>
-                <MudTextField T="string" ValueChanged="@(abilitySearchTerm => OnSearchByAbility(abilitySearchTerm))" Placeholder="Search by ability"
-                              Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
-                              IconSize="Size.Medium" Class="mt-0" Label="Search by ability" @ref="searchByAbility"></MudTextField>
-            </ToolBarContent>
-            <ColGroup>
-                <col style="width: 50px;" />
-                <col style="width: 50px;" />
-                <col style="width: 50px;" />
-                <col style="width: 30px;" />
-                <col style="width: 30px;" />
-                <col style="width: 10px;" />
-                <col style="width: 10px;" />
-                <col style="width: 490px;" />
-            </ColGroup>
-            <HeaderContent>
-
-                <MudTh><MudTableSortLabel SortLabel="@nameof(Card.Name)" T="Card">Name</MudTableSortLabel></MudTh>
-                <MudTh>Factions</MudTh>
-                <MudTh>Type</MudTh>
-                <MudTh><MudTableSortLabel SortLabel="@nameof(Card.Costs)" T="Card">Cost</MudTableSortLabel></MudTh>
-                <MudTh>Talent</MudTh>
-                <MudTh><MudTableSortLabel SortLabel="@nameof(Card.AttackValue)" T="Card">AV</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortLabel="@nameof(Card.HealthValue)" T="Card">HV</MudTableSortLabel></MudTh>
-                <MudTh>Ability</MudTh>
-
-            </HeaderContent>
-            <RowTemplate>
-
-                <MudTd DataLabel="Name">
-                    <div @onmouseover="@(() => UpdateImageSrc(context))" class="absolute mud-width-full mud-height-full" style="top:0;left:0;"></div>
-                    @context.Name
-                </MudTd>
-                <MudTd DataLabel="Factions">@context.Factions</MudTd>
-                <MudTd DataLabel="CardType">@context.Type</MudTd>
-                <MudTd DataLabel="Cost">
-                    @for (int i = 0; i < @context.Costs.Count; i++)
-                    {
-                        for (int j = 0; j < @context.Costs[i].Quantity; j++)
-                        {
-                            <img src="@ResourceIconImageLinkProvider.Provide(@context.Costs[i])" width="30" height="26">
-                        }
-                    }
-                </MudTd>
-                <MudTd DataLabel="Talent">
-                    @for (int i = 0; i < @context.Talents.Count; i++)
-                    {
-                        for (int j = 0; j < @context.Talents[i].Quantity; j++)
-                        {
-                            <img src="@TalentIconImageLinkProvider.Provide(@context.Talents[i])" width="30" height="26">
-                        }
-                    }
-                </MudTd>
-                <MudTd DataLabel="AttackValue">@context.AttackValue</MudTd>
-                <MudTd DataLabel="HealthValue">@context.HealthValue</MudTd>
-                <MudTd DataLabel="Ability">@context.Ability</MudTd>
-
-            </RowTemplate>
-            <PagerContent>
-                <MudTablePager PageSizeOptions="@pageSizeOption" RowsPerPageString="Cards per page" />
-            </PagerContent>
-        </MudTable>
-    </MudItem>*@
 
     <MudItem id="DecksAndCommands" xs="4" Spacing="0">
         <MudGrid>
@@ -204,9 +128,9 @@
                 {
                     <MudPaper @onclick="@(() => RemoveFromMissionDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
-                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudText Typo="Typo.body2">@item.Card.Name</MudText>
                         <MudSpacer />
-                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudDivider FlexItem="true" Vertical="true" />
                         <MudText Typo="Typo.body2">@item.Quantity</MudText>
                     </MudPaper>
                 }
@@ -218,9 +142,9 @@
                 {
                     <MudPaper @onclick="@(() => RemoveFromDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
-                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudText Typo="Typo.body2">@item.Card.Name</MudText>
                         <MudSpacer />
-                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudDivider FlexItem="true" Vertical="true" />
                         <MudText Typo="Typo.body2">@item.Quantity</MudText>
                     </MudPaper>
                 }
@@ -230,9 +154,9 @@
                 {
                     <MudPaper @onclick="@(() => RemoveFromTacticalDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
-                        <MudText Typo="Typo.body2" Class="my-2">@item.Card.Name</MudText>
+                        <MudText Typo="Typo.body2">@item.Card.Name</MudText>
                         <MudSpacer />
-                        <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                        <MudDivider FlexItem="true" Vertical="true" />
                         <MudText Typo="Typo.body2">@item.Quantity</MudText>
                     </MudPaper>
                 }

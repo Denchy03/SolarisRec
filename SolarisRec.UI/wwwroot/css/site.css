@@ -36,7 +36,7 @@
 }
 .type-header {
     width: 10%;
-    text-align: center
+    text-align: center;
 }
 
 .resourceCostIcon {
@@ -46,7 +46,7 @@
 
 .resourceCostIcon-header {
     width: 7%;
-    text-align: center
+    text-align: center;
 }
 
 .talentIcon {
@@ -59,31 +59,32 @@
 }
 
 .av {
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 
 .av-header {
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 
 .hv {
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 
 .hv-header {
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 
 .ability {
-    width: 40%;
-    text-align: justify
+    width: 44%;
+    text-align: justify;
+    padding-left: 10px;
 }
 
 .ability-header {
-    width: 40%;
-    text-align: center
+    width: 44%;
+    text-align: center;
 }
