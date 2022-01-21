@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SolarisRec.Core.Configuration;
 using MudBlazor.Services;
 using SolarisRec.UI.Configuration;
-using Microsoft.Extensions.Configuration;
 
 namespace SolarisRec.UI
 {

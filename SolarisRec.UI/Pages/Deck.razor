@@ -32,8 +32,8 @@
 
 <MudButton OnClick="ClearFilters">Clear Filters</MudButton>
 
-<MudGrid>
-    <MudItem>
+<MudGrid id="SearchCommands">
+    <MudItem xs="12" md="6" id="Search">
         <MudTextField T="string" @ref="searchByName" Label="Search by Name"
                       DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByName">
         </MudTextField>
@@ -41,8 +41,8 @@
         <MudTextField T="string" @ref="searchByAbility" Label="Search by Ability" 
                       DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByAbility"></MudTextField>
     </MudItem>
-    <MudItem>
-        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Save" OnClick="Export"></MudIconButton>
+    <MudItem xs="12" md="6">
+        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Save" OnClick="Export" ></MudIconButton>
 
         @if (!ValidationResult.IsDeckValid)
         {
@@ -134,10 +134,23 @@
                 <MudText Typo="Typo.body2" Class="ability">@item.Ability</MudText>
             </MudPaper>
         }
+        <MudPaper id="Paging" Class="solaris-deck-item d-flex px-2 align-center my-1">
+            <MudText Typo="Typo.body2">Cards per page</MudText>
+            <MudSpacer />
+            <MudText Typo="Typo.body2">@PageSize</MudText>
+            <MudSpacer />
+
+            <MudText Typo="Typo.body2">@PageSizeFromTo of @TotalItems</MudText>
+            <MudSpacer />
+            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.FirstPage"></MudIconButton>
+            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.ArrowLeft"></MudIconButton>
+            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.ArrowRight"></MudIconButton>
+            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.LastPage"></MudIconButton>
+        </MudPaper>
 
     </MudItem>
 
-    <MudItem id="DecksAndCommands" xs="4" Spacing="0">
+    <MudItem id="DecksAndPicture" xs="4" Spacing="0">
         <MudGrid>
 
             <MudItem xs="12" lg="6">

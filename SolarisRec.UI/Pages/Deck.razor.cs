@@ -69,6 +69,7 @@ namespace SolarisRec.UI.Pages
         private string SortLabel { get; set; } = string.Empty;
         private int SortingDirection { get; set; } = (int)Core.SortingDirection.None;
         private int TotalItems { get; set; }
+        private string PageSizeFromTo { get; set; } = "9-16";
 
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
         private readonly int[] pageSizeOption = { 4, 6, 8, 50 };
@@ -192,7 +193,10 @@ namespace SolarisRec.UI.Pages
         }
         
         private async Task ClearFilters()
-        {            
+        {
+            SortingDirection = (int)Core.SortingDirection.None;
+            SortLabel = string.Empty;
+
             reload = false;
 
             await factionDropdown.Clear();
@@ -204,9 +208,6 @@ namespace SolarisRec.UI.Pages
             await searchByAbility.Clear();            
 
             reload = true;
-
-            Filter.SortingDirection = (int)Core.SortingDirection.None;
-            Filter.OrderBy = string.Empty;
 
             await GetCardsFiltered();
         }
