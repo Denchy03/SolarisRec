@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using SolarisRec.Core.Configuration;
 using MudBlazor.Services;
 using SolarisRec.UI.Configuration;
+using Microsoft.Extensions.Configuration;
 
 namespace SolarisRec.UI
 {
@@ -24,7 +25,7 @@ namespace SolarisRec.UI
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = "Server=.;Database=SolarisRec;Trusted_Connection=True;";
+            var connectionString = Configuration.GetConnectionString("Default");
 
             services.UseSolarisRecPersistenceAdapters(connectionString);
             services.UseSolarisRecCore();
