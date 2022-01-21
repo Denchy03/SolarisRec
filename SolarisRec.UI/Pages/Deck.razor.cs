@@ -9,6 +9,7 @@ using SolarisRec.UI.Utility;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Web;
 using SolarisRec.UI.Providers;
 using SolarisRec.Core.Card.Enums;
 using SolarisRec.UI.Components.ValidationDialog;
@@ -49,9 +50,7 @@ namespace SolarisRec.UI.Pages
         [Inject] private IDialogService DialogService { get; set; }
 
         private const int DEFAULT_PAGE_SIZE = 8;
-        private const int DEFAULT_FROM_MUD_BLAZOR = 10;        
-
-        private MudTable<Card> table;       
+        private const int DEFAULT_FROM_MUD_BLAZOR = 10;
 
         private MudMultiSelectDropdown factionDropdown;
         private MudMultiSelectDropdown cardTypeDropdown;
@@ -62,8 +61,14 @@ namespace SolarisRec.UI.Pages
         private MudTextField<string> searchByAbility;
 
         private bool reload = true;
-        private int mainDeckCardCount => MainDeck.Select(d => d.Quantity).Sum();
-        private int mainDeckAgentCount => MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
+        private int MainDeckCardCount => MainDeck.Select(d => d.Quantity).Sum();
+        private int MainDeckAgentCount => MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
+
+        private int Page { get; set; } = 0;
+        private int PageSize { get; set; } = 8;
+        private string SortLabel { get; set; } = string.Empty;
+        private int SortingDirection { get; set; } = 0;
+        private int TotalItems { get; set; }
 
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
         private readonly int[] pageSizeOption = { 4, 6, 8, 50 };
@@ -135,34 +140,29 @@ namespace SolarisRec.UI.Pages
 
         private async Task ApplyDropdownFilters()
         {
-            await table.ReloadServerData();
+            await GetCardsFiltered();
         }
 
-        private async Task<TableData<Card>> GetCardsFiltered(TableState state)
+        private async Task GetCardsFiltered()
         {
-            state.PageSize = state.PageSize == DEFAULT_FROM_MUD_BLAZOR ? DEFAULT_PAGE_SIZE : state.PageSize;
-            table.SetRowsPerPage(state.PageSize);
+            PageSize = PageSize == DEFAULT_FROM_MUD_BLAZOR ? DEFAULT_PAGE_SIZE : PageSize;
 
-            Filter.PageSize = state.PageSize;
-            Filter.Page = state.Page + 1;
+            Filter.PageSize = PageSize;
+            Filter.Page = Page + 1;
             Filter.Factions = SelectedFactions.Selected.Select(f => f.Id).ToList();
             Filter.Talents = SelectedTalents.Selected.Select(t => t.Id).ToList();
             Filter.CardTypes = SelectedCardTypes.Selected.Select(ct => ct.Id).ToList();
             Filter.Keywords = SelectedKeywords.Selected.Select(k => k.Name).ToList();
             Filter.ConvertedResourceCost = SelectedConvertedResourceCosts.Selected.Select(c => c.Id).ToList();
-            Filter.OrderBy = state.SortLabel;
-            Filter.SortingDirection = (int)state.SortDirection;
+            Filter.OrderBy = SortLabel;
+            Filter.SortingDirection = SortingDirection;
 
             if (reload)
             {
                 Cards = await CardProvider.GetCardsFiltered(Filter);
             }
 
-            return new TableData<Card>
-            {
-                Items = Cards,
-                TotalItems = Filter.MatchingCardCount
-            };
+            TotalItems = Filter.MatchingCardCount;
         }        
 
         public void UpdateImageSrc(Card card)
@@ -180,7 +180,7 @@ namespace SolarisRec.UI.Pages
             reload = true;
 
             Filter.Name = searchTerm;
-            await table.ReloadServerData();
+            await GetCardsFiltered();
         }
 
         private async Task OnSearchByAbility(string abilitySearchTerm)
@@ -188,7 +188,7 @@ namespace SolarisRec.UI.Pages
             reload = true;
 
             Filter.Ability = abilitySearchTerm;
-            await table.ReloadServerData();
+            await GetCardsFiltered();
         }
         
         private async Task ClearFilters()
@@ -205,7 +205,7 @@ namespace SolarisRec.UI.Pages
 
             reload = true;            
 
-            await table.ReloadServerData();
+            await GetCardsFiltered();
         }
 
         private async Task ClearDeck()
@@ -224,23 +224,18 @@ namespace SolarisRec.UI.Pages
             }            
         }
 
-        private void AddToDeck(Card card)
+        private void AddToDeck(MouseEventArgs e, Card card)
         {
+            var isMission = card.Type == nameof(CardTypeConstants.Mission);
 
-        }
-
-        private void AddToDeck(TableRowClickEventArgs<Card> card)
-        {
-            bool isMission = card.Item.Type == nameof(CardTypeConstants.Mission);
-
-            if(card.Item.Id == (int)CardId.PlanetaryPolitics || card.Item.Id == (int)CardId.SearchforLostKnowledge)
+            if (card.Id is (int)CardId.PlanetaryPolitics or (int)CardId.SearchforLostKnowledge)
             {
                 return;
             }
 
-            if (card.MouseEventArgs.CtrlKey)
+            if (e.CtrlKey)
             {
-                card.Item.AddCard(TacticalDeck);
+                card.AddCard(TacticalDeck);
                 TacticalDeck = TacticalDeck
                     .OrderBy(d => d.Card.Factions)
                     .ThenBy(d => d.Card.Type)
@@ -254,7 +249,7 @@ namespace SolarisRec.UI.Pages
 
             if (isMission)
             {
-                card.Item.AddCard(MissionDeck);
+                card.AddCard(MissionDeck);
                 MissionDeck = MissionDeck
                     .OrderBy(d => d.Card.Talents.Select(t => t.Quantity).Sum())
                     .ThenBy(d => d.Card.Name)
@@ -262,9 +257,9 @@ namespace SolarisRec.UI.Pages
 
                 ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
                 return;
-            } 
-            
-            card.Item.AddCard(MainDeck);
+            }
+
+            card.AddCard(MainDeck);
             MainDeck = MainDeck
                 .OrderBy(d => d.Card.Factions)
                 .ThenBy(d => d.Card.Type)

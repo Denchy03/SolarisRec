@@ -88,3 +88,12 @@
     width: 44%;
     text-align: center;
 }
+
+.deckItemName {
+    width: 80%;
+}
+
+.deckItemQuantity {
+    width: 20%; 
+    text-align: center;
+}
