@@ -67,7 +67,7 @@ namespace SolarisRec.UI.Pages
         private int Page { get; set; } = 0;
         private int PageSize { get; set; } = 8;
         private string SortLabel { get; set; } = string.Empty;
-        private int SortingDirection { get; set; } = 0;
+        private int SortingDirection { get; set; } = (int)Core.SortingDirection.None;
         private int TotalItems { get; set; }
 
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
@@ -203,7 +203,10 @@ namespace SolarisRec.UI.Pages
             await searchByName.Clear();
             await searchByAbility.Clear();            
 
-            reload = true;            
+            reload = true;
+
+            Filter.SortingDirection = (int)Core.SortingDirection.None;
+            Filter.OrderBy = string.Empty;
 
             await GetCardsFiltered();
         }
@@ -323,7 +326,15 @@ namespace SolarisRec.UI.Pages
         private async Task SetSorting(string sortLabel)
         {
             SortLabel = sortLabel;
-            SortingDirection = 1;
+
+            if (SortingDirection is (int)Core.SortingDirection.None or (int)Core.SortingDirection.Descending)
+            {
+                SortingDirection = (int)Core.SortingDirection.Ascending;
+            }
+            else
+            {
+                SortingDirection = (int)Core.SortingDirection.Descending;
+            }
 
             await GetCardsFiltered();
         }

@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SolarisRec.Core.Card.Enums;
+using SolarisRec.Core;
 
 namespace SolarisRec.Persistence.Repositories
 {

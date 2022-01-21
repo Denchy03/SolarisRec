@@ -1,4 +1,4 @@
-﻿namespace SolarisRec.Core.Card.Enums
+﻿namespace SolarisRec.Core
 {
     public enum SortingDirection
     {
