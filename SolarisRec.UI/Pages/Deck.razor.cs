@@ -319,5 +319,13 @@ namespace SolarisRec.UI.Pages
             var dialog = DialogService.Show<ConfirmOnlyDialog>("Your deck state is illegal, because:", parameters, options);
             await dialog.Result;
         }
+
+        private async Task SetSorting(string sortLabel)
+        {
+            SortLabel = sortLabel;
+            SortingDirection = 1;
+
+            await GetCardsFiltered();
+        }
     }
 }
