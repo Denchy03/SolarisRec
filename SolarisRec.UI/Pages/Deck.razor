@@ -36,17 +36,42 @@
     
     <MudItem id="CardSearch" xs="8">
         
+        <MudPaper Class="solaris-deck-item-header d-flex px-2 align-center my-1">
+            <MudText Typo="Typo.body2" Class="name-header">Name</MudText>
+            <MudSpacer />
+            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudText Typo="Typo.body2" Class="factions-header">Factions</MudText>
+            <MudSpacer />
+            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudText Typo="Typo.body2" Class="type-header">Type</MudText>
+            <MudSpacer />
+            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudText Typo="Typo.body2" Class="resourceCostIcon-header">C</MudText>
+            <MudSpacer />
+            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudText Typo="Typo.body2" Class="talentIcon-header">T</MudText>
+            <MudSpacer />
+            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudText Typo="Typo.body2" Class="av-header">AV</MudText>
+            <MudSpacer />
+            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudText Typo="Typo.body2" Class="hv-header">HV</MudText>
+            <MudSpacer />
+            <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+            <MudText Typo="Typo.body2" Class="ability-header">Ability</MudText>
+        </MudPaper>
+
         @foreach (var item in Cards)
         {
             <MudPaper @onclick="@(() => AddToDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                       Class="solaris-deck-item d-flex px-2 align-center my-1">
-                <MudText Typo="Typo.body2" Class="my-2">@item.Name</MudText>
+                <MudText Typo="Typo.body2" Class="name">@item.Name</MudText>
                 <MudSpacer />
                 <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
-                <MudText Typo="Typo.body2">@item.Factions</MudText>
+                <MudText Typo="Typo.body2" Class="factions">@item.Factions</MudText>
                 <MudSpacer />
                 <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
-                <MudText Typo="Typo.body2">@item.Type</MudText>
+                <MudText Typo="Typo.body2" Class="type">@item.Type</MudText>
                 <MudSpacer />
                 <MudDivider FlexItem="true" Vertical="true" />
                 <MudItem Class="resourceCostIcon">
@@ -58,6 +83,8 @@
                         }
                     }
                 </MudItem>
+                <MudSpacer />
+                <MudDivider FlexItem="true" Vertical="true" />
                 <MudItem Class="talentIcon">
                     @for (int i = 0; i < @item.Talents.Count; i++)
                     {
@@ -67,6 +94,15 @@
                         }
                     }
                 </MudItem>
+                <MudSpacer />
+                <MudDivider FlexItem="true" Vertical="true" />
+                <MudText Typo="Typo.body2" Class="av">@item.AttackValue</MudText>
+                <MudSpacer />
+                <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                <MudText Typo="Typo.body2" Class="hv">@item.HealthValue</MudText>
+                <MudSpacer />
+                <MudDivider FlexItem="true" Vertical="true" Class="mx-2" />
+                <MudText Typo="Typo.body2" Class="ability">@item.Ability</MudText>
             </MudPaper>
         }
 

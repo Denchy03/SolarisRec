@@ -7,10 +7,83 @@
         background-color: var(--mud-palette-table-hover);
     }
 
+.solaris-deck-item-header {
+    user-select: none;
+}
+
+.name {
+    width: 12%;
+}
+
+.name-header {
+    width: 12%;
+    text-align: center;
+}
+
+.factions {
+    width: 10%;
+    text-align: center;
+}
+
+.factions-header {
+    width: 10%;
+    text-align: center;
+}
+
+.type {
+    width: 10%;
+    text-align: center;
+}
+.type-header {
+    width: 10%;
+    text-align: center
+}
+
 .resourceCostIcon {
-    width: 40px;
+    width: 7%;
+    text-align: center;
+}
+
+.resourceCostIcon-header {
+    width: 7%;
+    text-align: center
 }
 
 .talentIcon {
-    width: 40px;
+    width: 7%;
+    text-align: center;
+}
+.talentIcon-header {
+    width: 7%;
+    text-align: center;
+}
+
+.av {
+    width: 7%;
+    text-align: center;
+}
+
+.av-header {
+    width: 7%;
+    text-align: center;
+}
+
+.hv {
+    width: 7%;
+    text-align: center;
+}
+
+.hv-header {
+    width: 7%;
+    text-align: center;
+}
+
+.ability {
+    width: 40%;
+    text-align: justify
+}
+
+.ability-header {
+    width: 40%;
+    text-align: center
 }
