@@ -44,6 +44,7 @@ namespace SolarisRec.UI.Pages
         [Inject] private ICardTypeDropdownProvider CardTypeDropdownItemProvider { get; set; }
         [Inject] private IKeywordDropdownItemProvider KeywordDropdownItemProvider { get; set; }
         [Inject] private IConvertedResourceCostDropdownItemProvider ConvertedResourceCostDropdownItemProvider { get; set; }
+        [Inject] private IPagingValuesProvider PagingValuesProvider { get; set; }
         [Inject] private IDeckGenerator DeckGenerator { get; set; }
         [Inject] private IFileSaveService SaveFile { get; set; }
         [Inject] private IDeckValidator DeckValidator { get; set; }
@@ -66,13 +67,13 @@ namespace SolarisRec.UI.Pages
 
         private int Page { get; set; } = 0;
         private int PageSize { get; set; } = 8;
+        private string PageSizeFromTo { get; set; } = "9-16";
         private string SortLabel { get; set; } = string.Empty;
         private int SortingDirection { get; set; } = (int)Core.SortingDirection.None;
-        private int TotalItems { get; set; }
-        private string PageSizeFromTo { get; set; } = "9-16";
+        private int TotalItems { get; set; }       
 
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
-        private readonly int[] pageSizeOption = { 4, 6, 8, 50 };
+        
         private List<Card> Cards { get; set; } = new List<Card>();
         private List<DeckItem> MainDeck { get; set; } = new List<DeckItem>();
         private List<DeckItem> MissionDeck { get; set; } = new List<DeckItem>();
@@ -89,8 +90,9 @@ namespace SolarisRec.UI.Pages
         private List<DropdownItem> ConvertedResourceCostDropdownItems = new();
         private SelectedValues SelectedConvertedResourceCosts = new();       
 
-        private List<DropdownItem> PagingItems = new();
-        private MudSelect<DropdownItem> PagingSelect { get; set; }
+        private List<DropdownItem> PagingValues = new();
+        private SelectedValues SelectedPagingValue = new();
+        //private MudSelect<DropdownItem> PagingSelect { get; set; }
 
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
         private ValidationResult ValidationResult { get; set; } = new ValidationResult();
@@ -127,6 +129,12 @@ namespace SolarisRec.UI.Pages
                     await InvokeAsync(ApplyDropdownFilters);
             };
 
+            SelectedPagingValue.PropertyChanged += async (sender, e) =>
+            {
+                if (reload)
+                    await InvokeAsync(ApplyPaging);
+            };
+
             ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);            
         }
 
@@ -138,6 +146,7 @@ namespace SolarisRec.UI.Pages
             CardTypeDropdownItems = await CardTypeDropdownItemProvider.ProvideDropdownItems();
             KeywordDropdownItems = await KeywordDropdownItemProvider.ProvideDropdownItems();
             ConvertedResourceCostDropdownItems = await ConvertedResourceCostDropdownItemProvider.ProvideDropdownItems();
+            PagingValues = await PagingValuesProvider.ProvideDropdownItems();
 
             Cards = await CardProvider.GetCardsFiltered(Filter);
             TotalItems = Filter.MatchingCardCount;
@@ -145,6 +154,14 @@ namespace SolarisRec.UI.Pages
 
         private async Task ApplyDropdownFilters()
         {
+            await GetCardsFiltered();
+            StateHasChanged();
+        }
+
+        private async Task ApplyPaging()
+        {
+            PageSize = SelectedPagingValue.Selected.First().Id;
+
             await GetCardsFiltered();
             StateHasChanged();
         }
@@ -343,11 +360,6 @@ namespace SolarisRec.UI.Pages
             }
 
             await GetCardsFiltered();
-        }
-
-        private void PagingChanged()
-        {
-
-        }
+        }      
     }
 }

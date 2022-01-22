@@ -35,6 +35,8 @@ namespace SolarisRec.UI.Configuration
                 .AddTransient<IMapToUIModel<Core.Faction.FactionInformation, UIModels.FactionInformation>, Mappers.ToUIModel.FactionInformationMapper>()
                 .AddTransient<IFactionInformationProvider, FactionInformationProvider>()
 
+                .AddTransient<IPagingValuesProvider, PagingValuesProvider>()
+
                 .AddTransient<IDeckGenerator, DeckGenerator>()
                 .AddTransient<IFileSaveService, FileSaveService>()
 

@@ -138,6 +138,13 @@
             <MudText Style="padding-left: 20px;" Typo="Typo.body2">@PageSize</MudText>
             <MudSpacer />
             
+                <MudSelect T="DropdownItem" @bind-SelectedValues="SelectedPagingValue.Selected" MultiSelection="false" 
+                    Dense="true" IconSize="Size.Small" >
+                @foreach (var item in PagingValues)
+                {
+                    <MudSelectItem T="DropdownItem" Value="@item">@item.Name</MudSelectItem>
+                }
+                </MudSelect>
             
             <MudSpacer />
             <MudText Typo="Typo.body2">@PageSizeFromTo of @TotalItems</MudText>
