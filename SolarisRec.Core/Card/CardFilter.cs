@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SolarisRec.Core.Card
 {
@@ -20,6 +21,8 @@ namespace SolarisRec.Core.Card
 
         public int Page { get; set; } = 1;
 
+        public string PageSizeFromTo => GetPageSizeFromToString();
+
         public int MatchingCardCount { get; set; }
 
         public string Ability { get; set; } = string.Empty;
@@ -27,5 +30,14 @@ namespace SolarisRec.Core.Card
         public string OrderBy { get; set; } = string.Empty;
 
         public int SortingDirection { get; set; } = 0;
+
+        private string GetPageSizeFromToString()
+        {
+            var start = (Page - 1) * PageSize + 1;
+            var end = Page * PageSize;
+
+            return $"{start}-{end}";
+
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using SolarisRec.UI.UIModels;
 using System;
-using Enums = SolarisRec.Core.Card.Enums;
+using CoreEnums = SolarisRec.Core.Card.Enums;
 
 namespace SolarisRec.UI.Provdiders
 {
@@ -10,13 +10,13 @@ namespace SolarisRec.UI.Provdiders
         {
             return talent.TalentType switch
             {
-                Enums.Talent.Data => @"../Assets/Data.jpg",
-                Enums.Talent.Diplomacy => @"../Assets/Diplomacy.jpg",
-                Enums.Talent.Espionage => @"../Assets/Espionage.jpg",
-                Enums.Talent.Military => @"../Assets/Military.jpg",
-                Enums.Talent.Mining => @"../Assets/Mining.jpg",
-                Enums.Talent.Research => @"../Assets/Research.jpg",
-                Enums.Talent.Any => @"../Assets/Any.jpg",
+                CoreEnums.Talent.Data => @"../Assets/Data.jpg",
+                CoreEnums.Talent.Diplomacy => @"../Assets/Diplomacy.jpg",
+                CoreEnums.Talent.Espionage => @"../Assets/Espionage.jpg",
+                CoreEnums.Talent.Military => @"../Assets/Military.jpg",
+                CoreEnums.Talent.Mining => @"../Assets/Mining.jpg",
+                CoreEnums.Talent.Research => @"../Assets/Research.jpg",
+                CoreEnums.Talent.Any => @"../Assets/Any.jpg",
                 _ => throw new InvalidOperationException($"The talent type {Enum.GetName(talent.TalentType)} is not supported.")
             };
         }

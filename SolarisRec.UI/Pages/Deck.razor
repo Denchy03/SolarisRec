@@ -3,6 +3,7 @@
 @using SolarisRec.UI.Components.Dropdown
 @using SolarisRec.UI.Provdiders
 @using SolarisRec.UI.UIModels
+@using SolarisRec.UI.Enums
 
 <MudDialogProvider />
 
@@ -40,7 +41,7 @@
         <MudTextField T="string" @ref="searchByAbility" Label="Search by Ability" 
                       DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByAbility"></MudTextField>
     </MudItem>
-    <MudItem xs="12" md="6">
+    <MudItem xs="12" md="6" Style="text-align: center; vertical-align: bottom;">
         <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Save" OnClick="Export" ></MudIconButton>
 
         @if (!ValidationResult.IsDeckValid)
@@ -134,12 +135,12 @@
             </MudPaper>
         }
         <MudPaper id="Paging" Class="solaris-deck-item d-flex px-2 align-center my-1">
-            <MudText Typo="Typo.body2">Cards per page</MudText>            
+            <MudText Typo="Typo.body2">Cards per page:</MudText>            
             <MudText Style="padding-left: 20px;" Typo="Typo.body2">@PageSize</MudText>
             <MudSpacer />
             
                 <MudSelect T="DropdownItem" @bind-SelectedValues="SelectedPagingValue.Selected" MultiSelection="false" 
-                    Dense="true" IconSize="Size.Small" >
+                    Dense="true" IconSize="Size.Small">
                 @foreach (var item in PagingValues)
                 {
                     <MudSelectItem T="DropdownItem" Value="@item">@item.Name</MudSelectItem>
@@ -147,12 +148,12 @@
                 </MudSelect>
             
             <MudSpacer />
-            <MudText Typo="Typo.body2">@PageSizeFromTo of @TotalItems</MudText>
+            <MudText Typo="Typo.body2">@Filter.PageSizeFromTo of @TotalItems</MudText>
             <MudSpacer />
-            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.FirstPage"></MudIconButton>
-            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.ArrowLeft"></MudIconButton>
-            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.ArrowRight"></MudIconButton>
-            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.LastPage"></MudIconButton>
+            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.FirstPage" OnClick="() => MovePage(PagingDirection.FirstPage)"></MudIconButton>
+            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.ArrowLeft" OnClick="() => MovePage(PagingDirection.PreviousPage)"></MudIconButton>
+            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.ArrowRight" OnClick="() => MovePage(PagingDirection.NextPage)"></MudIconButton>
+            <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.LastPage" OnClick="() => MovePage(PagingDirection.LastPage)"></MudIconButton>
         </MudPaper>
 
     </MudItem>

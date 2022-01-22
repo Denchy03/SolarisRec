@@ -14,6 +14,7 @@ using SolarisRec.UI.Providers;
 using SolarisRec.Core.Card.Enums;
 using SolarisRec.UI.Components.ValidationDialog;
 using SolarisRec.UI.Components.ConfirmOnlyDialog;
+using SolarisRec.UI.Enums;
 
 namespace SolarisRec.UI.Pages
 {
@@ -66,8 +67,7 @@ namespace SolarisRec.UI.Pages
         private int MainDeckAgentCount => MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
 
         private int Page { get; set; } = 0;
-        private int PageSize { get; set; } = 8;
-        private string PageSizeFromTo { get; set; } = "9-16";
+        private int PageSize { get; set; } = 8;        
         private string SortLabel { get; set; } = string.Empty;
         private int SortingDirection { get; set; } = (int)Core.SortingDirection.None;
         private int TotalItems { get; set; }       
@@ -360,6 +360,28 @@ namespace SolarisRec.UI.Pages
             }
 
             await GetCardsFiltered();
-        }      
+        }
+        
+        private async Task MovePage(PagingDirection direction)
+        {
+            switch (direction)
+            {
+                case PagingDirection.FirstPage:
+                    Page = 0;
+                    break;
+                case PagingDirection.PreviousPage:
+                    Page = Page - 1;
+                    break;
+                case PagingDirection.NextPage:
+                    Page = Page + 1;
+                    break;
+                case PagingDirection.LastPage:
+                    Page = Filter.MatchingCardCount / Filter.PageSize;
+                    break;
+            }
+
+            await GetCardsFiltered();
+            StateHasChanged();
+        }
     }
 }
