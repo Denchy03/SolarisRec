@@ -91,8 +91,7 @@ namespace SolarisRec.UI.Pages
         private SelectedValues SelectedConvertedResourceCosts = new();       
 
         private List<DropdownItem> PagingValues = new();
-        private SelectedValues SelectedPagingValue = new();
-        //private MudSelect<DropdownItem> PagingSelect { get; set; }
+        private SelectedValues SelectedPagingValue = new();        
 
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
         private ValidationResult ValidationResult { get; set; } = new ValidationResult();
@@ -149,7 +148,7 @@ namespace SolarisRec.UI.Pages
             PagingValues = await PagingValuesProvider.ProvideDropdownItems();
 
             Cards = await CardProvider.GetCardsFiltered(Filter);
-            TotalItems = Filter.MatchingCardCount;
+            TotalItems = Filter.MatchingCardCount;            
         }      
 
         private async Task ApplyDropdownFilters()
@@ -247,7 +246,9 @@ namespace SolarisRec.UI.Pages
                 MainDeck = new List<DeckItem>();
                 MissionDeck = new List<DeckItem>();
                 TacticalDeck = new List<DeckItem>();
-            }            
+            }
+
+            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
         }
 
         private void AddToDeck(MouseEventArgs e, Card card)

@@ -136,11 +136,9 @@
         }
         <MudPaper id="Paging" Class="solaris-deck-item d-flex px-2 align-center my-1">
             <MudText Typo="Typo.body2">Cards per page:</MudText>            
-            <MudText Style="padding-left: 20px;" Typo="Typo.body2">@PageSize</MudText>
-            <MudSpacer />
             
                 <MudSelect T="DropdownItem" @bind-SelectedValues="SelectedPagingValue.Selected" MultiSelection="false" 
-                    Dense="true" IconSize="Size.Small">
+                    Dense="true" IconSize="Size.Small" Class="mud-table-pagination-select" DisableUnderLine="true" >
                 @foreach (var item in PagingValues)
                 {
                     <MudSelectItem T="DropdownItem" Value="@item">@item.Name</MudSelectItem>
