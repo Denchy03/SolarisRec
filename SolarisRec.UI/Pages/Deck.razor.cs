@@ -37,7 +37,7 @@ namespace SolarisRec.UI.Pages
         //todo: converted resource cost???
         //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
         //todo? MudPaper to component?       
-
+                
         [Inject] private ICardProvider CardProvider { get; set; }        
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
         [Inject] private ITalentDropdownItemProvider TalentDropdownItemProvider { get; set; }
@@ -146,6 +146,7 @@ namespace SolarisRec.UI.Pages
         private async Task ApplyDropdownFilters()
         {
             await GetCardsFiltered();
+            StateHasChanged();
         }
 
         private async Task GetCardsFiltered()
