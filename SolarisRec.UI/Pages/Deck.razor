@@ -46,7 +46,7 @@
 
         @if (!ValidationResult.IsDeckValid)
         {
-            <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Warning" OnClick="ShowReasons" />
+            <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Warning" OnClick="ShowValidationResultReasons" />
         }
 
         <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Clear" OnClick="ClearDeck" />
@@ -138,7 +138,8 @@
             <MudText Typo="Typo.body2">Cards per page:</MudText>            
             
                 <MudSelect T="DropdownItem" @bind-SelectedValues="SelectedPagingValue.Selected" MultiSelection="false" 
-                    Dense="true" IconSize="Size.Small" Class="mud-table-pagination-select" DisableUnderLine="true" >
+                    Dense="true" IconSize="Size.Small" Class="mud-table-pagination-select" DisableUnderLine="true" 
+                    Style="max-width: 35px !important; margin-left: 20px !important; margin-bottom: 5px !important;">
                 @foreach (var item in PagingValues)
                 {
                     <MudSelectItem T="DropdownItem" Value="@item">@item.Name</MudSelectItem>

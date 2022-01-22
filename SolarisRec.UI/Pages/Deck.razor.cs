@@ -147,8 +147,9 @@ namespace SolarisRec.UI.Pages
             ConvertedResourceCostDropdownItems = await ConvertedResourceCostDropdownItemProvider.ProvideDropdownItems();
             PagingValues = await PagingValuesProvider.ProvideDropdownItems();
 
-            Cards = await CardProvider.GetCardsFiltered(Filter);
-            TotalItems = Filter.MatchingCardCount;            
+            //This triggers the PropertyChanged event causing GetCardsFiltered to be called.
+            //This is why we should not call GetCardsFiltered here to avoid double execution!
+            SelectedPagingValue.Selected = PagingValues.Where(p => p.Id == 8);            
         }      
 
         private async Task ApplyDropdownFilters()
@@ -160,6 +161,7 @@ namespace SolarisRec.UI.Pages
         private async Task ApplyPaging()
         {
             PageSize = SelectedPagingValue.Selected.First().Id;
+            Page = 0;
 
             await GetCardsFiltered();
             StateHasChanged();
@@ -338,7 +340,7 @@ namespace SolarisRec.UI.Pages
             }                       
         }
         
-        private async Task ShowReasons()
+        private async Task ShowValidationResultReasons()
         {
             var parameters = new DialogParameters { ["reasons"] = ValidationResult.Reasons };
 
