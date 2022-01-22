@@ -1165,7 +1165,7 @@ namespace SolarisRec.Persistence.Configuration
                 new Card
                 {
                     Id = (int)Enum.CardId.MiningBeliever,
-                    Name = "MiningBeliever",
+                    Name = "Mining Believer",
                     Unique = false,
                     Type = (int)CardTypeEnum.Agent,
                     AttackValue = 3,

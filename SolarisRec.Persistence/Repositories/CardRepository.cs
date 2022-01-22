@@ -7,14 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SolarisRec.Core;
 
 namespace SolarisRec.Persistence.Repositories
 {
     internal class CardRepository : ICardRepository
     {
-        private const int ASCENDING = 1;
-        private const int DESCENDING = 2;
-
         private readonly SolarisRecDbContext context;
         private readonly IMapToDomainModel<PersistenceModel.Card, Card> persistenceModelMapper;
         private readonly IMapToPersistenceModel<Card, PersistenceModel.Card> domainModelMapper;
@@ -61,10 +59,7 @@ namespace SolarisRec.Persistence.Repositories
 
             if (allCards.Count > 0)
             {
-                foreach (var card in allCards)
-                {
-                    result.Add(persistenceModelMapper.Map(card));
-                }
+                result.AddRange(allCards.Select(card => persistenceModelMapper.Map(card)));
             }
 
             return result;
@@ -102,52 +97,50 @@ namespace SolarisRec.Persistence.Repositories
                        (filter.ConvertedResourceCost.Count <= 0 || filter.ConvertedResourceCost.Any(crc => ConvertedResourceCostCalculator.Calculate(c.CardResources) == crc))
                    );
 
-            if (filter.OrderBy == nameof(Card.Name) && filter.SortingDirection == ASCENDING)
+            if (filter.OrderBy == nameof(Card.Name) && filter.SortingDirection == (int)SortingDirection.Ascending)
             {
                 filteredCards = filteredCards.OrderBy(c => c.Name).ToList();
             }
-            else if (filter.OrderBy == nameof(Card.Name) && filter.SortingDirection == DESCENDING)
+            else if (filter.OrderBy == nameof(Card.Name) && filter.SortingDirection == (int)SortingDirection.Descending)
             {
                 filteredCards = filteredCards.OrderByDescending(c => c.Name).ToList();
             }
-            else if (filter.OrderBy == nameof(Card.AttackValue) && filter.SortingDirection == ASCENDING)
+            else if (filter.OrderBy == nameof(Card.AttackValue) && filter.SortingDirection == (int)SortingDirection.Ascending)
             {
                 filteredCards = filteredCards.OrderBy(c => c.AttackValue).ToList();
             }
-            else if (filter.OrderBy == nameof(Card.AttackValue) && filter.SortingDirection == DESCENDING)
+            else if (filter.OrderBy == nameof(Card.AttackValue) && filter.SortingDirection == (int)SortingDirection.Descending)
             {
                 filteredCards = filteredCards.OrderByDescending(c => c.AttackValue).ToList();
             }
-            else if (filter.OrderBy == nameof(Card.HealthValue) && filter.SortingDirection == ASCENDING)
+            else if (filter.OrderBy == nameof(Card.HealthValue) && filter.SortingDirection == (int)SortingDirection.Ascending)
             {
                 filteredCards = filteredCards.OrderBy(c => c.HealthValue).ToList();
             }
-            else if (filter.OrderBy == nameof(Card.HealthValue) && filter.SortingDirection == DESCENDING)
+            else if (filter.OrderBy == nameof(Card.HealthValue) && filter.SortingDirection == (int)SortingDirection.Descending)
             {
                 filteredCards = filteredCards.OrderByDescending(c => c.HealthValue).ToList();
             }
-            else if (filter.OrderBy == nameof(Card.Costs) && filter.SortingDirection == ASCENDING)
+            else if (filter.OrderBy == nameof(Card.Costs) && filter.SortingDirection == (int)SortingDirection.Ascending)
             {
                 filteredCards = filteredCards.OrderBy(c => ConvertedResourceCostCalculator.Calculate(c.CardResources)).ToList();
             }
-            else if (filter.OrderBy == nameof(Card.Costs) && filter.SortingDirection == DESCENDING)
+            else if (filter.OrderBy == nameof(Card.Costs) && filter.SortingDirection == (int)SortingDirection.Descending)
             {
                 filteredCards = filteredCards.OrderByDescending(c => ConvertedResourceCostCalculator.Calculate(c.CardResources)).ToList();
             }
 
-            filter.MatchingCardCount = filteredCards.Count();
+            var enumerable = filteredCards.ToList();
+            filter.MatchingCardCount = enumerable.Count;
 
-            var paged = filteredCards
+            var paged = enumerable
                 .Skip((filter.Page - 1) * filter.PageSize)
                 .Take(filter.PageSize)
                 .ToList();
 
             if (paged.Count > 0)
             {
-                foreach (var card in paged)
-                {
-                    result.Add(persistenceModelMapper.Map(card));
-                }
+                result.AddRange(paged.Select(card => persistenceModelMapper.Map(card)));
             }
 
             return result;
@@ -171,10 +164,7 @@ namespace SolarisRec.Persistence.Repositories
 
             if (cards.Count > 0)
             {
-                foreach (var card in cards)
-                {
-                    result.Add(persistenceModelMapper.Map(card));
-                }
+                result.AddRange(cards.Select(card => persistenceModelMapper.Map(card)));
             }
 
             return result;

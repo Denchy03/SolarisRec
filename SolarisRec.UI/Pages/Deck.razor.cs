@@ -9,10 +9,12 @@ using SolarisRec.UI.Utility;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.Web;
 using SolarisRec.UI.Providers;
 using SolarisRec.Core.Card.Enums;
 using SolarisRec.UI.Components.ValidationDialog;
 using SolarisRec.UI.Components.ConfirmOnlyDialog;
+using SolarisRec.UI.Enums;
 
 namespace SolarisRec.UI.Pages
 {
@@ -36,37 +38,42 @@ namespace SolarisRec.UI.Pages
         //todo: converted resource cost???
         //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
         //todo? MudPaper to component?       
-
+                
         [Inject] private ICardProvider CardProvider { get; set; }        
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
         [Inject] private ITalentDropdownItemProvider TalentDropdownItemProvider { get; set; }
         [Inject] private ICardTypeDropdownProvider CardTypeDropdownItemProvider { get; set; }
         [Inject] private IKeywordDropdownItemProvider KeywordDropdownItemProvider { get; set; }
         [Inject] private IConvertedResourceCostDropdownItemProvider ConvertedResourceCostDropdownItemProvider { get; set; }
+        [Inject] private IPagingValuesProvider PagingValuesProvider { get; set; }
         [Inject] private IDeckGenerator DeckGenerator { get; set; }
         [Inject] private IFileSaveService SaveFile { get; set; }
         [Inject] private IDeckValidator DeckValidator { get; set; }
         [Inject] private IDialogService DialogService { get; set; }
 
         private const int DEFAULT_PAGE_SIZE = 8;
-        private const int DEFAULT_FROM_MUD_BLAZOR = 10;        
-
-        private MudTable<Card> table;       
+        private const int DEFAULT_FROM_MUD_BLAZOR = 10;
 
         private MudMultiSelectDropdown factionDropdown;
         private MudMultiSelectDropdown cardTypeDropdown;
         private MudMultiSelectDropdown crcDropdown;
         private MudMultiSelectDropdown talentsDropdown;
-        private MudMultiSelectDropdown keywordDropown;
+        private MudMultiSelectDropdown keywordDropdown;
         private MudTextField<string> searchByName;
         private MudTextField<string> searchByAbility;
 
         private bool reload = true;
-        private int mainDeckCardCount => MainDeck.Select(d => d.Quantity).Sum();
-        private int mainDeckAgentCount => MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
+        private int MainDeckCardCount => MainDeck.Select(d => d.Quantity).Sum();
+        private int MainDeckAgentCount => MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
+
+        private int Page { get; set; } = 0;
+        private int PageSize { get; set; } = 8;        
+        private string SortLabel { get; set; } = string.Empty;
+        private int SortingDirection { get; set; } = (int)Core.SortingDirection.None;
+        private int TotalItems { get; set; }       
 
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
-        private readonly int[] pageSizeOption = { 4, 6, 8, 50 };
+        
         private List<Card> Cards { get; set; } = new List<Card>();
         private List<DeckItem> MainDeck { get; set; } = new List<DeckItem>();
         private List<DeckItem> MissionDeck { get; set; } = new List<DeckItem>();
@@ -83,13 +90,14 @@ namespace SolarisRec.UI.Pages
         private List<DropdownItem> ConvertedResourceCostDropdownItems = new();
         private SelectedValues SelectedConvertedResourceCosts = new();       
 
+        private List<DropdownItem> PagingValues = new();
+        private SelectedValues SelectedPagingValue = new();        
+
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
         private ValidationResult ValidationResult { get; set; } = new ValidationResult();
 
-        protected override void OnParametersSet()
-        {
-            base.OnParametersSet();
-
+        protected override void OnParametersSet() {
+            
             SelectedFactions.PropertyChanged += async (sender, e) =>
             {
                 if (reload)
@@ -120,6 +128,12 @@ namespace SolarisRec.UI.Pages
                     await InvokeAsync(ApplyDropdownFilters);
             };
 
+            SelectedPagingValue.PropertyChanged += async (sender, e) =>
+            {
+                if (reload)
+                    await InvokeAsync(ApplyPaging);
+            };
+
             ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);            
         }
 
@@ -131,38 +145,48 @@ namespace SolarisRec.UI.Pages
             CardTypeDropdownItems = await CardTypeDropdownItemProvider.ProvideDropdownItems();
             KeywordDropdownItems = await KeywordDropdownItemProvider.ProvideDropdownItems();
             ConvertedResourceCostDropdownItems = await ConvertedResourceCostDropdownItemProvider.ProvideDropdownItems();
-        }
+            PagingValues = await PagingValuesProvider.ProvideDropdownItems();
+
+            //This triggers the PropertyChanged event causing GetCardsFiltered to be called.
+            //This is why we should not call GetCardsFiltered here to avoid double execution!
+            SelectedPagingValue.Selected = PagingValues.Where(p => p.Id == 8);            
+        }      
 
         private async Task ApplyDropdownFilters()
         {
-            await table.ReloadServerData();
+            await GetCardsFiltered();
+            StateHasChanged();
         }
 
-        private async Task<TableData<Card>> GetCardsFiltered(TableState state)
+        private async Task ApplyPaging()
         {
-            state.PageSize = state.PageSize == DEFAULT_FROM_MUD_BLAZOR ? DEFAULT_PAGE_SIZE : state.PageSize;
-            table.SetRowsPerPage(state.PageSize);
+            PageSize = SelectedPagingValue.Selected.First().Id;
+            Page = 0;
 
-            Filter.PageSize = state.PageSize;
-            Filter.Page = state.Page + 1;
+            await GetCardsFiltered();
+            StateHasChanged();
+        }
+
+        private async Task GetCardsFiltered()
+        {
+            PageSize = PageSize == DEFAULT_FROM_MUD_BLAZOR ? DEFAULT_PAGE_SIZE : PageSize;
+
+            Filter.PageSize = PageSize;
+            Filter.Page = Page + 1;
             Filter.Factions = SelectedFactions.Selected.Select(f => f.Id).ToList();
             Filter.Talents = SelectedTalents.Selected.Select(t => t.Id).ToList();
             Filter.CardTypes = SelectedCardTypes.Selected.Select(ct => ct.Id).ToList();
             Filter.Keywords = SelectedKeywords.Selected.Select(k => k.Name).ToList();
             Filter.ConvertedResourceCost = SelectedConvertedResourceCosts.Selected.Select(c => c.Id).ToList();
-            Filter.OrderBy = state.SortLabel;
-            Filter.SortingDirection = (int)state.SortDirection;
+            Filter.OrderBy = SortLabel;
+            Filter.SortingDirection = SortingDirection;
 
             if (reload)
             {
                 Cards = await CardProvider.GetCardsFiltered(Filter);
             }
 
-            return new TableData<Card>
-            {
-                Items = Cards,
-                TotalItems = Filter.MatchingCardCount
-            };
+            TotalItems = Filter.MatchingCardCount;
         }        
 
         public void UpdateImageSrc(Card card)
@@ -180,7 +204,7 @@ namespace SolarisRec.UI.Pages
             reload = true;
 
             Filter.Name = searchTerm;
-            await table.ReloadServerData();
+            await GetCardsFiltered();
         }
 
         private async Task OnSearchByAbility(string abilitySearchTerm)
@@ -188,24 +212,27 @@ namespace SolarisRec.UI.Pages
             reload = true;
 
             Filter.Ability = abilitySearchTerm;
-            await table.ReloadServerData();
+            await GetCardsFiltered();
         }
         
         private async Task ClearFilters()
-        {            
+        {
+            SortingDirection = (int)Core.SortingDirection.None;
+            SortLabel = string.Empty;
+
             reload = false;
 
             await factionDropdown.Clear();
             await cardTypeDropdown.Clear();
             await crcDropdown.Clear();
             await talentsDropdown.Clear();
-            await keywordDropown.Clear();
+            await keywordDropdown.Clear();
             await searchByName.Clear();
-            await searchByAbility.Clear();            
+            await searchByAbility.Clear();
 
-            reload = true;            
+            reload = true;
 
-            await table.ReloadServerData();
+            await GetCardsFiltered();
         }
 
         private async Task ClearDeck()
@@ -221,21 +248,23 @@ namespace SolarisRec.UI.Pages
                 MainDeck = new List<DeckItem>();
                 MissionDeck = new List<DeckItem>();
                 TacticalDeck = new List<DeckItem>();
-            }            
+            }
+
+            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
         }
 
-        private void AddToDeck(TableRowClickEventArgs<Card> card)
+        private void AddToDeck(MouseEventArgs e, Card card)
         {
-            bool isMission = card.Item.Type == nameof(CardTypeConstants.Mission);
+            var isMission = card.Type == nameof(CardTypeConstants.Mission);
 
-            if(card.Item.Id == (int)CardId.PlanetaryPolitics || card.Item.Id == (int)CardId.SearchforLostKnowledge)
+            if (card.Id is (int)CardId.PlanetaryPolitics or (int)CardId.SearchforLostKnowledge)
             {
                 return;
             }
 
-            if (card.MouseEventArgs.CtrlKey)
+            if (e.CtrlKey)
             {
-                card.Item.AddCard(TacticalDeck);
+                card.AddCard(TacticalDeck);
                 TacticalDeck = TacticalDeck
                     .OrderBy(d => d.Card.Factions)
                     .ThenBy(d => d.Card.Type)
@@ -249,7 +278,7 @@ namespace SolarisRec.UI.Pages
 
             if (isMission)
             {
-                card.Item.AddCard(MissionDeck);
+                card.AddCard(MissionDeck);
                 MissionDeck = MissionDeck
                     .OrderBy(d => d.Card.Talents.Select(t => t.Quantity).Sum())
                     .ThenBy(d => d.Card.Name)
@@ -257,9 +286,9 @@ namespace SolarisRec.UI.Pages
 
                 ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
                 return;
-            } 
-            
-            card.Item.AddCard(MainDeck);
+            }
+
+            card.AddCard(MainDeck);
             MainDeck = MainDeck
                 .OrderBy(d => d.Card.Factions)
                 .ThenBy(d => d.Card.Type)
@@ -311,13 +340,55 @@ namespace SolarisRec.UI.Pages
             }                       
         }
         
-        private async Task ShowReasons()
+        private async Task ShowValidationResultReasons()
         {
             var parameters = new DialogParameters { ["reasons"] = ValidationResult.Reasons };
 
             var options = new DialogOptions { CloseOnEscapeKey = true };
             var dialog = DialogService.Show<ConfirmOnlyDialog>("Your deck state is illegal, because:", parameters, options);
             await dialog.Result;
+        }
+
+        private async Task SetSorting(string sortLabel)
+        {
+            SortLabel = sortLabel;
+
+            if (SortingDirection is (int)Core.SortingDirection.None or (int)Core.SortingDirection.Descending)
+            {
+                SortingDirection = (int)Core.SortingDirection.Ascending;
+            }
+            else
+            {
+                SortingDirection = (int)Core.SortingDirection.Descending;
+            }
+
+            await GetCardsFiltered();
+        }
+        
+        private async Task MovePage(PagingDirection direction)
+        {
+            var maxPage = Filter.MatchingCardCount / Filter.PageSize;
+
+            switch (direction)
+            {
+                case PagingDirection.FirstPage:
+                    Page = 0;
+                    break;
+                case PagingDirection.PreviousPage:
+                    if(Page - 1 > 0)                    
+                        Page--;                                      
+                    break;
+                case PagingDirection.NextPage:
+                    if(Page + 1 <= maxPage)
+                        Page++;
+                    break;
+                case PagingDirection.LastPage:
+                    Page = maxPage;
+                    break;
+            }
+
+            await GetCardsFiltered();
+            StateHasChanged();
         }
     }
 }
