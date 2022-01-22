@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace SolarisRec.Core.Card
 {
@@ -34,7 +33,11 @@ namespace SolarisRec.Core.Card
         private string GetPageSizeFromToString()
         {
             var start = (Page - 1) * PageSize + 1;
+            
             var end = Page * PageSize;
+
+            if(end > MatchingCardCount)
+                end = MatchingCardCount;
 
             return $"{start}-{end}";
 

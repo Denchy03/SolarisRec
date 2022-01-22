@@ -367,19 +367,23 @@ namespace SolarisRec.UI.Pages
         
         private async Task MovePage(PagingDirection direction)
         {
+            var maxPage = Filter.MatchingCardCount / Filter.PageSize;
+
             switch (direction)
             {
                 case PagingDirection.FirstPage:
                     Page = 0;
                     break;
                 case PagingDirection.PreviousPage:
-                    Page = Page - 1;
+                    if(Page - 1 > 0)                    
+                        Page--;                                      
                     break;
                 case PagingDirection.NextPage:
-                    Page = Page + 1;
+                    if(Page + 1 <= maxPage)
+                        Page++;
                     break;
                 case PagingDirection.LastPage:
-                    Page = Filter.MatchingCardCount / Filter.PageSize;
+                    Page = maxPage;
                     break;
             }
 
