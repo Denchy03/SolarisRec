@@ -89,6 +89,9 @@ namespace SolarisRec.UI.Pages
         private List<DropdownItem> ConvertedResourceCostDropdownItems = new();
         private SelectedValues SelectedConvertedResourceCosts = new();       
 
+        private List<DropdownItem> PagingItems = new();
+        private MudSelect<DropdownItem> PagingSelect { get; set; }
+
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
         private ValidationResult ValidationResult { get; set; } = new ValidationResult();
 
@@ -137,7 +140,8 @@ namespace SolarisRec.UI.Pages
             ConvertedResourceCostDropdownItems = await ConvertedResourceCostDropdownItemProvider.ProvideDropdownItems();
 
             Cards = await CardProvider.GetCardsFiltered(Filter);
-        }
+            TotalItems = Filter.MatchingCardCount;
+        }      
 
         private async Task ApplyDropdownFilters()
         {
@@ -205,7 +209,7 @@ namespace SolarisRec.UI.Pages
             await talentsDropdown.Clear();
             await keywordDropdown.Clear();
             await searchByName.Clear();
-            await searchByAbility.Clear();            
+            await searchByAbility.Clear();
 
             reload = true;
 
@@ -338,6 +342,11 @@ namespace SolarisRec.UI.Pages
             }
 
             await GetCardsFiltered();
+        }
+
+        private void PagingChanged()
+        {
+
         }
     }
 }

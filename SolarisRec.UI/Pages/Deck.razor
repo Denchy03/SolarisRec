@@ -35,8 +35,7 @@
 <MudGrid id="SearchCommands">
     <MudItem xs="12" md="6" id="Search">
         <MudTextField T="string" @ref="searchByName" Label="Search by Name"
-                      DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByName">
-        </MudTextField>
+                      DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByName"></MudTextField>
 
         <MudTextField T="string" @ref="searchByAbility" Label="Search by Ability" 
                       DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByAbility"></MudTextField>
@@ -135,11 +134,12 @@
             </MudPaper>
         }
         <MudPaper id="Paging" Class="solaris-deck-item d-flex px-2 align-center my-1">
-            <MudText Typo="Typo.body2">Cards per page</MudText>
+            <MudText Typo="Typo.body2">Cards per page</MudText>            
+            <MudText Style="padding-left: 20px;" Typo="Typo.body2">@PageSize</MudText>
             <MudSpacer />
-            <MudText Typo="Typo.body2">@PageSize</MudText>
+            
+            
             <MudSpacer />
-
             <MudText Typo="Typo.body2">@PageSizeFromTo of @TotalItems</MudText>
             <MudSpacer />
             <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.FirstPage"></MudIconButton>
