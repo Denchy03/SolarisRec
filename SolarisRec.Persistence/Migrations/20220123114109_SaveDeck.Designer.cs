@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolarisRec.Persistence;
 
@@ -11,9 +12,10 @@ using SolarisRec.Persistence;
 namespace SolarisRec.Persistence.Migrations
 {
     [DbContext(typeof(SolarisRecDbContext))]
-    partial class SolarisRecDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220123114109_SaveDeck")]
+    partial class SaveDeck
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1921,25 +1923,6 @@ namespace SolarisRec.Persistence.Migrations
                     b.HasIndex("DeckId");
 
                     b.ToTable("DeckItems", (string)null);
-                });
-
-            modelBuilder.Entity("SolarisRec.Persistence.PersistenceModel.ExceptionEvent", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("CallStack")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExceptionEvents", (string)null);
                 });
 
             modelBuilder.Entity("SolarisRec.Persistence.PersistenceModel.Expansion", b =>

@@ -13,6 +13,8 @@ using SolarisRec.Core.Faction.Processes;
 using SolarisRec.Core.Faction.Processes.PrimaryPorts;
 using SolarisRec.Core.Keyword.Processes;
 using SolarisRec.Core.Keyword.Processes.PrimaryPorts;
+using SolarisRec.Core.Logging.Processes;
+using SolarisRec.Core.Logging.Processes.PrimaryPorts;
 using SolarisRec.Core.ResourceCost.Processes;
 using SolarisRec.Core.ResourceCost.Processes.PrimaryPorts;
 using SolarisRec.Core.Talent.Processes;
@@ -37,6 +39,7 @@ namespace SolarisRec.Core.Configuration
                 .AddTransient<IProvideFactionInformationService, ProvideFactionInformationService>()
                 .AddTransient<IValidateDeckService, ValidateDeckService>()
                 .AddTransient<ISaveDeckListService, SaveDeckListService>()
+                .AddTransient<IExceptionEventLogger, ExceptionEventLogger>()
                 ;            
         }
     }

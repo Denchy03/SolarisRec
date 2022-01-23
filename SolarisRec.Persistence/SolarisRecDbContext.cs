@@ -20,6 +20,7 @@ namespace SolarisRec.Persistence
         public DbSet<Resource> Resources { get; set; }
         public DbSet<Faction> Factions { get; set; }
         public DbSet<Expansion> Expansions { get; set; }
+        public DbSet<ExceptionEvent> ExceptionEvents { get; set; }
 
         public DbSet<CardTalent> CardTalents { get; set; }
         public DbSet<CardFaction> CardFactions { get; set; }
@@ -37,6 +38,7 @@ namespace SolarisRec.Persistence
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new FactionConfiguration());
             modelBuilder.ApplyConfiguration(new ExpansionConfiguration());
+            modelBuilder.ApplyConfiguration(new ExceptionEventConfiguration());
 
             ApplyJoiningTableConfigurations(modelBuilder);
         }

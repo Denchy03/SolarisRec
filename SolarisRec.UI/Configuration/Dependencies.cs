@@ -54,6 +54,8 @@ namespace SolarisRec.UI.Configuration
 
                 .AddTransient<ISaveDeckListService, SaveDeckListService>()
                 .AddTransient<IMapToDomainModel<DeckList, Core.Deck.DeckList>, Mappers.ToDomainModel.DeckListMapper>()
+
+                .AddTransient<ILogExceptionEvent, ExceptionEventLogger>()
                 ;
         }       
     }

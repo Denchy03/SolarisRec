@@ -7,6 +7,7 @@ using SolarisRec.Core.Card.Processes.SecondaryPorts;
 using SolarisRec.Core.Deck.Processes.SecondaryPorts;
 using SolarisRec.Core.Faction;
 using SolarisRec.Core.Faction.Processes.SecondaryPorts;
+using SolarisRec.Core.Logging.Processes.SecondaryPorts;
 using SolarisRec.Core.Talent.Processes.SecondaryPorts;
 using SolarisRec.Persistence.Mappers;
 using SolarisRec.Persistence.Repositories;
@@ -18,7 +19,7 @@ namespace SolarisRec.Persistence.Configuration
         public static IServiceCollection UseSolarisRecPersistenceAdapters(this IServiceCollection serviceCollection, string connectionstring)
         {
             return serviceCollection
-                .AddDbContext<SolarisRecDbContext>()
+                .AddDbContext<SolarisRecDbContext>(ServiceLifetime.Transient)
                 .AddTransient((s) => CreateSolarisDbContext(connectionstring))
 
                 .AddTransient<IAccountRepository, AccountRepository>()
@@ -36,7 +37,9 @@ namespace SolarisRec.Persistence.Configuration
                 .AddTransient<IMapToDomainModel<PersistenceModel.Faction, Faction>, Mappers.ToDomainModel.FactionMapper>()
 
                 .AddTransient<ITalentRepository, TalentRepository>()
-                .AddTransient<IMapToDomainModel<PersistenceModel.Talent, Core.Talent.Talent>, Mappers.ToDomainModel.TalentMapper>()                
+                .AddTransient<IMapToDomainModel<PersistenceModel.Talent, Core.Talent.Talent>, Mappers.ToDomainModel.TalentMapper>()
+
+                .AddTransient<IExceptionEventRepository, ExceptionEventRepository>()
                 ;
         }
 
