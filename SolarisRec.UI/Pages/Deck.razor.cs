@@ -98,6 +98,21 @@ namespace SolarisRec.UI.Pages
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
         private ValidationResult ValidationResult { get; set; } = new ValidationResult();
 
+        private readonly ChartOptions cardTypeChartOptions = new ChartOptions
+        {
+            ChartPalette = new string[]
+                {
+                    "#5B403E",
+                    "#3B3B55",
+                    "#8D8D56"
+                }
+        };
+
+        private readonly string[] cardTypePieLabels = { "Agents", "Maneuvers", "Constructions" };
+
+        double[] CardTypePieData { get; set; } = { 0, 0, 0 };
+        
+
         protected override void OnParametersSet() {
             
             SelectedFactions.PropertyChanged += async (sender, e) =>
@@ -197,7 +212,7 @@ namespace SolarisRec.UI.Pages
                 }
             }
 
-            TotalItems = Filter.MatchingCardCount;
+            TotalItems = Filter.MatchingCardCount;            
         }        
 
         private void UpdateImageSrc(Card card)
@@ -308,12 +323,30 @@ namespace SolarisRec.UI.Pages
                 .ToList();
 
             ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
+
+            CardTypePieData = new double[]
+            {
+                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Agent).Select(d => d.Quantity).Sum(),
+                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Maneuver).Select(d => d.Quantity).Sum(),
+                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum()
+            };
+
+            StateHasChanged();
         }
 
         private void RemoveFromDeck(DeckItem deckItem)
         {
             deckItem.RemoveCard(MainDeck);
             ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
+
+            CardTypePieData = new double[]
+            {
+                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Agent).Select(d => d.Quantity).Sum(),
+                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Maneuver).Select(d => d.Quantity).Sum(),
+                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum()
+            };
+
+            StateHasChanged();
         }
 
         private void RemoveFromMissionDeck(DeckItem deckItem)
