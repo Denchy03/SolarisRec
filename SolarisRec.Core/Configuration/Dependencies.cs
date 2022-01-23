@@ -13,6 +13,8 @@ using SolarisRec.Core.Faction.Processes;
 using SolarisRec.Core.Faction.Processes.PrimaryPorts;
 using SolarisRec.Core.Keyword.Processes;
 using SolarisRec.Core.Keyword.Processes.PrimaryPorts;
+using SolarisRec.Core.Logging.Processes;
+using SolarisRec.Core.Logging.Processes.PrimaryPorts;
 using SolarisRec.Core.ResourceCost.Processes;
 using SolarisRec.Core.ResourceCost.Processes.PrimaryPorts;
 using SolarisRec.Core.Talent.Processes;
@@ -24,8 +26,7 @@ namespace SolarisRec.Core.Configuration
     {
         public static IServiceCollection UseSolarisRecCore(this IServiceCollection serviceCollection)
         {
-            return serviceCollection
-                .AddTransient<IDeckBuilderService, DeckBuilderService>()
+            return serviceCollection                
                 .AddTransient<IRegisterAccountService, RegisterAccountService>()
                 .AddTransient<ILoginService, LoginService>()
                 .AddTransient<IHashPassword, PasswordHasher>()
@@ -37,6 +38,8 @@ namespace SolarisRec.Core.Configuration
                 .AddTransient<IProvideConvertedResourceCostService, ProvideConvertedResourceCostService>()
                 .AddTransient<IProvideFactionInformationService, ProvideFactionInformationService>()
                 .AddTransient<IValidateDeckService, ValidateDeckService>()
+                .AddTransient<ISaveDeckListService, SaveDeckListService>()
+                .AddTransient<IExceptionEventLogger, ExceptionEventLogger>()
                 ;            
         }
     }

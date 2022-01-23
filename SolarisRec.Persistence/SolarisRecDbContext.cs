@@ -14,11 +14,13 @@ namespace SolarisRec.Persistence
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Deck> Decks { get; set; }
+        public DbSet<DeckItem> DeckItems { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Talent> Talents { get; set; }
         public DbSet<Resource> Resources { get; set; }
         public DbSet<Faction> Factions { get; set; }
         public DbSet<Expansion> Expansions { get; set; }
+        public DbSet<ExceptionEvent> ExceptionEvents { get; set; }
 
         public DbSet<CardTalent> CardTalents { get; set; }
         public DbSet<CardFaction> CardFactions { get; set; }
@@ -30,11 +32,13 @@ namespace SolarisRec.Persistence
 
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
             modelBuilder.ApplyConfiguration(new DeckConfiguration());
+            modelBuilder.ApplyConfiguration(new DeckItemConfiguration());
             modelBuilder.ApplyConfiguration(new CardConfiguration());
             modelBuilder.ApplyConfiguration(new TalentConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());
             modelBuilder.ApplyConfiguration(new FactionConfiguration());
             modelBuilder.ApplyConfiguration(new ExpansionConfiguration());
+            modelBuilder.ApplyConfiguration(new ExceptionEventConfiguration());
 
             ApplyJoiningTableConfigurations(modelBuilder);
         }

@@ -95,7 +95,7 @@ namespace SolarisRec.Persistence.Repositories
                        (filter.Keywords.Count <= 0 || filter.Keywords.All(k => c.Ability.ToLower().Contains(k.ToLower())))
                         &&
                        (filter.ConvertedResourceCost.Count <= 0 || filter.ConvertedResourceCost.Any(crc => ConvertedResourceCostCalculator.Calculate(c.CardResources) == crc))
-                   );
+                   ).ToList();
 
             if (filter.OrderBy == nameof(Card.Name) && filter.SortingDirection == (int)SortingDirection.Ascending)
             {
@@ -129,11 +129,10 @@ namespace SolarisRec.Persistence.Repositories
             {
                 filteredCards = filteredCards.OrderByDescending(c => ConvertedResourceCostCalculator.Calculate(c.CardResources)).ToList();
             }
+           
+            filter.MatchingCardCount = filteredCards.Count;
 
-            var enumerable = filteredCards.ToList();
-            filter.MatchingCardCount = enumerable.Count;
-
-            var paged = enumerable
+            var paged = filteredCards
                 .Skip((filter.Page - 1) * filter.PageSize)
                 .Take(filter.PageSize)
                 .ToList();

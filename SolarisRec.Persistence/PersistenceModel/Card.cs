@@ -10,6 +10,7 @@ namespace SolarisRec.Persistence.PersistenceModel
             CardTalents = new HashSet<CardTalent>();
             CardResources = new HashSet<CardResource>();
             CardFactions = new HashSet<CardFaction>();
+            DeckItems = new HashSet<DeckItem>();
         }
 
         public int Id { get; set; }
@@ -37,5 +38,7 @@ namespace SolarisRec.Persistence.PersistenceModel
         public virtual ICollection<CardTalent> CardTalents { get; set; }
        
         public virtual ICollection<CardResource> CardResources { get; set; }
+
+        public virtual ICollection<DeckItem> DeckItems { get; set; }
     }
 }

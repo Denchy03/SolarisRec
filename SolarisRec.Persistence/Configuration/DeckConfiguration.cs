@@ -9,6 +9,9 @@ namespace SolarisRec.Persistence.Configuration
         public void Configure(EntityTypeBuilder<Deck> builder)
         {
             builder.ToTable("Decks");
+
+            builder.Property(d => d.CreationDate)
+                .IsRequired(true);
         }
     }
 }
