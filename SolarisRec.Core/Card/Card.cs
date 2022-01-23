@@ -18,6 +18,8 @@ namespace SolarisRec.Core.Card
 
         public string Factions { get; set; }
 
+        public int TalentAffinity { get; set; }
+
         public string Type { get; set; }
 
         public string AttackValue { get; set; }

@@ -21,7 +21,8 @@ namespace SolarisRec.Persistence.Mappers.ToDomainModel
                 Type = MapType(input.Type),
                 Factions = MapFactions(input),
                 Costs = MapCosts(input.CardResources),
-                Talents = MapTalents(input.CardTalents)
+                Talents = MapTalents(input.CardTalents),
+                TalentAffinity = input.CardFactions.First().FactionId
             };
         }
 

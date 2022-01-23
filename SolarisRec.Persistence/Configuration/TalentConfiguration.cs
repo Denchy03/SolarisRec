@@ -26,16 +26,21 @@ namespace SolarisRec.Persistence.Configuration
         {
             builder.HasData
             (
-                new Talent
-                {
-                    Id = (int)Enum.Talent.Mining,
-                    Name = "Mining"
-                },
-                new Talent
-                {
-                    Id = (int)Enum.Talent.Data,
-                    Name = "Data"
-                },
+                 new Talent
+                 {
+                     Id = (int)Enum.Talent.Data,
+                     Name = "Data"
+                 },
+                 new Talent
+                 {
+                     Id = (int)Enum.Talent.Diplomacy,
+                     Name = "Diplomacy"
+                 },
+                 new Talent
+                 {
+                     Id = (int)Enum.Talent.Espionage,
+                     Name = "Espionage"
+                 },               
                 new Talent
                 {
                     Id = (int)Enum.Talent.Military,
@@ -43,13 +48,8 @@ namespace SolarisRec.Persistence.Configuration
                 },
                 new Talent
                 {
-                    Id = (int)Enum.Talent.Espionage,
-                    Name = "Espionage"
-                },
-                new Talent
-                {
-                    Id = (int)Enum.Talent.Diplomacy,
-                    Name = "Diplomacy"
+                    Id = (int)Enum.Talent.Mining,
+                    Name = "Mining"
                 },
                 new Talent
                 {

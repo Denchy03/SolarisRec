@@ -1947,27 +1947,27 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Mars"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Mercury"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Titan"
-                        },
-                        new
-                        {
-                            Id = 4,
                             Name = "Belt"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 2,
                             Name = "Earth"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Mars"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Mercury"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Titan"
                         },
                         new
                         {
@@ -1999,587 +1999,587 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 1,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 2,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 3,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 4,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 5,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 6,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 7,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 8,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 9,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 10,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 11,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 12,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 13,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 14,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 15,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 16,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 17,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 18,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 19,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 20,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 21,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 22,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 23,
-                            FactionId = 4
+                            FactionId = 1
                         },
                         new
                         {
                             CardId = 24,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 25,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 26,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 27,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 28,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 29,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 30,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 31,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 32,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 33,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 34,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 35,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 36,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 37,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 38,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 39,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 40,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 41,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 42,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 43,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 44,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 45,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 46,
-                            FactionId = 5
+                            FactionId = 2
                         },
                         new
                         {
                             CardId = 47,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 48,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 49,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 50,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 51,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 52,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 53,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 54,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 55,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 56,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 57,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 58,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 59,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 60,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 61,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 62,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 63,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 64,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 65,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 66,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 67,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 68,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 69,
-                            FactionId = 1
+                            FactionId = 3
                         },
                         new
                         {
                             CardId = 70,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 71,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 72,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 73,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 74,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 75,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 76,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 77,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 78,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 79,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 80,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 81,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 82,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 83,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 84,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 85,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 86,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 87,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 88,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 89,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 90,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 91,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 92,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 93,
-                            FactionId = 2
+                            FactionId = 4
                         },
                         new
                         {
                             CardId = 94,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 95,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 96,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 97,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 98,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 99,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 100,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 101,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 102,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 103,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 104,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 105,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 106,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 107,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 108,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 109,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 110,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 111,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 112,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 113,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 114,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 115,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 116,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
                             CardId = 117,
-                            FactionId = 3
+                            FactionId = 5
                         },
                         new
                         {
@@ -2824,25 +2824,25 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 1,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 2,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 3,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 4,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
@@ -2854,19 +2854,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 5,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 6,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 7,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
@@ -2878,7 +2878,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 8,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
@@ -2890,7 +2890,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 9,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
@@ -2902,7 +2902,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 10,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
@@ -2914,7 +2914,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 11,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
@@ -2926,7 +2926,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 12,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
@@ -2938,7 +2938,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 13,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 3
                         },
                         new
@@ -2950,7 +2950,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 14,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
@@ -2962,7 +2962,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 15,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
@@ -2974,7 +2974,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 16,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
@@ -2986,19 +2986,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 17,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 18,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 19,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
@@ -3010,7 +3010,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 20,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
@@ -3022,7 +3022,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 21,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
@@ -3034,13 +3034,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 22,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 23,
-                            ResourceId = 4,
+                            ResourceId = 1,
                             Quantity = 2
                         },
                         new
@@ -3052,25 +3052,25 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 24,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 25,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 26,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 27,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3082,7 +3082,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 28,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3094,7 +3094,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 29,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3106,13 +3106,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 30,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 31,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3124,7 +3124,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 32,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3136,7 +3136,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 33,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 2
                         },
                         new
@@ -3148,7 +3148,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 34,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3160,7 +3160,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 35,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3172,7 +3172,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 36,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 3
                         },
                         new
@@ -3184,7 +3184,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 37,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3196,19 +3196,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 38,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 39,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 40,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3220,19 +3220,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 41,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 42,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 43,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3244,7 +3244,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 44,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 3
                         },
                         new
@@ -3256,7 +3256,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 45,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 1
                         },
                         new
@@ -3268,7 +3268,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 46,
-                            ResourceId = 5,
+                            ResourceId = 2,
                             Quantity = 2
                         },
                         new
@@ -3280,31 +3280,31 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 47,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 48,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 49,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 50,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 51,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3316,7 +3316,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 52,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3328,13 +3328,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 53,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 54,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3346,7 +3346,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 55,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3358,7 +3358,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 56,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3370,7 +3370,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 57,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 2
                         },
                         new
@@ -3382,7 +3382,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 58,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 2
                         },
                         new
@@ -3394,7 +3394,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 59,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3406,7 +3406,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 60,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 3
                         },
                         new
@@ -3418,19 +3418,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 61,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 62,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 63,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3442,7 +3442,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 64,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3454,19 +3454,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 65,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 66,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 67,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3478,7 +3478,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 68,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 1
                         },
                         new
@@ -3490,25 +3490,25 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 69,
-                            ResourceId = 1,
+                            ResourceId = 3,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 70,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 71,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 72,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3520,7 +3520,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 73,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3532,13 +3532,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 74,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 75,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3550,7 +3550,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 76,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 2
                         },
                         new
@@ -3562,7 +3562,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 77,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3574,7 +3574,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 78,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3586,7 +3586,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 79,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3598,7 +3598,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 80,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 2
                         },
                         new
@@ -3610,7 +3610,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 81,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 3
                         },
                         new
@@ -3622,7 +3622,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 82,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3634,13 +3634,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 83,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 84,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3652,19 +3652,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 85,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 86,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 87,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3676,7 +3676,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 88,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
@@ -3688,7 +3688,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 89,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 2
                         },
                         new
@@ -3700,13 +3700,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 90,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 91,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 2
                         },
                         new
@@ -3718,7 +3718,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 92,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 2
                         },
                         new
@@ -3730,19 +3730,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 93,
-                            ResourceId = 2,
+                            ResourceId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 94,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 95,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
@@ -3754,7 +3754,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 96,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
@@ -3766,19 +3766,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 97,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 98,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 99,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
@@ -3790,7 +3790,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 100,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 2
                         },
                         new
@@ -3802,7 +3802,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 101,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
@@ -3814,7 +3814,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 102,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 2
                         },
                         new
@@ -3826,7 +3826,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 103,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
@@ -3838,7 +3838,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 104,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 3
                         },
                         new
@@ -3850,13 +3850,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 105,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 106,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
@@ -3868,7 +3868,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 107,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
@@ -3880,7 +3880,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 108,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
@@ -3892,19 +3892,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 109,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 110,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 111,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 2
                         },
                         new
@@ -3916,37 +3916,37 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 112,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 113,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 114,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 115,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 116,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 117,
-                            ResourceId = 3,
+                            ResourceId = 5,
                             Quantity = 2
                         },
                         new
@@ -4224,67 +4224,61 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 1,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 2,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 3,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 4,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 4,
-                            TalentId = 5,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 5,
-                            TalentId = 4,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 5,
                             TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
+                            CardId = 5,
+                            TalentId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 5,
+                            TalentId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
                             CardId = 6,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 6,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 7,
-                            TalentId = 4,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 7,
-                            TalentId = 2,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
@@ -4295,8 +4289,14 @@ namespace SolarisRec.Persistence.Migrations
                         },
                         new
                         {
+                            CardId = 7,
+                            TalentId = 5,
+                            Quantity = 1
+                        },
+                        new
+                        {
                             CardId = 8,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
@@ -4308,13 +4308,19 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 8,
+                            TalentId = 4,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 9,
                             TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 9,
-                            TalentId = 4,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
@@ -4325,20 +4331,14 @@ namespace SolarisRec.Persistence.Migrations
                         },
                         new
                         {
-                            CardId = 9,
-                            TalentId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
                             CardId = 10,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 10,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
@@ -4350,14 +4350,8 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 11,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 11,
-                            TalentId = 5,
-                            Quantity = 1
                         },
                         new
                         {
@@ -4367,56 +4361,62 @@ namespace SolarisRec.Persistence.Migrations
                         },
                         new
                         {
-                            CardId = 12,
-                            TalentId = 4,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 12,
+                            CardId = 11,
                             TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 12,
+                            TalentId = 3,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CardId = 12,
                             TalentId = 5,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 12,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 13,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 13,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 13,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 24,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 25,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 26,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
@@ -4428,72 +4428,84 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 27,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 27,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 28,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 29,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 30,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 30,
+                            TalentId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 31,
                             TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 31,
-                            TalentId = 5,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 31,
-                            TalentId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 31,
-                            TalentId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 32,
                             TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 32,
-                            TalentId = 3,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 32,
+                            TalentId = 4,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 32,
+                            TalentId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 33,
+                            TalentId = 2,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 33,
                             TalentId = 4,
                             Quantity = 1
                         },
@@ -4505,32 +4517,20 @@ namespace SolarisRec.Persistence.Migrations
                         },
                         new
                         {
-                            CardId = 33,
-                            TalentId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 33,
-                            TalentId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
                             CardId = 34,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 34,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 35,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 2
                         },
                         new
@@ -4542,6 +4542,18 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 35,
+                            TalentId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 36,
+                            TalentId = 2,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            CardId = 36,
                             TalentId = 4,
                             Quantity = 1
                         },
@@ -4549,42 +4561,24 @@ namespace SolarisRec.Persistence.Migrations
                         {
                             CardId = 36,
                             TalentId = 5,
-                            Quantity = 3
-                        },
-                        new
-                        {
-                            CardId = 36,
-                            TalentId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 36,
-                            TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 47,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 48,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 49,
-                            TalentId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 50,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
@@ -4595,50 +4589,56 @@ namespace SolarisRec.Persistence.Migrations
                         },
                         new
                         {
-                            CardId = 51,
+                            CardId = 50,
                             TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 51,
-                            TalentId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 52,
-                            TalentId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 52,
-                            TalentId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 53,
-                            TalentId = 3,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 53,
                             TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 54,
+                            CardId = 51,
+                            TalentId = 5,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 52,
+                            TalentId = 4,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 52,
+                            TalentId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 53,
+                            TalentId = 4,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CardId = 53,
                             TalentId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 54,
+                            TalentId = 4,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 54,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
@@ -4650,31 +4650,31 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 56,
+                            TalentId = 4,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 56,
+                            TalentId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 56,
                             TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 56,
-                            TalentId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 56,
+                            CardId = 57,
                             TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 57,
-                            TalentId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 57,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
@@ -4686,7 +4686,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 58,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 2
                         },
                         new
@@ -4698,31 +4698,31 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 59,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 59,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 59,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 60,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 60,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
@@ -4734,37 +4734,37 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 70,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 71,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 71,
-                            TalentId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 72,
-                            TalentId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 72,
                             TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
+                            CardId = 72,
+                            TalentId = 5,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 72,
+                            TalentId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
                             CardId = 73,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
@@ -4776,7 +4776,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 74,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 2
                         },
                         new
@@ -4788,13 +4788,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 75,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 75,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
@@ -4806,60 +4806,54 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 76,
-                            TalentId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 76,
                             TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 76,
-                            TalentId = 4,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 77,
-                            TalentId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 77,
                             TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 77,
-                            TalentId = 4,
+                            CardId = 76,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 78,
-                            TalentId = 1,
-                            Quantity = 2
+                            CardId = 77,
+                            TalentId = 5,
+                            Quantity = 1
                         },
                         new
                         {
-                            CardId = 78,
+                            CardId = 77,
+                            TalentId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 77,
                             TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 78,
-                            TalentId = 2,
+                            TalentId = 5,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CardId = 78,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 79,
+                            CardId = 78,
                             TalentId = 1,
                             Quantity = 1
                         },
@@ -4877,20 +4871,26 @@ namespace SolarisRec.Persistence.Migrations
                         },
                         new
                         {
-                            CardId = 80,
+                            CardId = 79,
                             TalentId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 80,
+                            TalentId = 5,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 80,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 81,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 3
                         },
                         new
@@ -4902,31 +4902,31 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 81,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 94,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 95,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 96,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 97,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 1
                         },
                         new
@@ -4938,61 +4938,49 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 98,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 98,
-                            TalentId = 5,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 99,
                             TalentId = 2,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 99,
-                            TalentId = 3,
+                            TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 100,
-                            TalentId = 2,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 100,
+                            CardId = 99,
                             TalentId = 4,
                             Quantity = 1
                         },
                         new
                         {
+                            CardId = 100,
+                            TalentId = 1,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CardId = 100,
+                            TalentId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
                             CardId = 101,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 101,
-                            TalentId = 5,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 103,
                             TalentId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 103,
-                            TalentId = 3,
                             Quantity = 1
                         },
                         new
@@ -5003,8 +4991,20 @@ namespace SolarisRec.Persistence.Migrations
                         },
                         new
                         {
+                            CardId = 103,
+                            TalentId = 4,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 103,
+                            TalentId = 5,
+                            Quantity = 1
+                        },
+                        new
+                        {
                             CardId = 104,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 3
                         },
                         new
@@ -5016,7 +5016,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 104,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 1
                         },
                         new
@@ -5028,7 +5028,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 119,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
@@ -5040,79 +5040,73 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 120,
-                            TalentId = 4,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 121,
-                            TalentId = 6,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 121,
-                            TalentId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 122,
-                            TalentId = 6,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 122,
                             TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 123,
+                            CardId = 121,
                             TalentId = 6,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 123,
-                            TalentId = 5,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 123,
-                            TalentId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 124,
-                            TalentId = 6,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 124,
-                            TalentId = 4,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 124,
+                            CardId = 121,
                             TalentId = 1,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 125,
+                            CardId = 122,
+                            TalentId = 6,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CardId = 122,
+                            TalentId = 4,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 123,
                             TalentId = 6,
                             Quantity = 1
                         },
                         new
                         {
-                            CardId = 125,
+                            CardId = 123,
+                            TalentId = 2,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 123,
+                            TalentId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 124,
+                            TalentId = 6,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 124,
+                            TalentId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 124,
                             TalentId = 5,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 125,
+                            TalentId = 6,
                             Quantity = 1
                         },
                         new
@@ -5123,6 +5117,12 @@ namespace SolarisRec.Persistence.Migrations
                         },
                         new
                         {
+                            CardId = 125,
+                            TalentId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
                             CardId = 126,
                             TalentId = 6,
                             Quantity = 2
@@ -5130,7 +5130,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 126,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
@@ -5142,7 +5142,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 127,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
@@ -5160,31 +5160,31 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 129,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 129,
+                            TalentId = 2,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            CardId = 130,
+                            TalentId = 6,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            CardId = 130,
                             TalentId = 5,
                             Quantity = 1
                         },
                         new
                         {
                             CardId = 130,
-                            TalentId = 6,
-                            Quantity = 3
-                        },
-                        new
-                        {
-                            CardId = 130,
-                            TalentId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            CardId = 130,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 1
                         },
                         new
@@ -5196,7 +5196,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 142,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 2
                         },
                         new
@@ -5208,7 +5208,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 143,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 2
                         },
                         new
@@ -5226,13 +5226,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 144,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 144,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 2
                         },
                         new
@@ -5244,31 +5244,31 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 145,
-                            TalentId = 2,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 145,
-                            TalentId = 4,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 145,
-                            TalentId = 7,
-                            Quantity = 3
-                        },
-                        new
-                        {
-                            CardId = 146,
-                            TalentId = 3,
-                            Quantity = 2
-                        },
-                        new
-                        {
-                            CardId = 146,
                             TalentId = 1,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CardId = 145,
+                            TalentId = 3,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CardId = 145,
+                            TalentId = 7,
+                            Quantity = 3
+                        },
+                        new
+                        {
+                            CardId = 146,
+                            TalentId = 4,
+                            Quantity = 2
+                        },
+                        new
+                        {
+                            CardId = 146,
+                            TalentId = 5,
                             Quantity = 2
                         },
                         new
@@ -5280,13 +5280,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 147,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 2
                         },
                         new
                         {
                             CardId = 147,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 2
                         },
                         new
@@ -5298,13 +5298,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 148,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 148,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 3
                         },
                         new
@@ -5322,7 +5322,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 149,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 3
                         },
                         new
@@ -5334,13 +5334,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 150,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 150,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 3
                         },
                         new
@@ -5352,13 +5352,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 151,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 151,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 3
                         },
                         new
@@ -5370,13 +5370,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 152,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 3
                         },
                         new
                         {
                             CardId = 152,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 3
                         },
                         new
@@ -5394,7 +5394,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 153,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 3
                         },
                         new
@@ -5406,7 +5406,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 154,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 3
                         },
                         new
@@ -5424,13 +5424,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 155,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 4
                         },
                         new
                         {
                             CardId = 155,
-                            TalentId = 3,
+                            TalentId = 4,
                             Quantity = 4
                         },
                         new
@@ -5442,13 +5442,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 156,
-                            TalentId = 1,
+                            TalentId = 5,
                             Quantity = 4
                         },
                         new
                         {
                             CardId = 156,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 4
                         },
                         new
@@ -5460,7 +5460,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 157,
-                            TalentId = 2,
+                            TalentId = 1,
                             Quantity = 4
                         },
                         new
@@ -5478,7 +5478,7 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 158,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 4
                         },
                         new
@@ -5496,13 +5496,13 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             CardId = 159,
-                            TalentId = 5,
+                            TalentId = 2,
                             Quantity = 4
                         },
                         new
                         {
                             CardId = 159,
-                            TalentId = 4,
+                            TalentId = 3,
                             Quantity = 4
                         },
                         new
@@ -5551,27 +5551,27 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Martian"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Mercurian"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Titanian"
-                        },
-                        new
-                        {
-                            Id = 4,
                             Name = "Beltian"
                         },
                         new
                         {
-                            Id = 5,
+                            Id = 2,
                             Name = "Earthian"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Martian"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Mercurian"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Titanian"
                         },
                         new
                         {
@@ -5611,27 +5611,27 @@ namespace SolarisRec.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "Mining"
-                        },
-                        new
-                        {
-                            Id = 2,
                             Name = "Data"
                         },
                         new
                         {
-                            Id = 3,
-                            Name = "Military"
+                            Id = 2,
+                            Name = "Diplomacy"
                         },
                         new
                         {
-                            Id = 4,
+                            Id = 3,
                             Name = "Espionage"
                         },
                         new
                         {
+                            Id = 4,
+                            Name = "Military"
+                        },
+                        new
+                        {
                             Id = 5,
-                            Name = "Diplomacy"
+                            Name = "Mining"
                         },
                         new
                         {

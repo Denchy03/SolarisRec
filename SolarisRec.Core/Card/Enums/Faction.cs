@@ -2,11 +2,11 @@
 {
     public enum Faction
     {
-        Mars = 1,
-        Mercury = 2,
-        Titan = 3,
-        Belt = 4,
-        Earth = 5,
+        Belt = 1,
+        Earth = 2,
+        Mars = 3,
+        Mercury = 4,
+        Titan = 5,        
         Venus = 6,
         IncludeMissions = 7
     }

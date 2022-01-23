@@ -28,6 +28,16 @@ namespace SolarisRec.Persistence.Configuration
             (
                 new Faction
                 {
+                    Id = (int)Enum.Faction.Belt,
+                    Name = "Belt"
+                },
+                 new Faction
+                 {
+                     Id = (int)Enum.Faction.Earth,
+                     Name = "Earth"
+                 },
+                new Faction
+                {
                     Id = (int)Enum.Faction.Mars,
                     Name = "Mars"
                 },
@@ -40,17 +50,7 @@ namespace SolarisRec.Persistence.Configuration
                 {
                     Id = (int)Enum.Faction.Titan,
                     Name = "Titan"
-                },
-                new Faction
-                {
-                    Id = (int)Enum.Faction.Belt,
-                    Name = "Belt"
-                },
-                new Faction
-                {
-                    Id = (int)Enum.Faction.Earth,
-                    Name = "Earth"
-                },
+                },               
                 new Faction
                 {
                     Id = (int)Enum.Faction.Venus,
