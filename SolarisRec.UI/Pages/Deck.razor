@@ -115,6 +115,9 @@
                 <MudSpacer />
                 <MudDivider FlexItem="true" Vertical="true" />
                 <MudItem Class="talentIcon">
+
+                    @*rule: most talents first > faction specific > order by index*@
+
                     @for (int i = 0; i < @item.Talents.Count; i++)
                     {
                         for (int j = 0; j < @item.Talents[i].Quantity; j++)

@@ -20,18 +20,14 @@ namespace SolarisRec.UI.Pages
 {
     public partial class Deck
     {
-        //todo: Features
-        //todo: Validation for decks
+        //todo: Features        
         //todo: More Deck info (Agent vs non-agent count, avg crc etc.)
 
         //todo: CodeCleanup
         //todo: cardtype string, enum? how should I treat it? 
-        //todo: FactionInformation: what is UI specific, what is domain specific?       
-        //todo: check why UI has/needs reference to Persistence and fix
-        //todo: clear filters shold reset sorting?
-        //todo: adjust grid header/rows
-        //todo: are void methods legit? Should I use Task.FromResult?
-        //todo: understand scoped vs transient
+        //todo: FactionInformation: what is UI specific, what is domain specific?        
+        //todo: clear filters shold reset sorting?        /
+        //todo: are void methods legit? Should I use Task.FromResult?        
         //todo: naming etc service, generator, provider etc
         //todo: move usings
         //todo: use for instead of foreach when using mappers
@@ -39,6 +35,7 @@ namespace SolarisRec.UI.Pages
         //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
         //todo? MudPaper to component?       
                 
+        [Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] private ICardProvider CardProvider { get; set; }        
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
         [Inject] private ITalentDropdownItemProvider TalentDropdownItemProvider { get; set; }
@@ -183,7 +180,14 @@ namespace SolarisRec.UI.Pages
 
             if (reload)
             {
-                Cards = await CardProvider.GetCardsFiltered(Filter);
+                try
+                {
+                    Cards = await CardProvider.GetCardsFiltered(Filter);
+                }
+                catch
+                {
+                    NavigationManager.NavigateTo("error");
+                }
             }
 
             TotalItems = Filter.MatchingCardCount;
@@ -375,7 +379,7 @@ namespace SolarisRec.UI.Pages
                     Page = 0;
                     break;
                 case PagingDirection.PreviousPage:
-                    if(Page - 1 > 0)                    
+                    if(Page - 1 >= 0)                    
                         Page--;                                      
                     break;
                 case PagingDirection.NextPage:
