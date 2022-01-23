@@ -370,6 +370,7 @@ namespace SolarisRec.UI.Pages
 
         private async Task SetSorting(string sortLabel)
         {
+            Page = START_PAGE;
             SortLabel = sortLabel;
 
             if (SortingDirection is (int)Core.SortingDirection.None or (int)Core.SortingDirection.Descending)
