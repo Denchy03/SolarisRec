@@ -212,12 +212,14 @@ namespace SolarisRec.UI.Pages
 
         private async Task OnSearchByName(string searchTerm)
         {
+            Page = START_PAGE;
             Filter.Name = searchTerm;
             await GetCardsFiltered();
         }
 
         private async Task OnSearchByAbility(string abilitySearchTerm)
         {
+            Page = START_PAGE;
             Filter.Ability = abilitySearchTerm;
             await GetCardsFiltered();
         }
@@ -370,6 +372,7 @@ namespace SolarisRec.UI.Pages
 
         private async Task SetSorting(string sortLabel)
         {
+            Page = START_PAGE;
             SortLabel = sortLabel;
 
             if (SortingDirection is (int)Core.SortingDirection.None or (int)Core.SortingDirection.Descending)
