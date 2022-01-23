@@ -110,8 +110,22 @@ namespace SolarisRec.UI.Pages
 
         private readonly string[] cardTypePieLabels = { "Agents", "Maneuvers", "Constructions" };
 
-        double[] CardTypePieData { get; set; } = { 0, 0, 0 };
-        
+        double[] CardTypePieData { get; set; } = Array.Empty<double>();
+
+        private readonly ChartOptions cardFactionChartOptions = new ChartOptions
+        {
+            ChartPalette = new string[]
+                {
+                    "#5B403E",
+                    "#3B3B55",
+                    "#8D8D56"
+                }
+        };
+
+        private string[] CardFactionPieLabels { get; set; } = Array.Empty<string>();
+
+        double[] CardFactionPieData { get; set; } = Array.Empty<double>();
+
 
         protected override void OnParametersSet() {
             
@@ -331,6 +345,18 @@ namespace SolarisRec.UI.Pages
                 MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum()
             };
 
+            CardFactionPieData = new double[]
+            {
+                5,8,11
+            };
+
+            CardFactionPieLabels = new string[]
+            {
+                "Test",
+                "Mert",
+                "Azert"
+            };
+
             StateHasChanged();
         }
 
@@ -344,6 +370,11 @@ namespace SolarisRec.UI.Pages
                 MainDeck.Where(d => d.Card.Type == CardTypeConstants.Agent).Select(d => d.Quantity).Sum(),
                 MainDeck.Where(d => d.Card.Type == CardTypeConstants.Maneuver).Select(d => d.Quantity).Sum(),
                 MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum()
+            };
+
+            CardFactionPieData = new double[]
+            {
+
             };
 
             StateHasChanged();

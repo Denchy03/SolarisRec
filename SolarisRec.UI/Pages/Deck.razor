@@ -38,11 +38,11 @@
         <MudTextField T="string" @ref="searchByName" Label="Search by Name"
                       DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByName"></MudTextField>
 
-        <MudTextField T="string" @ref="searchByAbility" Label="Search by Ability" 
+        <MudTextField T="string" @ref="searchByAbility" Label="Search by Ability"
                       DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByAbility"></MudTextField>
     </MudItem>
     <MudItem xs="12" md="6" Style="text-align: center; vertical-align: bottom;">
-        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Save" OnClick="Export" ></MudIconButton>
+        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Save" OnClick="Export"></MudIconButton>
 
         @if (!ValidationResult.IsDeckValid)
         {
@@ -58,7 +58,8 @@
     <MudItem id="CardSearch" xs="8">
 
         <MudPaper Class="solaris-deck-item-header d-flex px-2 align-center my-1">
-            <MudText Typo="Typo.body2" Class="name-header">Name 
+            <MudText Typo="Typo.body2" Class="name-header">
+                Name
                 <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.Sort" OnClick="() => SetSorting(nameof(Card.Name))"></MudIconButton>
             </MudText>
             <MudSpacer />
@@ -69,7 +70,8 @@
             <MudText Typo="Typo.body2" Class="type-header">Type</MudText>
             <MudSpacer />
             <MudDivider FlexItem="true" Vertical="true" />
-            <MudText Typo="Typo.body2" Class="resourceCostIcon-header">C
+            <MudText Typo="Typo.body2" Class="resourceCostIcon-header">
+                C
                 <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.Sort" OnClick="() => SetSorting(nameof(Card.Costs))"></MudIconButton>
             </MudText>
             <MudSpacer />
@@ -77,12 +79,14 @@
             <MudText Typo="Typo.body2" Class="talentIcon-header">T</MudText>
             <MudSpacer />
             <MudDivider FlexItem="true" Vertical="true" />
-            <MudText Typo="Typo.body2" Class="av-header">AV
+            <MudText Typo="Typo.body2" Class="av-header">
+                AV
                 <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.Sort" OnClick="() => SetSorting(nameof(Card.AttackValue))"></MudIconButton>
             </MudText>
             <MudSpacer />
             <MudDivider FlexItem="true" Vertical="true" />
-            <MudText Typo="Typo.body2" Class="hv-header">HV
+            <MudText Typo="Typo.body2" Class="hv-header">
+                HV
                 <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.Sort" OnClick="() => SetSorting(nameof(Card.HealthValue))"></MudIconButton>
             </MudText>
             <MudSpacer />
@@ -135,17 +139,17 @@
             </MudPaper>
         }
         <MudPaper id="Paging" Class="solaris-deck-item d-flex px-2 align-center my-1">
-            <MudText Typo="Typo.body2">Cards per page:</MudText>            
-            
-                <MudSelect T="DropdownItem" @bind-SelectedValues="SelectedPagingValue.Selected" MultiSelection="false" 
-                    Dense="true" IconSize="Size.Small" Class="mud-table-pagination-select" DisableUnderLine="true" 
-                    Style="max-width: 35px !important; margin-left: 20px !important; margin-bottom: 5px !important;">
+            <MudText Typo="Typo.body2">Cards per page:</MudText>
+
+            <MudSelect T="DropdownItem" @bind-SelectedValues="SelectedPagingValue.Selected" MultiSelection="false"
+                       Dense="true" IconSize="Size.Small" Class="mud-table-pagination-select" DisableUnderLine="true"
+                       Style="max-width: 35px !important; margin-left: 20px !important; margin-bottom: 5px !important;">
                 @foreach (var item in PagingValues)
                 {
                     <MudSelectItem T="DropdownItem" Value="@item">@item.Name</MudSelectItem>
                 }
-                </MudSelect>
-            
+            </MudSelect>
+
             <MudSpacer />
             <MudText Typo="Typo.body2">@Filter.PageSizeFromTo of @TotalItems</MudText>
             <MudSpacer />
@@ -207,8 +211,22 @@
 
 </MudGrid>
 
-@*test*@
-<MudPaper Class="pa-4">
-    <MudChart ChartType="ChartType.Pie" InputData="@CardTypePieData" InputLabels="@cardTypePieLabels"
-        Width="300px" Height="300px" ChartOptions="cardTypeChartOptions"/>
-</MudPaper>
+<MudGrid>
+
+    @*CardType*@
+    <MudItem xs="4" lg="4">
+        <MudPaper Class="pa-4">
+            <MudChart ChartType="ChartType.Pie" InputData="@CardTypePieData" InputLabels="@cardTypePieLabels"
+                      Width="300px" Height="300px" ChartOptions="cardTypeChartOptions" />
+        </MudPaper>
+    </MudItem>
+
+    @*Factions*@
+    <MudItem xs="4" lg="4">
+        <MudPaper Class="pa-4">
+            <MudChart ChartType="ChartType.Pie" InputData="@CardFactionPieData" InputLabels="@CardFactionPieLabels"
+                      Width="300px" Height="300px" ChartOptions="cardFactionChartOptions" />
+        </MudPaper>
+    </MudItem>
+
+</MudGrid>
