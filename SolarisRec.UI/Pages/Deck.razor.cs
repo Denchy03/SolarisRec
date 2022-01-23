@@ -212,12 +212,14 @@ namespace SolarisRec.UI.Pages
 
         private async Task OnSearchByName(string searchTerm)
         {
+            Page = START_PAGE;
             Filter.Name = searchTerm;
             await GetCardsFiltered();
         }
 
         private async Task OnSearchByAbility(string abilitySearchTerm)
         {
+            Page = START_PAGE;
             Filter.Ability = abilitySearchTerm;
             await GetCardsFiltered();
         }
