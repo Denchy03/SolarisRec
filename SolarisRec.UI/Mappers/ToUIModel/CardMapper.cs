@@ -1,6 +1,7 @@
 ﻿using SolarisRec.UI.UIModels;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoreCard = SolarisRec.Core.Card;
 
 namespace SolarisRec.UI.Mappers.ToUIModel
@@ -33,7 +34,8 @@ namespace SolarisRec.UI.Mappers.ToUIModel
                 AttackValue = input.AttackValue,
                 HealthValue = input.HealthValue,
                 Costs = MapCosts(input.Costs),
-                Talents = MapTalents(input.Talents)
+                Talents = MapTalents(input.Talents, input.TalentAffinity),
+
             };
         }
 
@@ -49,7 +51,7 @@ namespace SolarisRec.UI.Mappers.ToUIModel
             return result;
         }
 
-        private List<Talent> MapTalents(List<CoreCard.Talent> talents)
+        private List<Talent> MapTalents(List<CoreCard.Talent> talents, int talentAffinity)
         {
             var result = new List<Talent>();
 
@@ -58,7 +60,12 @@ namespace SolarisRec.UI.Mappers.ToUIModel
                 result.Add(talentToUIModelMapper.Map(talent));
             }
 
+            result = result
+                .OrderByDescending(t => t.Quantity)
+                .ThenBy(t => (int)t.TalentType == talentAffinity)
+                .ThenBy(t => t.TalentType).ToList();
+
             return result;
-        }
+        }        
     }
 }

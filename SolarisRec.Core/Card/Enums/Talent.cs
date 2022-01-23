@@ -2,11 +2,11 @@
 {
     public enum Talent
     {
-        Mining = 1,
-        Data = 2,
-        Military = 3,
-        Espionage = 4,
-        Diplomacy = 5,
+        Data = 1,
+        Diplomacy = 2,
+        Espionage = 3,
+        Military = 4,
+        Mining = 5,
         Research = 6,
         Any = 7
     }

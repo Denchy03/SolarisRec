@@ -28,6 +28,16 @@ namespace SolarisRec.Persistence.Configuration
             (
                 new Resource
                 {
+                    Id = (int)Enum.Resource.Beltian,
+                    Name = "Beltian"
+                },
+                new Resource
+                {
+                    Id = (int)Enum.Resource.Earthian,
+                    Name = "Earthian"
+                },
+                new Resource
+                {
                     Id = (int)Enum.Resource.Martian,
                     Name = "Martian"
                 },
@@ -40,16 +50,6 @@ namespace SolarisRec.Persistence.Configuration
                 {
                     Id = (int)Enum.Resource.Titanian,
                     Name = "Titanian"
-                },
-                new Resource
-                {
-                    Id = (int)Enum.Resource.Beltian,
-                    Name = "Beltian"
-                },
-                new Resource
-                {
-                    Id = (int)Enum.Resource.Earthian,
-                    Name = "Earthian"
                 },
                 new Resource
                 {
