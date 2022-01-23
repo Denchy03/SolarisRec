@@ -26,6 +26,7 @@ namespace SolarisRec.Persistence.Configuration
                 .AddTransient<IMapToPersistenceModel<Account, PersistenceModel.Account>, Mappers.ToPersistenceModel.AccountMapper>()
 
                 .AddTransient<IDeckRepository, DeckRepository>()
+                .AddTransient<IDeckItemToPersistenceModelMapper, Mappers.ToPersistenceModel.DeckItemMapper>()
 
                 .AddTransient<ICardRepository, CardRepository>()
                 .AddTransient<IMapToDomainModel<PersistenceModel.Card, Card>, Mappers.ToDomainModel.CardMapper>()
@@ -35,8 +36,7 @@ namespace SolarisRec.Persistence.Configuration
                 .AddTransient<IMapToDomainModel<PersistenceModel.Faction, Faction>, Mappers.ToDomainModel.FactionMapper>()
 
                 .AddTransient<ITalentRepository, TalentRepository>()
-                .AddTransient<IMapToDomainModel<PersistenceModel.Talent, Core.Talent.Talent>, Mappers.ToDomainModel.TalentMapper>()
-
+                .AddTransient<IMapToDomainModel<PersistenceModel.Talent, Core.Talent.Talent>, Mappers.ToDomainModel.TalentMapper>()                
                 ;
         }
 

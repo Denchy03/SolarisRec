@@ -24,8 +24,7 @@ namespace SolarisRec.Core.Configuration
     {
         public static IServiceCollection UseSolarisRecCore(this IServiceCollection serviceCollection)
         {
-            return serviceCollection
-                .AddTransient<IDeckBuilderService, DeckBuilderService>()
+            return serviceCollection                
                 .AddTransient<IRegisterAccountService, RegisterAccountService>()
                 .AddTransient<ILoginService, LoginService>()
                 .AddTransient<IHashPassword, PasswordHasher>()
@@ -37,6 +36,7 @@ namespace SolarisRec.Core.Configuration
                 .AddTransient<IProvideConvertedResourceCostService, ProvideConvertedResourceCostService>()
                 .AddTransient<IProvideFactionInformationService, ProvideFactionInformationService>()
                 .AddTransient<IValidateDeckService, ValidateDeckService>()
+                .AddTransient<ISaveDeckListService, SaveDeckListService>()
                 ;            
         }
     }

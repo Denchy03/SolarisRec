@@ -6,6 +6,7 @@ using SolarisRec.Core.ResourceCost;
 using SolarisRec.UI.Components.Dropdown;
 using SolarisRec.UI.Mappers;
 using SolarisRec.UI.Providers;
+using SolarisRec.UI.Services;
 using SolarisRec.UI.UIModels;
 using SolarisRec.UI.Utility;
 using CoreCard = SolarisRec.Core.Card;
@@ -50,6 +51,9 @@ namespace SolarisRec.UI.Configuration
                 .AddTransient<IMapToDomainModel<DeckItem, Core.Deck.DeckItem>, Mappers.ToDomainModel.DeckItemMapper>()
                 .AddTransient<IMapToDomainModel<Card, CoreCard.Card>, Mappers.ToDomainModel.CardMapper>()
                 .AddTransient<IDeckValidator, DeckValidator>()
+
+                .AddTransient<ISaveDeckListService, SaveDeckListService>()
+                .AddTransient<IMapToDomainModel<DeckList, Core.Deck.DeckList>, Mappers.ToDomainModel.DeckListMapper>()
                 ;
         }       
     }

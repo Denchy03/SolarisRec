@@ -15,6 +15,7 @@ using SolarisRec.Core.Card.Enums;
 using SolarisRec.UI.Components.ValidationDialog;
 using SolarisRec.UI.Components.ConfirmOnlyDialog;
 using SolarisRec.UI.Enums;
+using SolarisRec.UI.Services;
 
 namespace SolarisRec.UI.Pages
 {
@@ -34,9 +35,9 @@ namespace SolarisRec.UI.Pages
         //todo: converted resource cost???
         //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
         //todo? MudPaper to component?       
-                
+
         [Inject] private NavigationManager NavigationManager { get; set; }
-        [Inject] private ICardProvider CardProvider { get; set; }        
+        [Inject] private ICardProvider CardProvider { get; set; }
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
         [Inject] private ITalentDropdownItemProvider TalentDropdownItemProvider { get; set; }
         [Inject] private ICardTypeDropdownProvider CardTypeDropdownItemProvider { get; set; }
@@ -44,8 +45,9 @@ namespace SolarisRec.UI.Pages
         [Inject] private IConvertedResourceCostDropdownItemProvider ConvertedResourceCostDropdownItemProvider { get; set; }
         [Inject] private IPagingValuesProvider PagingValuesProvider { get; set; }
         [Inject] private IDeckGenerator DeckGenerator { get; set; }
-        [Inject] private IFileSaveService SaveFile { get; set; }
         [Inject] private IDeckValidator DeckValidator { get; set; }
+        [Inject] private ISaveDeckListService SaveDeckListService { get; set; }
+        [Inject] private IFileSaveService SaveFile { get; set; }       
         [Inject] private IDialogService DialogService { get; set; }
 
         private const int DEFAULT_PAGE_SIZE = 8;
@@ -193,12 +195,12 @@ namespace SolarisRec.UI.Pages
             TotalItems = Filter.MatchingCardCount;
         }        
 
-        public void UpdateImageSrc(Card card)
+        private void UpdateImageSrc(Card card)
         {
             ImgSrc = card.ImageSrc;
         }
 
-        public void UpdateImageSrc(DeckItem deckItem)
+        private void UpdateImageSrc(DeckItem deckItem)
         {
             ImgSrc = deckItem.Card.ImageSrc;
         }
@@ -339,7 +341,15 @@ namespace SolarisRec.UI.Pages
 
                     using var streamRef = new DotNetStreamReference(stream: stream);
 
-                    await SaveFile.Save(streamRef);
+                    try
+                    {
+                        await SaveFile.Save(streamRef);
+                        await SaveDeckListService.Save(new DeckList { MainDeck = MainDeck, MissionDeck = MissionDeck, TacticalDeck = TacticalDeck });
+                    }
+                    catch
+                    {
+                        NavigationManager.NavigateTo("error");
+                    }
                 }
             }                       
         }

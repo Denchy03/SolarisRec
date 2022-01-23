@@ -14,6 +14,7 @@ namespace SolarisRec.Persistence
 
         public DbSet<Account> Accounts { get; set; }
         public DbSet<Deck> Decks { get; set; }
+        public DbSet<DeckItem> DeckItems { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Talent> Talents { get; set; }
         public DbSet<Resource> Resources { get; set; }
@@ -30,6 +31,7 @@ namespace SolarisRec.Persistence
 
             modelBuilder.ApplyConfiguration(new AccountConfiguration());
             modelBuilder.ApplyConfiguration(new DeckConfiguration());
+            modelBuilder.ApplyConfiguration(new DeckItemConfiguration());
             modelBuilder.ApplyConfiguration(new CardConfiguration());
             modelBuilder.ApplyConfiguration(new TalentConfiguration());
             modelBuilder.ApplyConfiguration(new ResourceConfiguration());

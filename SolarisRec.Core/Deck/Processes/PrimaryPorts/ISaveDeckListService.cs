@@ -2,8 +2,8 @@
 
 namespace SolarisRec.Core.Deck.Processes.PrimaryPorts
 {
-    public interface IDeckBuilderService
+    public interface ISaveDeckListService
     {
-        
+        Task Save(DeckList deckList);
     }
 }
