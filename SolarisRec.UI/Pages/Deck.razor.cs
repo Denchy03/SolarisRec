@@ -52,7 +52,6 @@ namespace SolarisRec.UI.Pages
         private bool hide = false;
         private bool showWhenCardSearchIsHidden => !hide;
         private Color hideEyeIconColor = Color.Error;
-
         private bool reload = true;
         private int MainDeckCardCount => DeckList.MainDeck.Select(d => d.Quantity).Sum();
         private int MainDeckAgentCount => DeckList.MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
@@ -66,7 +65,6 @@ namespace SolarisRec.UI.Pages
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
 
         private List<Card> Cards { get; set; } = new();
-
         private DeckList DeckList { get; set; } = new();
 
         private List<DropdownItem> FactionDropdownItems = new();
@@ -79,7 +77,6 @@ namespace SolarisRec.UI.Pages
         private SelectedValues SelectedKeywords = new();
         private List<DropdownItem> ConvertedResourceCostDropdownItems = new();
         private SelectedValues SelectedConvertedResourceCosts = new();
-
         private List<DropdownItem> PagingValues = new();
         private SelectedValues SelectedPagingValue = new();
 
