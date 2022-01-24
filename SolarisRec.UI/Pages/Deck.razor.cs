@@ -65,6 +65,7 @@ namespace SolarisRec.UI.Pages
         private MudTextField<string> searchByAbility;
 
         private bool hide = false;
+        private bool showWhenCardSearchIsHidden => !hide;
         private Color hideEyeIconColor = Color.Error;
 
         private bool reload = true;
@@ -132,7 +133,8 @@ namespace SolarisRec.UI.Pages
             ChartPalette = new string[]
                 {
                     "#8D8D56"
-                }
+                },
+            DisableLegend = true
         };
 
         protected override void OnParametersSet()
@@ -351,21 +353,30 @@ namespace SolarisRec.UI.Pages
 
         private void RemoveFromMainDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(DeckList.MainDeck);
-            UpdateCharts();
-            ValidationResult = DeckValidator.Validate(DeckList);
+            if (!hide)
+            {
+                deckItem.RemoveCard(DeckList.MainDeck);
+                UpdateCharts();
+                ValidationResult = DeckValidator.Validate(DeckList);
+            }
         }
 
         private void RemoveFromMissionDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(DeckList.MissionDeck);
-            ValidationResult = DeckValidator.Validate(DeckList);
+            if (!hide)
+            {
+                deckItem.RemoveCard(DeckList.MissionDeck);
+                ValidationResult = DeckValidator.Validate(DeckList);
+            }
         }
 
         private void RemoveFromTacticalDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(DeckList.TacticalDeck);
-            ValidationResult = DeckValidator.Validate(DeckList);
+            if (!hide)
+            {
+                deckItem.RemoveCard(DeckList.TacticalDeck);
+                ValidationResult = DeckValidator.Validate(DeckList);
+            }
         }
 
         private async Task Export()
@@ -491,8 +502,6 @@ namespace SolarisRec.UI.Pages
                 .ToArray();
 
             CardFactionChartOptions.ChartPalette = ChartHelper.GenerateChartPalette(CardFactionPieLabels);
-            CardFactionChartOptions.DisableLegend = true;
-
 
             ConvertedResourceCostSeries = new List<ChartSeries>
             {
