@@ -65,8 +65,8 @@ namespace SolarisRec.UI.Pages
         private MudTextField<string> searchByAbility;
 
         private bool reload = true;
-        private int MainDeckCardCount => MainDeck.Select(d => d.Quantity).Sum();
-        private int MainDeckAgentCount => MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
+        private int MainDeckCardCount => DeckList.MainDeck.Select(d => d.Quantity).Sum();
+        private int MainDeckAgentCount => DeckList.MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
 
         private int Page { get; set; } = START_PAGE;
         private int PageSize { get; set; } = DEFAULT_PAGE_SIZE;        
@@ -76,10 +76,9 @@ namespace SolarisRec.UI.Pages
 
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
         
-        private List<Card> Cards { get; set; } = new List<Card>();
-        private List<DeckItem> MainDeck { get; set; } = new List<DeckItem>();
-        private List<DeckItem> MissionDeck { get; set; } = new List<DeckItem>();
-        private List<DeckItem> TacticalDeck { get; set; } = new List<DeckItem>();
+        private List<Card> Cards { get; set; } = new();
+
+        private DeckList DeckList { get; set; } = new();        
 
         private List<DropdownItem> FactionDropdownItems = new();
         private SelectedValues SelectedFactions = new();
@@ -108,9 +107,9 @@ namespace SolarisRec.UI.Pages
                 }
         };
 
-        private readonly string[] cardTypePieLabels = { "Agents", "Maneuvers", "Constructions" };
+        private string[] CardTypePieLabels = Array.Empty<string>();
 
-        double[] CardTypePieData { get; set; } = Array.Empty<double>();
+        private double[] CardTypePieData { get; set; } = Array.Empty<double>();
 
         private readonly ChartOptions cardFactionChartOptions = new ChartOptions
         {
@@ -127,7 +126,7 @@ namespace SolarisRec.UI.Pages
 
         private string[] CardFactionPieLabels { get; set; } = Array.Empty<string>();
 
-        double[] CardFactionPieData { get; set; } = Array.Empty<double>();
+        private double[] CardFactionPieData { get; set; } = Array.Empty<double>();
 
 
         protected override void OnParametersSet() {
@@ -166,9 +165,9 @@ namespace SolarisRec.UI.Pages
             {
                 if (reload)
                     await InvokeAsync(ApplyPaging);
-            };
+            };            
 
-            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);            
+            ValidationResult = DeckValidator.Validate(DeckList);            
         }
 
         protected override async Task OnInitializedAsync()
@@ -288,12 +287,12 @@ namespace SolarisRec.UI.Pages
 
             if (!result.Cancelled)
             {
-                MainDeck = new List<DeckItem>();
-                MissionDeck = new List<DeckItem>();
-                TacticalDeck = new List<DeckItem>();
+                DeckList.MainDeck = new List<DeckItem>();
+                DeckList.MissionDeck = new List<DeckItem>();
+                DeckList.TacticalDeck = new List<DeckItem>();
             }
 
-            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
+            ValidationResult = DeckValidator.Validate(DeckList);
         }
 
         private void AddToDeck(MouseEventArgs e, Card card)
@@ -307,91 +306,59 @@ namespace SolarisRec.UI.Pages
 
             if (e.CtrlKey)
             {
-                card.AddCard(TacticalDeck);
-                TacticalDeck = TacticalDeck
+                card.AddCard(DeckList.TacticalDeck);
+                DeckList.TacticalDeck = DeckList.TacticalDeck
                     .OrderBy(d => d.Card.Factions)
                     .ThenBy(d => d.Card.Type)
                     .ThenBy(d => d.Card.ConvertedResourceCost)
                     .ThenBy(d => d.Card.Name)
                     .ToList();
 
-                ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
+                ValidationResult = DeckValidator.Validate(DeckList);
                 return;
             }
 
             if (isMission)
             {
-                card.AddCard(MissionDeck);
-                MissionDeck = MissionDeck
+                card.AddCard(DeckList.MissionDeck);
+                DeckList.MissionDeck = DeckList.MissionDeck
                     .OrderBy(d => d.Card.Talents.Select(t => t.Quantity).Sum())
                     .ThenBy(d => d.Card.Name)
                     .ToList();
 
-                ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
+                ValidationResult = DeckValidator.Validate(DeckList);
                 return;
             }
 
-            card.AddCard(MainDeck);
-            MainDeck = MainDeck
+            card.AddCard(DeckList.MainDeck);
+            DeckList.MainDeck = DeckList.MainDeck
                 .OrderBy(d => d.Card.Factions)
                 .ThenBy(d => d.Card.Type)
                 .ThenBy(d => d.Card.ConvertedResourceCost)
                 .ThenBy(d => d.Card.Name)
                 .ToList();
 
-            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
-
-            CardTypePieData = new double[]
-            {
-                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Agent).Select(d => d.Quantity).Sum(),
-                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Maneuver).Select(d => d.Quantity).Sum(),
-                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum()
-            };
-
-            CardFactionPieData = MainDeck
-                .GroupBy(d => d.Card.Factions)
-                .Select(x => new {Factions = x.Select(d => d.Card.Factions), Quantity = x.Sum(d => d.Quantity) })                
-                .Select(x => (double)x.Quantity)
-                .ToArray();            
-
-            CardFactionPieLabels = MainDeck.Select(d => d.Card.Factions).OrderBy(d => d).Distinct().ToArray();
-
-            StateHasChanged();
+            UpdateCharts();
+            ValidationResult = DeckValidator.Validate(DeckList); 
         }
 
-        private void RemoveFromDeck(DeckItem deckItem)
-        {
-            deckItem.RemoveCard(MainDeck);
-            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
-
-            CardTypePieData = new double[]
-            {
-                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Agent).Select(d => d.Quantity).Sum(),
-                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Maneuver).Select(d => d.Quantity).Sum(),
-                MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum()
-            };
-
-            CardFactionPieData = MainDeck
-               .GroupBy(d => d.Card.Factions)
-               .Select(x => new { Factions = x.Select(d => d.Card.Factions), Quantity = x.Sum(d => d.Quantity) })              
-               .Select(x => (double)x.Quantity)
-               .ToArray();
-
-            CardFactionPieLabels = MainDeck.Select(d => d.Card.Factions).OrderBy(d => d).Distinct().ToArray();
-
-            StateHasChanged();
+        private void RemoveFromMainDeck(DeckItem deckItem)
+        {            
+            deckItem.RemoveCard(DeckList.MainDeck);
+            UpdateCharts();
+            ValidationResult = DeckValidator.Validate(DeckList);           
         }
 
         private void RemoveFromMissionDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(MissionDeck);
-            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
+            deckItem.RemoveCard(DeckList.MissionDeck);
+            ValidationResult = DeckValidator.Validate(DeckList);
         }
 
         private void RemoveFromTacticalDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(TacticalDeck);
-            ValidationResult = DeckValidator.Validate(MainDeck, MissionDeck, TacticalDeck);
+            deckItem.RemoveCard(DeckList.TacticalDeck);
+            ValidationResult = DeckValidator.Validate(DeckList);
         }
 
         private async Task Export()
@@ -406,7 +373,7 @@ namespace SolarisRec.UI.Pages
 
                 if(!result.Cancelled)
                 {
-                    var deck = DeckGenerator.Generate(MainDeck, MissionDeck, TacticalDeck);
+                    var deck = DeckGenerator.Generate(DeckList);
 
                     var stream = StringToStreamConverter.Convert(deck);
 
@@ -415,7 +382,7 @@ namespace SolarisRec.UI.Pages
                     try
                     {
                         await SaveFile.Save(streamRef);
-                        await SaveDeckListService.Save(new DeckList { MainDeck = MainDeck, MissionDeck = MissionDeck, TacticalDeck = TacticalDeck });
+                        await SaveDeckListService.Save(DeckList);
                     }
                     catch (Exception ex)
                     {
@@ -483,6 +450,35 @@ namespace SolarisRec.UI.Pages
             }
 
             await GetCardsFiltered();
+            StateHasChanged();
+        }
+
+        private void UpdateCharts()
+        {
+            var agentCount = DeckList.MainDeck.Where(d => d.Card.Type == CardTypeConstants.Agent).Select(d => d.Quantity).Sum();
+            var maneuverCount = DeckList.MainDeck.Where(d => d.Card.Type == CardTypeConstants.Maneuver).Select(d => d.Quantity).Sum();
+            var constructionCount = DeckList.MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum();
+
+            CardTypePieData = new double[]
+            {
+                agentCount,
+                maneuverCount,
+                constructionCount
+            };
+
+            CardTypePieLabels = new string[] { $"Agents [{agentCount}]", $"Maneuvers [{maneuverCount}]", $"Constructions [{constructionCount}]" };
+
+            var deckFactionCardCount = DeckList.MainDeck
+                .GroupBy(d => d.Card.Factions)
+                .Select(x => new { Factions = x.Select(d => d.Card.Factions).First(), Quantity = x.Sum(d => d.Quantity) })                
+                .ToArray();                   
+
+            CardFactionPieData = deckFactionCardCount.Select(x => (double)x.Quantity).ToArray();
+
+            CardFactionPieLabels = deckFactionCardCount
+                .Select(x => x.Factions + $" [{deckFactionCardCount.First(d => d.Factions == x.Factions).Quantity}]")
+                .ToArray();
+
             StateHasChanged();
         }
     }

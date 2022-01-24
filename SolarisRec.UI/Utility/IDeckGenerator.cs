@@ -5,6 +5,6 @@ namespace SolarisRec.UI.Utility
 {
     public interface IDeckGenerator
     {
-        string Generate(List<DeckItem> maindeck, List<DeckItem> tacticalDeck, List<DeckItem> missionDeck);
+        string Generate(DeckList deckList);
     }
 }

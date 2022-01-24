@@ -167,8 +167,8 @@
             <MudItem xs="12" lg="6">
                 <img src="@(ImgSrc)" width="100%" height="auto">
 
-                <MudText GutterBottom="true"> Missions (@MissionDeck.Select(d => d.Quantity).Sum())</MudText>
-                @foreach (var item in MissionDeck)
+                <MudText GutterBottom="true"> Missions (@DeckList.MissionDeck.Select(d => d.Quantity).Sum())</MudText>
+                @foreach (var item in DeckList.MissionDeck)
                 {
                     <MudPaper @onclick="@(() => RemoveFromMissionDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
@@ -182,9 +182,9 @@
 
             <MudItem xs="12" lg="6">
                 <MudText GutterBottom="true"> Main deck (@MainDeckCardCount / @MainDeckAgentCount A)</MudText>
-                @foreach (var item in MainDeck)
+                @foreach (var item in DeckList.MainDeck)
                 {
-                    <MudPaper @onclick="@(() => RemoveFromDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
+                    <MudPaper @onclick="@(() => RemoveFromMainDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
                         <MudText Typo="Typo.body2" Class="deckItemName">@item.Card.Name</MudText>
                         <MudSpacer />
@@ -193,8 +193,8 @@
                     </MudPaper>
                 }
 
-                <MudText GutterBottom="true"> Tactical Deck (@TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
-                @foreach (var item in TacticalDeck)
+                <MudText GutterBottom="true"> Tactical Deck (@DeckList.TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
+                @foreach (var item in DeckList.TacticalDeck)
                 {
                     <MudPaper @onclick="@(() => RemoveFromTacticalDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
@@ -216,7 +216,7 @@
     @*CardType*@
     <MudItem xs="4" lg="4">
         <MudPaper Class="pa-4">
-            <MudChart ChartType="ChartType.Pie" InputData="@CardTypePieData" InputLabels="@cardTypePieLabels"
+            <MudChart ChartType="ChartType.Pie" InputData="@CardTypePieData" InputLabels="@CardTypePieLabels"
                       Width="300px" Height="300px" ChartOptions="cardTypeChartOptions" />
         </MudPaper>
     </MudItem>

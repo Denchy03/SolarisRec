@@ -19,11 +19,11 @@ namespace SolarisRec.UI.Utility
             this.deckItemToDomainModelMapper = deckItemToDomainModelMapper ?? throw new ArgumentNullException(nameof(deckItemToDomainModelMapper));
         }
 
-        public ValidationResult Validate(List<DeckItem> maindeck, List<DeckItem> missionDeck, List<DeckItem> tacticalDeck)
+        public ValidationResult Validate(DeckList deckList)
         {
-            var coreMaindeck = Map(maindeck);
-            var coreMissionDeck = Map(missionDeck);
-            var coreTacticalDeck = Map(tacticalDeck);
+            var coreMaindeck = Map(deckList.MainDeck);
+            var coreMissionDeck = Map(deckList.MissionDeck);
+            var coreTacticalDeck = Map(deckList.TacticalDeck);
 
             var reasons = validateDeckService.Validate(coreMaindeck, coreMissionDeck, coreTacticalDeck);
 
