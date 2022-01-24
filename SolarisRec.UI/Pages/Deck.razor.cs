@@ -117,8 +117,11 @@ namespace SolarisRec.UI.Pages
             ChartPalette = new string[]
                 {
                     "#5B403E",
-                    "#3B3B55",
-                    "#8D8D56"
+                    "#3B3B55", 
+                    "#8D8D56",
+                    "#8F5F10",
+                    "#416057",
+                    "#949796"
                 }
         };
 
@@ -345,17 +348,13 @@ namespace SolarisRec.UI.Pages
                 MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum()
             };
 
-            CardFactionPieData = new double[]
-            {
-                5,8,11
-            };
+            CardFactionPieData = MainDeck
+                .GroupBy(d => d.Card.Factions)
+                .Select(x => new {Factions = x.Select(d => d.Card.Factions), Quantity = x.Sum(d => d.Quantity) })                
+                .Select(x => (double)x.Quantity)
+                .ToArray();            
 
-            CardFactionPieLabels = new string[]
-            {
-                "Test",
-                "Mert",
-                "Azert"
-            };
+            CardFactionPieLabels = MainDeck.Select(d => d.Card.Factions).OrderBy(d => d).Distinct().ToArray();
 
             StateHasChanged();
         }
@@ -372,10 +371,13 @@ namespace SolarisRec.UI.Pages
                 MainDeck.Where(d => d.Card.Type == CardTypeConstants.Construction).Select(d => d.Quantity).Sum()
             };
 
-            CardFactionPieData = new double[]
-            {
+            CardFactionPieData = MainDeck
+               .GroupBy(d => d.Card.Factions)
+               .Select(x => new { Factions = x.Select(d => d.Card.Factions), Quantity = x.Sum(d => d.Quantity) })              
+               .Select(x => (double)x.Quantity)
+               .ToArray();
 
-            };
+            CardFactionPieLabels = MainDeck.Select(d => d.Card.Factions).OrderBy(d => d).Distinct().ToArray();
 
             StateHasChanged();
         }
