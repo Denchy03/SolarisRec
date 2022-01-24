@@ -21,22 +21,7 @@ using System;
 namespace SolarisRec.UI.Pages
 {
     public partial class Deck
-    {
-        //todo: Features        
-        //todo: More Deck info (Agent vs non-agent count, avg crc etc.)
-
-        //todo: CodeCleanup
-        //todo: cardtype string, enum? how should I treat it? 
-        //todo: FactionInformation: what is UI specific, what is domain specific?        
-        //todo: clear filters shold reset sorting?        /
-        //todo: are void methods legit? Should I use Task.FromResult?        
-        //todo: naming etc service, generator, provider etc
-        //todo: move usings
-        //todo: use for instead of foreach when using mappers
-        //todo: converted resource cost???
-        //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
-        //todo? MudPaper to component?       
-
+    {       
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] private ICardProvider CardProvider { get; set; }
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
