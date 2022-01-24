@@ -11,46 +11,51 @@ namespace SolarisRec.Persistence.Repositories
 {
     internal class AccountRepository : IAccountRepository
     {
-        private readonly SolarisRecDbContext context;
+        private readonly IDbContextFactory<SolarisRecDbContext> contextFactory;
         private readonly IMapToDomainModel<PersistenceModel.Account, Account> persistenceModelMapper;
         private readonly IMapToPersistenceModel<Account, PersistenceModel.Account> domainModelMapper;
 
         public AccountRepository(
-            SolarisRecDbContext context,
+            IDbContextFactory<SolarisRecDbContext> contextFactory,
             IMapToDomainModel<PersistenceModel.Account, Account> persistenceModelMapper,
             IMapToPersistenceModel<Account, PersistenceModel.Account> domainModelMapper)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            this.contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
             this.persistenceModelMapper = persistenceModelMapper ?? throw new ArgumentNullException(nameof(persistenceModelMapper));
             this.domainModelMapper = domainModelMapper ?? throw new ArgumentNullException(nameof(domainModelMapper));
         }
        
         public async Task<bool> AccountExists(string accountName)
         {
+            using var context = await contextFactory.CreateDbContextAsync();
             return await context.Accounts.AnyAsync(a => a.AccountName == accountName);
         }
 
         public async Task<bool> EmailExists(string email)
         {
+            using var context = await contextFactory.CreateDbContextAsync();
             return await context.Accounts.AnyAsync(a => a.Email == email);
         }
 
         public async Task<Account> Get(string accountName)
         {
+            using var context = await contextFactory.CreateDbContextAsync();
+
             var account = await context.Accounts
-                .Where(a => a.AccountName == accountName)
-                .FirstOrDefaultAsync();
+            .Where(a => a.AccountName == accountName)
+            .FirstOrDefaultAsync();
 
             if (account == null)
             {
                 throw new KeyNotFoundException($"Account with Account Name {accountName} does not exist.");
             }
-                
-            return persistenceModelMapper.Map(account);            
+
+            return persistenceModelMapper.Map(account);
         }
 
         public async Task CreateAccount(Account account)
         {
+            using var context = await contextFactory.CreateDbContextAsync();
             var accountToCreate = new PersistenceModel.Account();
 
             domainModelMapper.Apply(account, accountToCreate);

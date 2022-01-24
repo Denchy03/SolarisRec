@@ -10,19 +10,21 @@ namespace SolarisRec.Persistence.Repositories
 {
     internal class TalentRepository : ITalentRepository
     {
-        private readonly SolarisRecDbContext context;
+        private readonly IDbContextFactory<SolarisRecDbContext> contextFactory;
         private readonly IMapToDomainModel<PersistenceModel.Talent, Talent> persistenceModelMapper;
 
         public TalentRepository(
-            SolarisRecDbContext context,
+            IDbContextFactory<SolarisRecDbContext> contextFactory,
             IMapToDomainModel<PersistenceModel.Talent, Talent> persistenceModelMapper)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            this.contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
             this.persistenceModelMapper = persistenceModelMapper ?? throw new ArgumentNullException(nameof(persistenceModelMapper));
         }
 
         public async Task<List<Talent>> List()
         {
+            using var context = await contextFactory.CreateDbContextAsync();
+
             var result = new List<Talent>();
 
             var allTalents = await context.Talents.ToListAsync();

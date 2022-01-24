@@ -16,11 +16,12 @@ namespace SolarisRec.Persistence.Configuration
 {
     public static class Dependencies
     {
-        public static IServiceCollection UseSolarisRecPersistenceAdapters(this IServiceCollection serviceCollection, string connectionstring)
+        public static IServiceCollection UseSolarisRecPersistenceAdapters(this IServiceCollection serviceCollection, string connectionString)
         {
             return serviceCollection
+                .AddDbContextFactory<SolarisRecDbContext>(opt => opt.UseSqlServer(connectionString))
                 .AddDbContext<SolarisRecDbContext>(ServiceLifetime.Transient)
-                .AddTransient((s) => CreateSolarisDbContext(connectionstring))
+                .AddTransient((s) => CreateSolarisDbContext(connectionString))
 
                 .AddTransient<IAccountRepository, AccountRepository>()
                 .AddTransient<IMapToDomainModel<PersistenceModel.Account, Account>, Mappers.ToDomainModel.AccountMapper>()

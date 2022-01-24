@@ -7,42 +7,44 @@
 
 <MudDialogProvider />
 
-<MudGrid id="Dropdowns">
-    <MudItem>
-        <MudMultiSelectDropdown @ref="factionDropdown" DropdownItems="FactionDropdownItems" Dense="true"
-                                Label="Factions" @bind-SelectedValues="@SelectedFactions.Selected" />
-    </MudItem>
-    <MudItem>
-        <MudMultiSelectDropdown @ref="cardTypeDropdown" DropdownItems="CardTypeDropdownItems" Dense="true"
-                                Label="Card Type" @bind-SelectedValues="@SelectedCardTypes.Selected" />
-    </MudItem>
-    <MudItem>
-        <MudMultiSelectDropdown @ref="crcDropdown" DropdownItems="ConvertedResourceCostDropdownItems" Dense="true"
-                                Label="Converted Cost" @bind-SelectedValues="@SelectedConvertedResourceCosts.Selected" />
-    </MudItem>
-    <MudItem>
-        <MudMultiSelectDropdown @ref="talentsDropdown" DropdownItems="TalentDropdownItems" Dense="true"
-                                Label="Talents" @bind-SelectedValues="@SelectedTalents.Selected" />
-    </MudItem>
-    <MudItem>
-        <MudMultiSelectDropdown @ref="keywordDropdown" DropdownItems="KeywordDropdownItems" Dense="true"
-                                Label="Keyword" @bind-SelectedValues="@SelectedKeywords.Selected" />
-    </MudItem>
-</MudGrid>
-
-
-<MudButton OnClick="ClearFilters">Clear Filters</MudButton>
+<MudItem hidden="@hide">
+    <MudGrid id="Dropdowns">
+        <MudItem>
+            <MudMultiSelectDropdown @ref="factionDropdown" DropdownItems="FactionDropdownItems" Dense="true"
+                                    Label="Factions" @bind-SelectedValues="@SelectedFactions.Selected" />
+        </MudItem>
+        <MudItem>
+            <MudMultiSelectDropdown @ref="cardTypeDropdown" DropdownItems="CardTypeDropdownItems" Dense="true"
+                                    Label="Card Type" @bind-SelectedValues="@SelectedCardTypes.Selected" />
+        </MudItem>
+        <MudItem>
+            <MudMultiSelectDropdown @ref="crcDropdown" DropdownItems="ConvertedResourceCostDropdownItems" Dense="true"
+                                    Label="Converted Cost" @bind-SelectedValues="@SelectedConvertedResourceCosts.Selected" />
+        </MudItem>
+        <MudItem>
+            <MudMultiSelectDropdown @ref="talentsDropdown" DropdownItems="TalentDropdownItems" Dense="true"
+                                    Label="Talents" @bind-SelectedValues="@SelectedTalents.Selected" />
+        </MudItem>
+        <MudItem>
+            <MudMultiSelectDropdown @ref="keywordDropdown" DropdownItems="KeywordDropdownItems" Dense="true"
+                                    Label="Keyword" @bind-SelectedValues="@SelectedKeywords.Selected" />
+        </MudItem>
+        <MudItem>
+            <MudButton OnClick="ClearFilters">Clear Filters</MudButton>
+        </MudItem>
+    </MudGrid>
+</MudItem>
 
 <MudGrid id="SearchCommands">
-    <MudItem xs="12" md="6" id="Search">
+    <MudItem xs="12" md="6" id="Search" hidden="@hide">
         <MudTextField T="string" @ref="searchByName" Label="Search by Name"
                       DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByName"></MudTextField>
 
-        <MudTextField T="string" @ref="searchByAbility" Label="Search by Ability" 
+        <MudTextField T="string" @ref="searchByAbility" Label="Search by Ability"
                       DebounceInterval="500" OnDebounceIntervalElapsed="OnSearchByAbility"></MudTextField>
     </MudItem>
     <MudItem xs="12" md="6" Style="text-align: center; vertical-align: bottom;">
-        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Save" OnClick="Export" ></MudIconButton>
+        <MudIconButton Color="Color.Inherit" Icon="@Icons.Material.Filled.Save" OnClick="Export"></MudIconButton>
 
         @if (!ValidationResult.IsDeckValid)
         {
@@ -50,15 +52,18 @@
         }
 
         <MudIconButton Color="Color.Secondary" Icon="@Icons.Material.Filled.Clear" OnClick="ClearDeck" />
+
+        <MudIconButton Color="hideEyeIconColor" Icon="@Icons.Material.Filled.RemoveRedEye" OnClick="ShowHide"></MudIconButton>
     </MudItem>
 </MudGrid>
 
 <MudGrid>
 
-    <MudItem id="CardSearch" xs="8">
+    <MudItem id="CardSearch" xs="8" hidden="@hide">
 
         <MudPaper Class="solaris-deck-item-header d-flex px-2 align-center my-1">
-            <MudText Typo="Typo.body2" Class="name-header">Name 
+            <MudText Typo="Typo.body2" Class="name-header">
+                Name
                 <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.Sort" OnClick="() => SetSorting(nameof(Card.Name))"></MudIconButton>
             </MudText>
             <MudSpacer />
@@ -69,7 +74,8 @@
             <MudText Typo="Typo.body2" Class="type-header">Type</MudText>
             <MudSpacer />
             <MudDivider FlexItem="true" Vertical="true" />
-            <MudText Typo="Typo.body2" Class="resourceCostIcon-header">C
+            <MudText Typo="Typo.body2" Class="resourceCostIcon-header">
+                C
                 <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.Sort" OnClick="() => SetSorting(nameof(Card.Costs))"></MudIconButton>
             </MudText>
             <MudSpacer />
@@ -77,12 +83,14 @@
             <MudText Typo="Typo.body2" Class="talentIcon-header">T</MudText>
             <MudSpacer />
             <MudDivider FlexItem="true" Vertical="true" />
-            <MudText Typo="Typo.body2" Class="av-header">AV
+            <MudText Typo="Typo.body2" Class="av-header">
+                AV
                 <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.Sort" OnClick="() => SetSorting(nameof(Card.AttackValue))"></MudIconButton>
             </MudText>
             <MudSpacer />
             <MudDivider FlexItem="true" Vertical="true" />
-            <MudText Typo="Typo.body2" Class="hv-header">HV
+            <MudText Typo="Typo.body2" Class="hv-header">
+                HV
                 <MudIconButton Size="Size.Small" Color="Color.Primary" Icon="@Icons.Material.Filled.Sort" OnClick="() => SetSorting(nameof(Card.HealthValue))"></MudIconButton>
             </MudText>
             <MudSpacer />
@@ -135,17 +143,17 @@
             </MudPaper>
         }
         <MudPaper id="Paging" Class="solaris-deck-item d-flex px-2 align-center my-1">
-            <MudText Typo="Typo.body2">Cards per page:</MudText>            
-            
-                <MudSelect T="DropdownItem" @bind-SelectedValues="SelectedPagingValue.Selected" MultiSelection="false" 
-                    Dense="true" IconSize="Size.Small" Class="mud-table-pagination-select" DisableUnderLine="true" 
-                    Style="max-width: 35px !important; margin-left: 20px !important; margin-bottom: 5px !important;">
+            <MudText Typo="Typo.body2">Cards per page:</MudText>
+
+            <MudSelect T="DropdownItem" @bind-SelectedValues="SelectedPagingValue.Selected" MultiSelection="false"
+                       Dense="true" IconSize="Size.Small" Class="mud-table-pagination-select" DisableUnderLine="true"
+                       Style="max-width: 35px !important; margin-left: 20px !important; margin-bottom: 5px !important;">
                 @foreach (var item in PagingValues)
                 {
                     <MudSelectItem T="DropdownItem" Value="@item">@item.Name</MudSelectItem>
                 }
-                </MudSelect>
-            
+            </MudSelect>
+
             <MudSpacer />
             <MudText Typo="Typo.body2">@Filter.PageSizeFromTo of @TotalItems</MudText>
             <MudSpacer />
@@ -161,10 +169,10 @@
         <MudGrid>
 
             <MudItem xs="12" lg="6">
-                <img src="@(ImgSrc)" width="100%" height="auto">
+                <img src="@(ImgSrc)" width="100%" height="auto" hidden="@hide">
 
-                <MudText GutterBottom="true"> Missions (@MissionDeck.Select(d => d.Quantity).Sum())</MudText>
-                @foreach (var item in MissionDeck)
+                <MudText GutterBottom="true"> Missions (@DeckList.MissionDeck.Select(d => d.Quantity).Sum())</MudText>
+                @foreach (var item in DeckList.MissionDeck)
                 {
                     <MudPaper @onclick="@(() => RemoveFromMissionDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
@@ -178,9 +186,9 @@
 
             <MudItem xs="12" lg="6">
                 <MudText GutterBottom="true"> Main deck (@MainDeckCardCount / @MainDeckAgentCount A)</MudText>
-                @foreach (var item in MainDeck)
+                @foreach (var item in DeckList.MainDeck)
                 {
-                    <MudPaper @onclick="@(() => RemoveFromDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
+                    <MudPaper @onclick="@(() => RemoveFromMainDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
                         <MudText Typo="Typo.body2" Class="deckItemName">@item.Card.Name</MudText>
                         <MudSpacer />
@@ -189,8 +197,8 @@
                     </MudPaper>
                 }
 
-                <MudText GutterBottom="true"> Tactical Deck (@TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
-                @foreach (var item in TacticalDeck)
+                <MudText GutterBottom="true"> Tactical Deck (@DeckList.TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
+                @foreach (var item in DeckList.TacticalDeck)
                 {
                     <MudPaper @onclick="@(() => RemoveFromTacticalDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
                           Class="solaris-deck-item d-flex px-2 align-center my-1">
@@ -206,3 +214,27 @@
     </MudItem>
 
 </MudGrid>
+
+<MudGrid>
+
+    @*CardType*@
+    <MudItem lg="6">
+        <MudPaper Class="pa-4">
+            <MudChart ChartType="ChartType.Pie" InputData="@CardTypePieData" InputLabels="@CardTypePieLabels"
+                      Width="300px" Height="300px" ChartOptions="cardTypeChartOptions" />
+        </MudPaper>
+    </MudItem>
+
+    @*Factions*@
+    <MudItem lg="6">
+        <MudPaper Class="pa-4">
+            <MudChart ChartType="ChartType.Pie" InputData="@CardFactionPieData" InputLabels="@CardFactionPieLabels"
+                      Width="300px" Height="300px" ChartOptions="CardFactionChartOptions" />
+        </MudPaper>
+    </MudItem>
+
+</MudGrid>
+
+<MudChart ChartType="ChartType.Bar" ChartSeries="@ConvertedResourceCostSeries" XAxisLabels="ConvertedResourceCostLables"
+          ChartOptions="convertedResourceCostChartOptions" Width="50%" Height="50%" LegendPosition="Position.Bottom">
+</MudChart>

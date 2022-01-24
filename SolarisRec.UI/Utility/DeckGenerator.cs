@@ -8,15 +8,15 @@ namespace SolarisRec.UI.Utility
 {
     internal class DeckGenerator : IDeckGenerator
     {
-        public string Generate(List<DeckItem> maindeck, List<DeckItem> missionDeck, List<DeckItem> tacticalDeck)
+        public string Generate(DeckList deckList)
         {
             StringBuilder stringBuilder = new();
 
-            WriteMaindeck(stringBuilder, maindeck);
+            WriteMaindeck(stringBuilder, deckList.MainDeck);
 
-            WriteMissionDeck(stringBuilder, missionDeck);
+            WriteMissionDeck(stringBuilder, deckList.MissionDeck);
 
-            WriteTacticalDeck(stringBuilder, tacticalDeck);
+            WriteTacticalDeck(stringBuilder, deckList.TacticalDeck);
 
             stringBuilder.Append("Built with SolaricRec by Major Martin");
 
