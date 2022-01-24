@@ -21,22 +21,7 @@ using System;
 namespace SolarisRec.UI.Pages
 {
     public partial class Deck
-    {
-        //todo: Features        
-        //todo: More Deck info (Agent vs non-agent count, avg crc etc.)
-
-        //todo: CodeCleanup
-        //todo: cardtype string, enum? how should I treat it? 
-        //todo: FactionInformation: what is UI specific, what is domain specific?        
-        //todo: clear filters shold reset sorting?        /
-        //todo: are void methods legit? Should I use Task.FromResult?        
-        //todo: naming etc service, generator, provider etc
-        //todo: move usings
-        //todo: use for instead of foreach when using mappers
-        //todo: converted resource cost???
-        //todo: <MudTableSortLabel SortBy="new Func<TaskItemDisplayModel, object>(x => x.Name)"></MudTableSortLabel>
-        //todo? MudPaper to component?       
-
+    {       
         [Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] private ICardProvider CardProvider { get; set; }
         [Inject] private IFactionDropdownItemProvider FactionDropdownItemProvider { get; set; }
@@ -65,8 +50,8 @@ namespace SolarisRec.UI.Pages
         private MudTextField<string> searchByAbility;
 
         private bool hide = false;
+        private bool showWhenCardSearchIsHidden => !hide;
         private Color hideEyeIconColor = Color.Error;
-
         private bool reload = true;
         private int MainDeckCardCount => DeckList.MainDeck.Select(d => d.Quantity).Sum();
         private int MainDeckAgentCount => DeckList.MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
@@ -80,7 +65,6 @@ namespace SolarisRec.UI.Pages
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
 
         private List<Card> Cards { get; set; } = new();
-
         private DeckList DeckList { get; set; } = new();
 
         private List<DropdownItem> FactionDropdownItems = new();
@@ -93,7 +77,6 @@ namespace SolarisRec.UI.Pages
         private SelectedValues SelectedKeywords = new();
         private List<DropdownItem> ConvertedResourceCostDropdownItems = new();
         private SelectedValues SelectedConvertedResourceCosts = new();
-
         private List<DropdownItem> PagingValues = new();
         private SelectedValues SelectedPagingValue = new();
 
@@ -132,7 +115,8 @@ namespace SolarisRec.UI.Pages
             ChartPalette = new string[]
                 {
                     "#8D8D56"
-                }
+                },
+            DisableLegend = true
         };
 
         protected override void OnParametersSet()
@@ -351,21 +335,30 @@ namespace SolarisRec.UI.Pages
 
         private void RemoveFromMainDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(DeckList.MainDeck);
-            UpdateCharts();
-            ValidationResult = DeckValidator.Validate(DeckList);
+            if (!hide)
+            {
+                deckItem.RemoveCard(DeckList.MainDeck);
+                UpdateCharts();
+                ValidationResult = DeckValidator.Validate(DeckList);
+            }
         }
 
         private void RemoveFromMissionDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(DeckList.MissionDeck);
-            ValidationResult = DeckValidator.Validate(DeckList);
+            if (!hide)
+            {
+                deckItem.RemoveCard(DeckList.MissionDeck);
+                ValidationResult = DeckValidator.Validate(DeckList);
+            }
         }
 
         private void RemoveFromTacticalDeck(DeckItem deckItem)
         {
-            deckItem.RemoveCard(DeckList.TacticalDeck);
-            ValidationResult = DeckValidator.Validate(DeckList);
+            if (!hide)
+            {
+                deckItem.RemoveCard(DeckList.TacticalDeck);
+                ValidationResult = DeckValidator.Validate(DeckList);
+            }
         }
 
         private async Task Export()
@@ -491,8 +484,6 @@ namespace SolarisRec.UI.Pages
                 .ToArray();
 
             CardFactionChartOptions.ChartPalette = ChartHelper.GenerateChartPalette(CardFactionPieLabels);
-            CardFactionChartOptions.DisableLegend = true;
-
 
             ConvertedResourceCostSeries = new List<ChartSeries>
             {

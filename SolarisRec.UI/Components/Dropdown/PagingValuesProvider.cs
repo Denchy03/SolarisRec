@@ -17,13 +17,13 @@ namespace SolarisRec.UI.Components.Dropdown
                 },
                 new DropdownItem
                 {
-                    Id = 6,
-                    Name = "6"
+                    Id = 8,
+                    Name = "8"
                 },
                 new DropdownItem
                 {
-                    Id = 8,
-                    Name = "8"
+                    Id = 16,
+                    Name = "16"
                 },
                 new DropdownItem
                 {

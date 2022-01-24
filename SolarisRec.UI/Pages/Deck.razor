@@ -59,7 +59,7 @@
 
 <MudGrid>
 
-    <MudItem id="CardSearch" xs="8" hidden="@hide">
+    <MudItem id="CardSearch" xs="10" hidden="@hide">
 
         <MudPaper Class="solaris-deck-item-header d-flex px-2 align-center my-1">
             <MudText Typo="Typo.body2" Class="name-header">
@@ -165,52 +165,49 @@
 
     </MudItem>
 
-    <MudItem id="DecksAndPicture" xs="4" Spacing="0">
-        <MudGrid>
+    <MudItem id="DecksAndPicture" xs="2">
 
-            <MudItem xs="12" lg="6">
-                <img src="@(ImgSrc)" width="100%" height="auto" hidden="@hide">
+        <img src="@(ImgSrc)" width="100%" height="auto" hidden="@hide">
 
-                <MudText GutterBottom="true"> Missions (@DeckList.MissionDeck.Select(d => d.Quantity).Sum())</MudText>
-                @foreach (var item in DeckList.MissionDeck)
-                {
-                    <MudPaper @onclick="@(() => RemoveFromMissionDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
-                          Class="solaris-deck-item d-flex px-2 align-center my-1">
-                        <MudText Typo="Typo.body2" Class="deckItemName">@item.Card.Name</MudText>
-                        <MudSpacer />
-                        <MudDivider FlexItem="true" Vertical="true" />
-                        <MudText Typo="Typo.body2" Class="deckItemQuantity">@item.Quantity</MudText>
-                    </MudPaper>
-                }
-            </MudItem>
+        <MudText GutterBottom="true"> Main deck (@MainDeckCardCount / @MainDeckAgentCount A)</MudText>
+        @foreach (var item in DeckList.MainDeck)
+        {
+            <MudPaper @onclick="@(() => RemoveFromMainDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
+                  Class="solaris-deck-item d-flex px-2 align-center my-1">
+                <MudText Typo="Typo.body2" Class="deckItemName">@item.Card.Name</MudText>
+                <MudSpacer />
+                <MudDivider FlexItem="true" Vertical="true" />
+                <MudText Typo="Typo.body2" Class="deckItemQuantity">@item.Quantity</MudText>
+            </MudPaper>
+        }
 
-            <MudItem xs="12" lg="6">
-                <MudText GutterBottom="true"> Main deck (@MainDeckCardCount / @MainDeckAgentCount A)</MudText>
-                @foreach (var item in DeckList.MainDeck)
-                {
-                    <MudPaper @onclick="@(() => RemoveFromMainDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
-                          Class="solaris-deck-item d-flex px-2 align-center my-1">
-                        <MudText Typo="Typo.body2" Class="deckItemName">@item.Card.Name</MudText>
-                        <MudSpacer />
-                        <MudDivider FlexItem="true" Vertical="true" />
-                        <MudText Typo="Typo.body2" Class="deckItemQuantity">@item.Quantity</MudText>
-                    </MudPaper>
-                }
+        <MudText GutterBottom="true"> Missions (@DeckList.MissionDeck.Select(d => d.Quantity).Sum())</MudText>
+        @foreach (var item in DeckList.MissionDeck)
+        {
+            <MudPaper @onclick="@(() => RemoveFromMissionDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
+                  Class="solaris-deck-item d-flex px-2 align-center my-1">
+                <MudText Typo="Typo.body2" Class="deckItemName">@item.Card.Name</MudText>
+                <MudSpacer />
+                <MudDivider FlexItem="true" Vertical="true" />
+                <MudText Typo="Typo.body2" Class="deckItemQuantity">@item.Quantity</MudText>
+            </MudPaper>
+        }
 
-                <MudText GutterBottom="true"> Tactical Deck (@DeckList.TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
-                @foreach (var item in DeckList.TacticalDeck)
-                {
-                    <MudPaper @onclick="@(() => RemoveFromTacticalDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
-                          Class="solaris-deck-item d-flex px-2 align-center my-1">
-                        <MudText Typo="Typo.body2" Class="deckItemName">@item.Card.Name</MudText>
-                        <MudSpacer />
-                        <MudDivider FlexItem="true" Vertical="true" />
-                        <MudText Typo="Typo.body2" Class="deckItemQuantity">@item.Quantity</MudText>
-                    </MudPaper>
-                }
-            </MudItem>
+        <MudText GutterBottom="true"> Tactical Deck (@DeckList.TacticalDeck.Select(d => d.Quantity).Sum())</MudText>
+        @foreach (var item in DeckList.TacticalDeck)
+        {
+            <MudPaper @onclick="@(() => RemoveFromTacticalDeck(item))" @onmouseover="@(() => UpdateImageSrc(item))"
+                  Class="solaris-deck-item d-flex px-2 align-center my-1">
+                <MudText Typo="Typo.body2" Class="deckItemName">@item.Card.Name</MudText>
+                <MudSpacer />
+                <MudDivider FlexItem="true" Vertical="true" />
+                <MudText Typo="Typo.body2" Class="deckItemQuantity">@item.Quantity</MudText>
+            </MudPaper>
+        }
+    </MudItem>
 
-        </MudGrid>
+    <MudItem id="ShowWhenCardSearchGridIsHidden" hidden="@showWhenCardSearchIsHidden">
+        <img src="@(ImgSrc)" width="100%" height="auto" class="img">
     </MudItem>
 
 </MudGrid>

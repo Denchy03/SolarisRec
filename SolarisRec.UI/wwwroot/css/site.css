@@ -40,21 +40,21 @@
 }
 
 .resourceCostIcon {
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 
 .resourceCostIcon-header {
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 
 .talentIcon {
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 .talentIcon-header {
-    width: 7%;
+    width: 5%;
     text-align: center;
 }
 
@@ -79,13 +79,13 @@
 }
 
 .ability {
-    width: 40%;
+    width: 44%;
     text-align: justify;
     padding-left: 10px;
 }
 
 .ability-header {
-    width: 40%;
+    width: 44%;
     text-align: center;
 }
 
@@ -96,4 +96,9 @@
 .deckItemQuantity {
     width: 20%; 
     text-align: center;
+}
+
+.img {    
+    max-width: 200px;
+    min-width: 100px;
 }
