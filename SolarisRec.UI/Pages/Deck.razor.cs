@@ -48,7 +48,7 @@ namespace SolarisRec.UI.Pages
         [Inject] private IDeckGenerator DeckGenerator { get; set; }
         [Inject] private IDeckValidator DeckValidator { get; set; }
         [Inject] private ISaveDeckListService SaveDeckListService { get; set; }
-        [Inject] private IFileSaveService SaveFile { get; set; }       
+        [Inject] private IFileSaveService SaveFile { get; set; }
         [Inject] private IDialogService DialogService { get; set; }
         [Inject] private ILogExceptionEvent ExceptionEventLogger { get; set; }
 
@@ -64,21 +64,24 @@ namespace SolarisRec.UI.Pages
         private MudTextField<string> searchByName;
         private MudTextField<string> searchByAbility;
 
+        private bool hide = false;
+        private Color hideEyeIconColor = Color.Error;
+
         private bool reload = true;
         private int MainDeckCardCount => DeckList.MainDeck.Select(d => d.Quantity).Sum();
         private int MainDeckAgentCount => DeckList.MainDeck.Where(d => d.Card.Type == nameof(CardTypeConstants.Agent)).Select(d => d.Quantity).Sum();
 
         private int Page { get; set; } = START_PAGE;
-        private int PageSize { get; set; } = DEFAULT_PAGE_SIZE;        
+        private int PageSize { get; set; } = DEFAULT_PAGE_SIZE;
         private string SortLabel { get; set; } = string.Empty;
         private int SortingDirection { get; set; } = (int)Core.SortingDirection.None;
-        private int TotalItems { get; set; }       
+        private int TotalItems { get; set; }
 
         private string ImgSrc { get; set; } = @"../Assets/0Cardback.jpg";
-        
+
         private List<Card> Cards { get; set; } = new();
 
-        private DeckList DeckList { get; set; } = new();        
+        private DeckList DeckList { get; set; } = new();
 
         private List<DropdownItem> FactionDropdownItems = new();
         private SelectedValues SelectedFactions = new();
@@ -89,10 +92,10 @@ namespace SolarisRec.UI.Pages
         private List<DropdownItem> KeywordDropdownItems = new();
         private SelectedValues SelectedKeywords = new();
         private List<DropdownItem> ConvertedResourceCostDropdownItems = new();
-        private SelectedValues SelectedConvertedResourceCosts = new();       
+        private SelectedValues SelectedConvertedResourceCosts = new();
 
         private List<DropdownItem> PagingValues = new();
-        private SelectedValues SelectedPagingValue = new();        
+        private SelectedValues SelectedPagingValue = new();
 
         private CoreCard.CardFilter Filter { get; set; } = new CoreCard.CardFilter();
         private ValidationResult ValidationResult { get; set; } = new ValidationResult();
@@ -111,26 +114,30 @@ namespace SolarisRec.UI.Pages
 
         private double[] CardTypePieData { get; set; } = Array.Empty<double>();
 
-        private readonly ChartOptions cardFactionChartOptions = new ChartOptions
+        private ChartOptions CardFactionChartOptions { get; set; } = new ChartOptions
         {
-            ChartPalette = new string[]
-                {
-                    "#5B403E",
-                    "#3B3B55", 
-                    "#8D8D56",
-                    "#8F5F10",
-                    "#416057",
-                    "#949796"
-                }
+            ChartPalette = Array.Empty<string>()            
         };
 
         private string[] CardFactionPieLabels { get; set; } = Array.Empty<string>();
 
         private double[] CardFactionPieData { get; set; } = Array.Empty<double>();
 
+        private readonly string[] ConvertedResourceCostLables = new string[] { "1", "2", "3", "4", "5", "6" };
 
-        protected override void OnParametersSet() {
-            
+        private List<ChartSeries> ConvertedResourceCostSeries { get; set; } = new();
+
+        private readonly ChartOptions convertedResourceCostChartOptions = new ChartOptions
+        {
+            ChartPalette = new string[]
+                {
+                    "#8D8D56"
+                }
+        };
+
+        protected override void OnParametersSet()
+        {
+
             SelectedFactions.PropertyChanged += async (sender, e) =>
             {
                 if (reload)
@@ -165,9 +172,9 @@ namespace SolarisRec.UI.Pages
             {
                 if (reload)
                     await InvokeAsync(ApplyPaging);
-            };            
+            };
 
-            ValidationResult = DeckValidator.Validate(DeckList);            
+            ValidationResult = DeckValidator.Validate(DeckList);
         }
 
         protected override async Task OnInitializedAsync()
@@ -182,8 +189,8 @@ namespace SolarisRec.UI.Pages
 
             //This triggers the PropertyChanged event causing GetCardsFiltered to be called.
             //This is why we should not call GetCardsFiltered here to avoid double execution!
-            SelectedPagingValue.Selected = PagingValues.Where(p => p.Id == 8);            
-        }      
+            SelectedPagingValue.Selected = PagingValues.Where(p => p.Id == 8);
+        }
 
         private async Task ApplyDropdownFilters()
         {
@@ -221,15 +228,15 @@ namespace SolarisRec.UI.Pages
                 {
                     Cards = await CardProvider.GetCardsFiltered(Filter);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     await ExceptionEventLogger.Log(ex);
                     NavigationManager.NavigateTo("error");
                 }
             }
 
-            TotalItems = Filter.MatchingCardCount;            
-        }        
+            TotalItems = Filter.MatchingCardCount;
+        }
 
         private void UpdateImageSrc(Card card)
         {
@@ -254,7 +261,7 @@ namespace SolarisRec.UI.Pages
             Filter.Ability = abilitySearchTerm;
             await GetCardsFiltered();
         }
-        
+
         private async Task ClearFilters()
         {
             SortingDirection = (int)Core.SortingDirection.None;
@@ -339,14 +346,14 @@ namespace SolarisRec.UI.Pages
                 .ToList();
 
             UpdateCharts();
-            ValidationResult = DeckValidator.Validate(DeckList); 
+            ValidationResult = DeckValidator.Validate(DeckList);
         }
 
         private void RemoveFromMainDeck(DeckItem deckItem)
-        {            
+        {
             deckItem.RemoveCard(DeckList.MainDeck);
             UpdateCharts();
-            ValidationResult = DeckValidator.Validate(DeckList);           
+            ValidationResult = DeckValidator.Validate(DeckList);
         }
 
         private void RemoveFromMissionDeck(DeckItem deckItem)
@@ -363,37 +370,41 @@ namespace SolarisRec.UI.Pages
 
         private async Task Export()
         {
-            if(!ValidationResult.IsDeckValid)
-            {               
+            bool canBeSaved = true;
+
+            if (!ValidationResult.IsDeckValid)
+            {
                 var parameters = new DialogParameters { ["reasons"] = ValidationResult.Reasons };
 
                 var options = new DialogOptions { CloseOnEscapeKey = true };
                 var dialog = DialogService.Show<ValidationDialog>("Illegal Deck state! Are you sure you want to continue?", parameters, options);
                 var result = await dialog.Result;
 
-                if(!result.Cancelled)
+                canBeSaved = !result.Cancelled;
+            }
+
+            if (canBeSaved)
+            {
+                var deck = DeckGenerator.Generate(DeckList);
+
+                var stream = StringToStreamConverter.Convert(deck);
+
+                using var streamRef = new DotNetStreamReference(stream: stream);
+
+                try
                 {
-                    var deck = DeckGenerator.Generate(DeckList);
+                    await SaveFile.Save(streamRef);
+                    await SaveDeckListService.Save(DeckList);
+                }
+                catch (Exception ex)
+                {
+                    await ExceptionEventLogger.Log(ex);
+                    NavigationManager.NavigateTo("error");
 
-                    var stream = StringToStreamConverter.Convert(deck);
-
-                    using var streamRef = new DotNetStreamReference(stream: stream);
-
-                    try
-                    {
-                        await SaveFile.Save(streamRef);
-                        await SaveDeckListService.Save(DeckList);
-                    }
-                    catch (Exception ex)
-                    {
-                        await ExceptionEventLogger.Log(ex);
-                        NavigationManager.NavigateTo("error");
-
-                    }                    
                 }
             }
         }
-        
+
         private async Task ShowValidationResultReasons()
         {
             var parameters = new DialogParameters { ["reasons"] = ValidationResult.Reasons };
@@ -419,7 +430,7 @@ namespace SolarisRec.UI.Pages
 
             await GetCardsFiltered();
         }
-        
+
         private async Task MovePage(PagingDirection direction)
         {
             var maxPage = Filter.MatchingCardCount / Filter.PageSize;
@@ -437,11 +448,11 @@ namespace SolarisRec.UI.Pages
                     Page = START_PAGE;
                     break;
                 case PagingDirection.PreviousPage:
-                    if(Page - 1 >= START_PAGE)                    
-                        Page--;                                      
+                    if (Page - 1 >= START_PAGE)
+                        Page--;
                     break;
                 case PagingDirection.NextPage:
-                    if(Page + 1 <= maxPage)
+                    if (Page + 1 <= maxPage)
                         Page++;
                     break;
                 case PagingDirection.LastPage:
@@ -470,8 +481,8 @@ namespace SolarisRec.UI.Pages
 
             var deckFactionCardCount = DeckList.MainDeck
                 .GroupBy(d => d.Card.Factions)
-                .Select(x => new { Factions = x.Select(d => d.Card.Factions).First(), Quantity = x.Sum(d => d.Quantity) })                
-                .ToArray();                   
+                .Select(x => new { Factions = x.Select(d => d.Card.Factions).First(), Quantity = x.Sum(d => d.Quantity) })
+                .ToArray();
 
             CardFactionPieData = deckFactionCardCount.Select(x => (double)x.Quantity).ToArray();
 
@@ -479,7 +490,31 @@ namespace SolarisRec.UI.Pages
                 .Select(x => x.Factions + $" [{deckFactionCardCount.First(d => d.Factions == x.Factions).Quantity}]")
                 .ToArray();
 
+            CardFactionChartOptions.ChartPalette = ChartHelper.GenerateChartPalette(CardFactionPieLabels);
+            CardFactionChartOptions.DisableLegend = true;
+
+
+            ConvertedResourceCostSeries = new List<ChartSeries>
+            {
+                new ChartSeries
+                {
+                    Name = "Converted Resource Cost",
+                    Data = DeckList.MainDeck
+                        .GroupBy(d => d.Card.ConvertedResourceCost)
+                        .Select(x => new { Quantity = x.Sum(d => d.Quantity) })
+                        .Select(x => (double)x.Quantity)
+                        .ToArray()
+                }
+            };
+
             StateHasChanged();
+        }
+
+        private void ShowHide()
+        {
+            hide = !hide;
+
+            hideEyeIconColor = hide ? Color.Success : Color.Error;
         }
     }
 }
