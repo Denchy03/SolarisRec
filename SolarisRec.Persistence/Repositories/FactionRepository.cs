@@ -12,19 +12,21 @@ namespace SolarisRec.Persistence.Repositories
 {
     internal class FactionRepository : IFactionRepository
     {
-        private readonly SolarisRecDbContext context;
+        private readonly IDbContextFactory<SolarisRecDbContext> contextFactory;
         private readonly IMapToDomainModel<PersistenceModel.Faction, Faction> persistenceModelMapper;
 
         public FactionRepository(
-            SolarisRecDbContext context,
+            IDbContextFactory<SolarisRecDbContext> contextFactory,
             IMapToDomainModel<PersistenceModel.Faction, Faction> persistenceModelMapper)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            this.contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
             this.persistenceModelMapper = persistenceModelMapper ?? throw new ArgumentNullException(nameof(persistenceModelMapper));
         }
 
         public async Task<List<Faction>> List()
         {
+            using var context = await contextFactory.CreateDbContextAsync();
+
             var result = new List<Faction>();
 
             var allFactions = await context.Factions.OrderBy(f => f.Id).ToListAsync();
@@ -41,7 +43,8 @@ namespace SolarisRec.Persistence.Repositories
         }
 
         public async Task<int> GetFactionId(string factionName)
-        {            
+        {
+            using var context = await contextFactory.CreateDbContextAsync();
             var faction = await context.Factions.FirstAsync(f => f.Name == factionName);
 
             return faction.Id;

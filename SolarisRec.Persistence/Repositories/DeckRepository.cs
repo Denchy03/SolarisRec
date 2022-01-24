@@ -6,24 +6,27 @@ using SolarisRec.Persistence.PersistenceModel;
 using SolarisRec.Persistence.Mappers;
 using System.Linq;
 using SolarisRec.Core.Deck.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace SolarisRec.Persistence.Repositories
 {
     internal class DeckRepository : IDeckRepository
     {
-        private readonly SolarisRecDbContext context;
+        private readonly IDbContextFactory<SolarisRecDbContext> contextFactory;
         private readonly IDeckItemToPersistenceModelMapper deckItemToPersistenceModelMapper;
 
         public DeckRepository(
-            SolarisRecDbContext context,
+            IDbContextFactory<SolarisRecDbContext> contextFactory,
             IDeckItemToPersistenceModelMapper deckItemToPersistenceModelMapper)
         {
-            this.context = context ?? throw new ArgumentNullException(nameof(context));
+            this.contextFactory = contextFactory ?? throw new ArgumentNullException(nameof(contextFactory));
             this.deckItemToPersistenceModelMapper = deckItemToPersistenceModelMapper ?? throw new ArgumentNullException(nameof(deckItemToPersistenceModelMapper));
         }
 
         public async Task SaveDeckList(CoreDeck.DeckList deckList)
         {
+            using var context = await contextFactory.CreateDbContextAsync();
+
             Deck deck = new()
             {
                 CreationDate = DateTime.Now,
